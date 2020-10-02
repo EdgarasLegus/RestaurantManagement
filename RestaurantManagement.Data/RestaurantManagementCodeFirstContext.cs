@@ -6,13 +6,13 @@ using System.Text;
 
 namespace RestaurantManagement.Data
 {
-    public partial class RestaurantManagementCodeFirst_Context : DbContext
+    public partial class RestaurantManagementCodeFirstContext : DbContext
     {
-        public RestaurantManagementCodeFirst_Context()
+        public RestaurantManagementCodeFirstContext()
         {
         }
 
-        public RestaurantManagementCodeFirst_Context(DbContextOptions<RestaurantManagementCodeFirst_Context> options)
+        public RestaurantManagementCodeFirstContext(DbContextOptions<RestaurantManagementCodeFirstContext> options)
             : base(options)
         {
         }

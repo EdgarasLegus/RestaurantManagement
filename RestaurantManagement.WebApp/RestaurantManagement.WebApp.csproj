@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RestaurantManagement.EF.CodeFirst\RestaurantManagement.Data.csproj" />
+    <ProjectReference Include="..\RestaurantManagement.Data\RestaurantManagement.Data.csproj" />
   </ItemGroup>
 
 </Project>

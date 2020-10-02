@@ -5,13 +5,13 @@ using RestaurantManagement.Contracts.Entities;
 
 namespace RestaurantManagement.Data.ModelsDB
 {
-    public partial class RestaurantManagementContext : DbContext
+    public partial class RestaurantManagementDBFirstContext : DbContext
     {
-        public RestaurantManagementContext()
+        public RestaurantManagementDBFirstContext()
         {
         }
 
-        public RestaurantManagementContext(DbContextOptions<RestaurantManagementContext> options)
+        public RestaurantManagementDBFirstContext(DbContextOptions<RestaurantManagementDBFirstContext> options)
             : base(options)
         {
         }
