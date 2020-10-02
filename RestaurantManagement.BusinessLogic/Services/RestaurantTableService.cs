@@ -9,9 +9,9 @@ using System.Text;
 
 namespace RestaurantManagement.BusinessLogic.Services
 {
-    public class RestaurantTablesService : IRestaurantTablesService
+    public class RestaurantTableService : IRestaurantTablesService
     {
-        public List<RestaurantTables> GetInitialRestaurantTables()
+        public List<RestaurantTable> GetInitialRestaurantTables()
         {
             var configuration = new ConfigurationBuilder()
                .AddJsonFile(@"./appsettings.json")
@@ -24,7 +24,7 @@ namespace RestaurantManagement.BusinessLogic.Services
                 throw new Exception($"Data file {path} does not exist!");
             }
 
-            var tablesList = new List<RestaurantTables>();
+            var tablesList = new List<RestaurantTable>();
 
             using (StreamReader reader = new StreamReader(path))
             {
@@ -32,7 +32,7 @@ namespace RestaurantManagement.BusinessLogic.Services
                 while ((line = reader.ReadLine()) != null)
                 {
                     string tableName = line;
-                    var tables = new RestaurantTables()
+                    var tables = new RestaurantTable()
                     {
                         TableName = tableName,
                     };

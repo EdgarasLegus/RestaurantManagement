@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using RestaurantManagement.Contracts.Entities;
 
-namespace RestaurantManagement.EF.DBFirst.ModelsDB
+namespace RestaurantManagement.Data.ModelsDB
 {
     public partial class RestaurantManagementContext : DbContext
     {
@@ -16,13 +16,13 @@ namespace RestaurantManagement.EF.DBFirst.ModelsDB
         {
         }
 
-        public virtual DbSet<DishProducts> DishProducts { get; set; }
-        public virtual DbSet<Dishes> Dishes { get; set; }
-        public virtual DbSet<OrderItems> OrderItems { get; set; }
-        public virtual DbSet<Orders> Orders { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<Reservations> Reservations { get; set; }
-        public virtual DbSet<RestaurantTables> RestaurantTables { get; set; }
+        public virtual DbSet<Dish> Dish { get; set; }
+        public virtual DbSet<DishProduct> DishProduct { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderItem> OrderItem { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<Reservation> Reservation { get; set; }
+        public virtual DbSet<RestaurantTable> RestaurantTable { get; set; }
         public virtual DbSet<Staff> Staff { get; set; }
         public virtual DbSet<UserLog> UserLog { get; set; }
 
@@ -37,55 +37,51 @@ namespace RestaurantManagement.EF.DBFirst.ModelsDB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DishProducts>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.Property(e => e.Portion).HasColumnType("decimal(19, 3)");
-
-                entity.HasOne(d => d.Dish)
-                    .WithMany()
-                    .HasForeignKey(d => d.DishId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DishProdu__DishI__29572725");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany()
-                    .HasForeignKey(d => d.ProductId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DishProdu__Produ__2A4B4B5E");
-            });
-
-            modelBuilder.Entity<Dishes>(entity =>
+            modelBuilder.Entity<Dish>(entity =>
             {
                 entity.Property(e => e.DishName).IsRequired();
 
                 entity.Property(e => e.DishType).IsRequired();
             });
 
-            modelBuilder.Entity<OrderItems>(entity =>
+            modelBuilder.Entity<DishProduct>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.Portion).HasColumnType("decimal(19, 3)");
 
                 entity.HasOne(d => d.Dish)
-                    .WithMany()
+                    .WithMany(p => p.DishProduct)
                     .HasForeignKey(d => d.DishId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderItem__DishI__2F10007B");
+                    .HasConstraintName("FK__DishProdu__DishI__49C3F6B7");
 
-                entity.HasOne(d => d.Order)
-                    .WithMany()
-                    .HasForeignKey(d => d.OrderId)
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.DishProduct)
+                    .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderItem__Order__2E1BDC42");
+                    .HasConstraintName("FK__DishProdu__Produ__4AB81AF0");
             });
 
-            modelBuilder.Entity<Orders>(entity =>
+            modelBuilder.Entity<Order>(entity =>
             {
                 entity.Property(e => e.OrderName).IsRequired();
             });
 
-            modelBuilder.Entity<Products>(entity =>
+            modelBuilder.Entity<OrderItem>(entity =>
+            {
+                entity.HasOne(d => d.Dish)
+                    .WithMany(p => p.OrderItem)
+                    .HasForeignKey(d => d.DishId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OrderItem__DishI__4E88ABD4");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.OrderItem)
+                    .HasForeignKey(d => d.OrderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OrderItem__Order__4D94879B");
+            });
+
+            modelBuilder.Entity<Product>(entity =>
             {
                 entity.Property(e => e.ProductName).IsRequired();
 
@@ -94,18 +90,18 @@ namespace RestaurantManagement.EF.DBFirst.ModelsDB
                 entity.Property(e => e.UnitOfMeasure).IsRequired();
             });
 
-            modelBuilder.Entity<Reservations>(entity =>
+            modelBuilder.Entity<Reservation>(entity =>
             {
                 entity.Property(e => e.ReservationPersonName).IsRequired();
 
                 entity.HasOne(d => d.Table)
-                    .WithMany(p => p.Reservations)
+                    .WithMany(p => p.Reservation)
                     .HasForeignKey(d => d.TableId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Reservati__Table__33D4B598");
             });
 
-            modelBuilder.Entity<RestaurantTables>(entity =>
+            modelBuilder.Entity<RestaurantTable>(entity =>
             {
                 entity.Property(e => e.TableName).IsRequired();
             });

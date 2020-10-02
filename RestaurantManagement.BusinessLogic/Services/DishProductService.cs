@@ -9,9 +9,9 @@ using System.Text;
 
 namespace RestaurantManagement.BusinessLogic.Services
 {
-    public class DishProductsService : IDishProductsService
+    public class DishProductService : IDishProductsService
     {
-        public List<DishProducts> GetInitialDishProducts()
+        public List<DishProduct> GetInitialDishProducts()
         {
             var configuration = new ConfigurationBuilder()
                .AddJsonFile(@"./appsettings.json")
@@ -24,7 +24,7 @@ namespace RestaurantManagement.BusinessLogic.Services
                 throw new Exception($"Data file {path} does not exist!");
             }
 
-            var dishProductList = new Dictionary<string, DishProducts>();
+            var dishProductList = new Dictionary<string, DishProduct>();
 
             using (StreamReader reader = new StreamReader(path))
             {
@@ -35,7 +35,7 @@ namespace RestaurantManagement.BusinessLogic.Services
                     string productId = line.Split(',').ElementAt(1);
                     string portion = line.Split(',').ElementAt(2);
 
-                    var dishProduct = new DishProducts()
+                    var dishProduct = new DishProduct()
                     {
                         DishId = Int32.Parse(dishId),
                         ProductId = Int32.Parse(productId),
@@ -46,7 +46,7 @@ namespace RestaurantManagement.BusinessLogic.Services
                     }
                 }
             }
-            var returnList = dishProductList.Select(pair => new DishProducts()
+            var returnList = dishProductList.Select(pair => new DishProduct()
             {
                 DishId = pair.Value.DishId,
                 ProductId = pair.Value.ProductId,

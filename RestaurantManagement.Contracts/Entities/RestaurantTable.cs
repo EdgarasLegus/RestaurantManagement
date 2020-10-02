@@ -4,16 +4,16 @@ using System.Text;
 
 namespace RestaurantManagement.Contracts.Entities
 {
-    public partial class RestaurantTables
+    public partial class RestaurantTable
     {
-        public RestaurantTables()
+        public RestaurantTable()
         {
-            Reservations = new HashSet<Reservations>();
+            Reservation = new HashSet<Reservation>();
         }
 
         public int Id { get; set; }
         public string TableName { get; set; }
 
-        public virtual ICollection<Reservations> Reservations { get; set; }
+        public virtual ICollection<Reservation> Reservation { get; set; }
     }
 }

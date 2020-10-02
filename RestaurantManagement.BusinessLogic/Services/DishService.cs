@@ -10,7 +10,7 @@ namespace RestaurantManagement.BusinessLogic
 {
     public class DishService : IDishService
     {
-        public List<Dishes> GetInitialDishes()
+        public List<Dish> GetInitialDishes()
         {
             var configuration = new ConfigurationBuilder()
                .AddJsonFile(@"./appsettings.json")
@@ -23,7 +23,7 @@ namespace RestaurantManagement.BusinessLogic
                 throw new Exception($"Data file {path} does not exist!");
             }
 
-            var dishesList = new Dictionary<string, Dishes>();
+            var dishesList = new Dictionary<string, Dish>();
 
             using (StreamReader reader = new StreamReader(path))
             {
@@ -34,7 +34,7 @@ namespace RestaurantManagement.BusinessLogic
                     string isOnMenu = line.Split(',').ElementAt(1);
                     string dishType = line.Split(',').ElementAt(2);
 
-                    var dish = new Dishes()
+                    var dish = new Dish()
                     {
                         DishName = dishName,
                         IsOnMenu = Convert.ToBoolean(isOnMenu)
@@ -45,7 +45,7 @@ namespace RestaurantManagement.BusinessLogic
                     }
                 }
             }
-            var returnList = dishesList.Select(pair => new Dishes()
+            var returnList = dishesList.Select(pair => new Dish()
             {
                 DishName = pair.Value.DishName,
                 DishType = pair.Key,

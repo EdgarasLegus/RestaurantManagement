@@ -7,6 +7,6 @@ namespace RestaurantManagement.Contracts.Interfaces
 {
     public interface IRestaurantTablesService
     {
-        List<RestaurantTables> GetInitialRestaurantTables();
+        List<RestaurantTable> GetInitialRestaurantTables();
     }
 }

@@ -7,6 +7,6 @@ namespace RestaurantManagement.Contracts.Interfaces
 {
     public interface IDishService
     {
-        List<Dishes> GetInitialDishes();
+        List<Dish> GetInitialDishes();
     }
 }

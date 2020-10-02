@@ -6,6 +6,6 @@ namespace RestaurantManagement.Contracts
 {
     public interface IDishProductsService
     {
-        List<DishProducts> GetInitialDishProducts();
+        List<DishProduct> GetInitialDishProducts();
     }
 }

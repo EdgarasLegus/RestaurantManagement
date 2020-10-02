@@ -11,7 +11,7 @@ namespace RestaurantManagement.BusinessLogic.Services
 {
     public class ProductService : IProductService
     {
-        public List<Products> GetInitialProducts()
+        public List<Product> GetInitialProducts()
         {
             var configuration = new ConfigurationBuilder()
                .AddJsonFile(@"./appsettings.json")
@@ -24,7 +24,7 @@ namespace RestaurantManagement.BusinessLogic.Services
                 throw new Exception($"Data file {path} does not exist!");
             }
 
-            var productList = new Dictionary<string, Products>();
+            var productList = new Dictionary<string, Product>();
 
             using (StreamReader reader = new StreamReader(path))
             {
@@ -35,7 +35,7 @@ namespace RestaurantManagement.BusinessLogic.Services
                     string stockAmount = line.Split(',').ElementAt(1);
                     string unitOfMeasure = line.Split(',').ElementAt(2);
 
-                    var product = new Products()
+                    var product = new Product()
                     {
                         ProductName = productName,
                         StockAmount = Convert.ToDecimal(stockAmount)
@@ -46,7 +46,7 @@ namespace RestaurantManagement.BusinessLogic.Services
                     }
                 }
             }
-            var returnList = productList.Select(pair => new Products()
+            var returnList = productList.Select(pair => new Product()
             {
                 ProductName = pair.Value.ProductName,
                 StockAmount = pair.Value.StockAmount,
