@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RestaurantManagement.BusinessLogic.Settings
+namespace RestaurantManagement.Contracts.Settings
 {
     public class ConfigurationSettings
     {

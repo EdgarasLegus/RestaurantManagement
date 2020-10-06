@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RestaurantManagement.Contracts.Entities;
-using RestaurantManagement.Contracts.Interfaces;
+using RestaurantManagement.Contracts.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,35 +24,33 @@ namespace RestaurantManagement.BusinessLogic.Services
                 throw new Exception($"Data file {path} does not exist!");
             }
 
-            var productList = new Dictionary<string, Product>();
+            var productList = new List<Product>();
 
             using (StreamReader reader = new StreamReader(path))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    string productName = line.Split(',').First();
-                    string stockAmount = line.Split(',').ElementAt(1);
-                    string unitOfMeasure = line.Split(',').ElementAt(2);
+                    string id = line.Split(',').First();
+                    string productName = line.Split(',').ElementAt(1);
+                    string stockAmount = line.Split(',').ElementAt(2);
+                    string unitOfMeasure = line.Split(',').ElementAt(3);
 
                     var product = new Product()
                     {
+                        Id = Int32.Parse(id),
                         ProductName = productName,
-                        StockAmount = Convert.ToDecimal(stockAmount)
+                        StockAmount = Convert.ToDecimal(stockAmount),
+                        UnitOfMeasure = unitOfMeasure
                     };
-                    if (!productList.ContainsValue(product))
+                    //var matches = myList.Where(p => p.Name == nameToExtract);
+                    if (!productList.Any(x => x.ProductName == product.ProductName))
                     {
-                        productList.Add(unitOfMeasure, product);
+                        productList.Add(product);
                     }
                 }
             }
-            var returnList = productList.Select(pair => new Product()
-            {
-                ProductName = pair.Value.ProductName,
-                StockAmount = pair.Value.StockAmount,
-                UnitOfMeasure = pair.Key
-            }).ToList();
-            return returnList;
+            return productList;
 
         }
     }

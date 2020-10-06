@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace RestaurantManagement.Contracts
+namespace RestaurantManagement.Contracts.Interfaces.Services
 {
-    public interface IDishProductsService
+    public interface IDishProductService
     {
         List<DishProduct> GetInitialDishProducts();
     }

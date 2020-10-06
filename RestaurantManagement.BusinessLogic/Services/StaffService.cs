@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RestaurantManagement.Contracts.Entities;
-using RestaurantManagement.Contracts.Interfaces;
+using RestaurantManagement.Contracts.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,23 +31,23 @@ namespace RestaurantManagement.BusinessLogic.Services
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    string userName = line.Split(',').First();
-                    string userPassword = line.Split(',').ElementAt(1);
-                    string userRole = line.Split(',').ElementAt(2);
-                    string start = line.Split(',').ElementAt(3);
-                    string end = line.Split(',').ElementAt(4);
-
-
+                    string id = line.Split(',').First();
+                    string userName = line.Split(',').ElementAt(1);
+                    string userPassword = line.Split(',').ElementAt(2);
+                    string userRole = line.Split(',').ElementAt(3);
+                    string start = line.Split(',').ElementAt(4);
+                    string end = line.Split(',').ElementAt(5);
 
                     var staff = new Staff()
                     {
+                        Id = Int32.Parse(id),
                         UserName = userName,
                         UserPassword = userPassword,
                         UserRole = userRole,
                         StartDayOfEmployment = Convert.ToDateTime(start),
                         EndDayOfEmployment = Convert.ToDateTime(end)
                     };
-                    if (!staffList.Contains(staff))
+                    if (!staffList.Any(x => x.UserName == staff.UserName))
                     {
                         staffList.Add(staff);
                     }

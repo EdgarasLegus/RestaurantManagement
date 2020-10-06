@@ -1,0 +1,54 @@
+﻿@*PaginatedList<AnagramSolver.Contracts.Anagram>*@
+@*@model PaginatedList<AnagramSolver.Contracts.WordModel>*@
+@model PaginatedList<RestaurantManagement.Contracts.Entities.Staff>
+@{ ViewData["Title"] = "Staff List"; }
+
+
+
+@{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : ""; }
+
+<style>
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .button-act {
+        margin-left: auto;
+    }
+
+    .navigation {
+        display: flex;
+    }
+</style>
+
+<div class="form-group">
+    <div class="navigation">
+        <a asp-action="Index"
+           asp-route-pageIndex="@(Model.PageIndex - 1)"
+           class="btn btn-default active @prevDisabled">
+            << Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-pageIndex="@(Model.PageIndex + 1)"
+           class="btn btn-default active @nextDisabled">
+            Next >>
+        </a>
+        <button onclick="location.href='@Url.Action("StaffAddition", "Staff")'" type="button" class="button-act">Add member</button>
+        <button onclick="location.href='api/download_dictionary/zodynas'" type="button" class="button-act">Delete member</button>
+    </div>
+    <form asp-action="Index" class="search-form">
+        <input type="text" name="searchInput" size="25">
+        <button type="submit" class="button">Search</button>
+    </form>
+</div>
+
+<p><u>Staff List:</u></p>
+
+
+@foreach (var item in Model)
+{
+<ul>
+    <a asp-action="StaffMember" asp-route-id="@item.UserName">@item.UserName</a>
+</ul>}

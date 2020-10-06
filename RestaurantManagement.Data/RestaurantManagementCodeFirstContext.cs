@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestaurantManagement.Contracts.Entities;
+using RestaurantManagement.Contracts.Settings;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,7 +32,7 @@ namespace RestaurantManagement.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(BusinessLogic.Settings.ConfigurationSettings.GetConnectionStringCodeFirst());
+                optionsBuilder.UseSqlServer(ConfigurationSettings.GetConnectionStringCodeFirst());
             }
         }
     }

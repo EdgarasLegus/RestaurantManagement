@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RestaurantManagement.Contracts.Entities;
-using RestaurantManagement.Contracts.Interfaces;
+using RestaurantManagement.Contracts.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,12 +31,15 @@ namespace RestaurantManagement.BusinessLogic.Services
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    string tableName = line;
+                    string id = line.Split(',').First();
+                    string tableName = line.Split(',').ElementAt(1);
+
                     var tables = new RestaurantTable()
                     {
+                        Id = Int32.Parse(id),
                         TableName = tableName,
                     };
-                    if (!tablesList.Contains(tables))
+                    if (!tablesList.Any(x => x.TableName == tables.TableName))
                     {
                         tablesList.Add(tables);
                     }

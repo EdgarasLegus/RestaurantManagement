@@ -15,10 +15,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.8" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RestaurantManagement.BusinessLogic\RestaurantManagement.BusinessLogic.csproj" />
     <ProjectReference Include="..\RestaurantManagement.Contracts\RestaurantManagement.Contracts.csproj" />
   </ItemGroup>
 

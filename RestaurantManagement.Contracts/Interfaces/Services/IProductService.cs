@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RestaurantManagement.Contracts.Interfaces
+namespace RestaurantManagement.Contracts.Interfaces.Services
 {
     public interface IProductService
     {

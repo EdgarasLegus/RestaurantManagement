@@ -1,0 +1,56 @@
+﻿@model List<RestaurantManagement.Contracts.Entities.Staff>
+@{ ViewData["Title"] = "Staff Member"; }
+
+<h3><u>Selected staff member</u></h3>
+
+@if (Model != null)
+{
+@foreach (var item in Model)
+{
+<ul>
+    <li>Id: @item.Id</li>
+    <li>Name: @item.UserName</li>
+    <li>Password: @item.UserPassword</li>
+    <li>Role: @item.UserRole</li>
+    <li>Started: @item.StartDayOfEmployment.ToString("MMMM dd, yyyy")</li>
+    <li>Contract until: @item.EndDayOfEmployment.ToString("MMMM dd, yyyy")</li>
+</ul>}}
+
+<form asp-action="Index">
+    <button type="submit" class="button" id="button-3">Return</button>
+</form>
+
+<style>
+    .button {
+        display: inline-flex;
+        height: 40px;
+        width: 150px;
+        border: 2px solid #DF9924;
+        margin: 20px 20px 20px 0px;
+        color: #DF9924;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: .8em;
+        letter-spacing: 1.5px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    value {
+        color: #DF9924;
+        text-decoration: none;
+        letter-spacing: 1px;
+    }
+
+    #button-3 {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+        #button-3:hover {
+            color: #2D3142;
+            background: #DF9924;
+        }
+</style>
+

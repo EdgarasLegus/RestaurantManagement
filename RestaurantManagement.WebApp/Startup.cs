@@ -7,9 +7,13 @@ using IdentityServer4.Test;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RestaurantManagement.Contracts.Interfaces.Repositories;
+using RestaurantManagement.Contracts.Interfaces.Services;
+using RestaurantManagement.Data;
 
 namespace RestaurantManagement.WebApp
 {
@@ -35,6 +39,23 @@ namespace RestaurantManagement.WebApp
                 .AddTestUsers(new List<TestUser>())
                 .AddDeveloperSigningCredential();
 
+            services
+                .AddScoped<IDataLoader, BusinessLogic.Services.DataLoader>()
+                .AddScoped<IDishProductService, BusinessLogic.Services.DishProductService>()
+                .AddScoped<IDishService, BusinessLogic.Services.DishService>()
+                .AddScoped<IProductService, BusinessLogic.Services.ProductService>()
+                .AddScoped<IRestaurantTablesService, BusinessLogic.Services.RestaurantTableService>()
+                .AddScoped<IStaffService, BusinessLogic.Services.StaffService>()
+                .AddScoped<IDishRepo, BusinessLogic.Repository.DishRepository>()
+                .AddScoped<IDishProductRepo, BusinessLogic.Repository.DishProductRepository>()
+                .AddScoped<IProductRepo, BusinessLogic.Repository.ProductRepository>()
+                .AddScoped<IRestaurantTableRepo, BusinessLogic.Repository.RestaurantTableRepository>()
+                .AddScoped<IStaffRepo, BusinessLogic.Repository.StaffRepository>()
+                .AddScoped<ILogicHandler, BusinessLogic.Services.LogicHandler>()
+                .AddScoped<IUserLogRepo, BusinessLogic.Repository.UserLogRepository>()
+                .AddHttpContextAccessor();
+
+            services.AddDbContext<RestaurantManagementCodeFirstContext>(options => options.UseSqlServer(Contracts.Settings.ConfigurationSettings.GetConnectionStringCodeFirst()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,10 @@
+1,Bahamai,
+2,Fidžis,
+3,Havana
+4,Karibai,
+5,Kiribatis,
+6,Maršalai,
+7,Polinezija,
+8,Tasmanija,
+9,Tenerifė,
+10,Zelandija,

@@ -1,15 +1,22 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RestaurantManagement.Contracts.Entities;
-using RestaurantManagement.Contracts.Interfaces;
+using RestaurantManagement.Contracts.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace RestaurantManagement.BusinessLogic
+namespace RestaurantManagement.BusinessLogic.Services
 {
     public class DishService : IDishService
     {
+        private readonly ILogicHandler _logicHandler;
+
+        public DishService(ILogicHandler logicHandler)
+        {
+            _logicHandler = logicHandler;
+        }
+
         public List<Dish> GetInitialDishes()
         {
             var configuration = new ConfigurationBuilder()
@@ -23,35 +30,33 @@ namespace RestaurantManagement.BusinessLogic
                 throw new Exception($"Data file {path} does not exist!");
             }
 
-            var dishesList = new Dictionary<string, Dish>();
+            var dishesList = new List<Dish>();
 
             using (StreamReader reader = new StreamReader(path))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    string dishName = line.Split(',').First();
-                    string isOnMenu = line.Split(',').ElementAt(1);
-                    string dishType = line.Split(',').ElementAt(2);
+                    string id = line.Split(',').First();
+                    string dishName = line.Split(',').ElementAt(1);
+                    string isOnMenu = line.Split(',').ElementAt(2);
+                    string dishType = line.Split(',').ElementAt(3);
 
                     var dish = new Dish()
                     {
+                        //IsOnMenu = Convert.ToBoolean(isOnMenu),
+                        Id = Int32.Parse(id),
                         DishName = dishName,
-                        IsOnMenu = Convert.ToBoolean(isOnMenu)
+                        IsOnMenu = _logicHandler.BooleanConverter(isOnMenu),
+                        DishType = dishType
                     };
-                    if (!dishesList.ContainsValue(dish))
+                    if (!dishesList.Any(x => x.DishName == dish.DishName))
                     {
-                        dishesList.Add(dishType, dish);
+                        dishesList.Add(dish);
                     }
                 }
             }
-            var returnList = dishesList.Select(pair => new Dish()
-            {
-                DishName = pair.Value.DishName,
-                DishType = pair.Key,
-                IsOnMenu = pair.Value.IsOnMenu
-            }).ToList();
-            return returnList;
+            return dishesList;
 
         }
     }
