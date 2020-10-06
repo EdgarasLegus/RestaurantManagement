@@ -36,7 +36,7 @@
             Next >>
         </a>
         <button onclick="location.href='@Url.Action("StaffAddition", "Staff")'" type="button" class="button-act">Add member</button>
-        <button onclick="location.href='api/download_dictionary/zodynas'" type="button" class="button-act">Delete member</button>
+        <button onclick="location.href='@Url.Action("StaffRemoval", "Staff")'" type="button" class="button-act">Delete member</button>
     </div>
     <form asp-action="Index" class="search-form">
         <input type="text" name="searchInput" size="25">

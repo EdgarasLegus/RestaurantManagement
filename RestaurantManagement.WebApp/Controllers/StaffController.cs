@@ -104,7 +104,39 @@ namespace RestaurantManagement.WebApp.Controllers
                 {
                     await _staffRepo.InsertAdditionalStaffMember(userName, userPassword, userRole, startDay, endDay);
                     _userLogRepo.InsertUserLog(UserAction.Add_Staff, userId);
-                    ViewBag.Message = "New word added successfully! +1 search is added";
+                    ViewBag.Message = "New word added successfully!";
+                    return View();
+                }
+            }
+            return View();
+        }
+
+        public IActionResult StaffRemoval()
+        {
+            return View();
+        }
+
+        [HttpPost, ActionName("StaffRemoval")]
+        [ValidateAntiForgeryToken]
+        public IActionResult RemovalConfirmed(string staffMemberName)
+        {
+            if (ModelState.IsValid)
+            {
+                //var ip = _eflogic.GetIP();
+                //var ip = HttpContext.Connection.RemoteIpAddress.ToString();
+                var exists = _staffRepo.CheckIfStaffMemberExists(staffMemberName);
+                var userId = 1;
+
+                if (!exists)
+                {
+                    ModelState.AddModelError(string.Empty, "Specified member does not exist!");
+                    return View();
+                }
+                else
+                {
+                    _staffRepo.RemoveStaffMember(staffMemberName);
+                    _userLogRepo.InsertUserLog(UserAction.Remove_Staff, userId);
+                    ViewBag.Message = "Selected member was deleted!";
                     return View();
                 }
             }

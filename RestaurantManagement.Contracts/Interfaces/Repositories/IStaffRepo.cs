@@ -14,5 +14,6 @@ namespace RestaurantManagement.Contracts.Interfaces.Repositories
         Task<List<Staff>> GetStaffMember(string member);
         bool CheckIfStaffMemberExists(string memberName);
         Task InsertAdditionalStaffMember(string userName, string userPassword, string userRole, DateTime startDay, DateTime endDay);
+        void RemoveStaffMember(string staffMemberName);
     }
 }

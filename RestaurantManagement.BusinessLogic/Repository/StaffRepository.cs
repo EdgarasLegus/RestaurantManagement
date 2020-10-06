@@ -91,5 +91,16 @@ namespace RestaurantManagement.BusinessLogic.Repository
             await _context.SaveChangesAsync();
         }
 
+        public void RemoveStaffMember(string staffMemberName)
+        {
+            var memberId = _context.Staff.Where(x => x.UserName == staffMemberName).Select(x => x.Id).First();
+            var staffEntity = new Staff
+            {
+                Id = memberId
+            };
+            _context.Staff.Remove(staffEntity);
+            _context.SaveChangesAsync();
+        }
+
     }
 }
