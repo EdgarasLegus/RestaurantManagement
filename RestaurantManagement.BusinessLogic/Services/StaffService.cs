@@ -34,7 +34,7 @@ namespace RestaurantManagement.BusinessLogic.Services
                     string id = line.Split(',').First();
                     string userName = line.Split(',').ElementAt(1);
                     string userPassword = line.Split(',').ElementAt(2);
-                    string userRole = line.Split(',').ElementAt(3);
+                    string personRoleId = line.Split(',').ElementAt(3);
                     string start = line.Split(',').ElementAt(4);
                     string end = line.Split(',').ElementAt(5);
 
@@ -43,7 +43,7 @@ namespace RestaurantManagement.BusinessLogic.Services
                         Id = Int32.Parse(id),
                         UserName = userName,
                         UserPassword = userPassword,
-                        UserRole = userRole,
+                        PersonRoleId = Int32.Parse(personRoleId),
                         StartDayOfEmployment = Convert.ToDateTime(start),
                         EndDayOfEmployment = Convert.ToDateTime(end)
                     };

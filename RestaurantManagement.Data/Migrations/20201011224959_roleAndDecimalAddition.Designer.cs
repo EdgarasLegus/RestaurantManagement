@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestaurantManagement.Data;
 
 namespace RestaurantManagement.Data.Migrations
 {
     [DbContext(typeof(RestaurantManagementCodeFirstContext))]
-    partial class RestaurantManagementCodeFirstContextModelSnapshot : ModelSnapshot
+    [Migration("20201011224959_roleAndDecimalAddition")]
+    partial class roleAndDecimalAddition
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,9 +203,6 @@ namespace RestaurantManagement.Data.Migrations
                     b.Property<DateTime>("EndDayOfEmployment")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PersonRoleId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartDayOfEmployment")
                         .HasColumnType("datetime2");
 
@@ -217,9 +216,15 @@ namespace RestaurantManagement.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<int>("UserRole")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserRoleNavigationId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonRoleId");
+                    b.HasIndex("UserRoleNavigationId");
 
                     b.ToTable("Staff");
                 });
@@ -234,7 +239,10 @@ namespace RestaurantManagement.Data.Migrations
                     b.Property<DateTime>("ActionTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("StaffId")
+                    b.Property<int>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ModifiedByNavigationId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserAction")
@@ -242,7 +250,7 @@ namespace RestaurantManagement.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StaffId");
+                    b.HasIndex("ModifiedByNavigationId");
 
                     b.ToTable("UserLog");
                 });
@@ -288,20 +296,16 @@ namespace RestaurantManagement.Data.Migrations
 
             modelBuilder.Entity("RestaurantManagement.Contracts.Entities.Staff", b =>
                 {
-                    b.HasOne("RestaurantManagement.Contracts.Entities.PersonRole", "PersonRole")
+                    b.HasOne("RestaurantManagement.Contracts.Entities.PersonRole", "UserRoleNavigation")
                         .WithMany("Staff")
-                        .HasForeignKey("PersonRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserRoleNavigationId");
                 });
 
             modelBuilder.Entity("RestaurantManagement.Contracts.Entities.UserLog", b =>
                 {
-                    b.HasOne("RestaurantManagement.Contracts.Entities.Staff", "Staff")
+                    b.HasOne("RestaurantManagement.Contracts.Entities.Staff", "ModifiedByNavigation")
                         .WithMany("UserLog")
-                        .HasForeignKey("StaffId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ModifiedByNavigationId");
                 });
 #pragma warning restore 612, 618
         }

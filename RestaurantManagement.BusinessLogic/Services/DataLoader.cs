@@ -22,10 +22,12 @@ namespace RestaurantManagement.BusinessLogic.Services
         private readonly IDishRepo _dishRepo;
         private readonly IDishProductService _dishProductService;
         private readonly IDishProductRepo _dishProductRepo;
+        private readonly IPersonRoleService _personRoleService;
+        private readonly IPersonRoleRepo _personRoleRepo;
 
         public DataLoader(RestaurantManagementCodeFirstContext context, IStaffService staffService, IStaffRepo staffRepo, IRestaurantTablesService restaurantTablesService,
             IRestaurantTableRepo restaurantTableRepo, IProductService productService, IProductRepo productRepo, IDishService dishService, IDishRepo dishRepo,
-            IDishProductService dishProductService, IDishProductRepo dishProductRepo)
+            IDishProductService dishProductService, IDishProductRepo dishProductRepo, IPersonRoleService personRoleService, IPersonRoleRepo personRoleRepo)
         {
             _context = context;
             _staffService = staffService;
@@ -38,6 +40,8 @@ namespace RestaurantManagement.BusinessLogic.Services
             _dishRepo = dishRepo;
             _dishProductService = dishProductService;
             _dishProductRepo = dishProductRepo;
+            _personRoleService = personRoleService;
+            _personRoleRepo = personRoleRepo;
         }
 
         public async Task LoadInitialData()
@@ -47,6 +51,7 @@ namespace RestaurantManagement.BusinessLogic.Services
             //await _productRepo.InsertInitialProducts(_productService.GetInitialProducts());
             //await _dishRepo.InsertInitialDishes(_dishService.GetInitialDishes());
             //await _dishProductRepo.InsertInitialDishProducts(_dishProductService.GetInitialDishProducts());
+            await LoadRoles();
             await LoadStaff();
             await LoadTables();
             await LoadProducts();
@@ -54,6 +59,11 @@ namespace RestaurantManagement.BusinessLogic.Services
             await LoadDishProducts();
 
             //await _context.SaveChangesAsync();
+        }
+
+        private async Task LoadRoles()
+        {
+            await _personRoleRepo.InsertInitialPersonRoles(_personRoleService.GetInitialPersonRoles());
         }
 
         private async Task LoadStaff()

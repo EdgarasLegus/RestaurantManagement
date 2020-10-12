@@ -80,13 +80,13 @@ namespace RestaurantManagement.WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> StaffAddition([Bind("UserName, UserPassword, UserRole, StartDayOfEmployment, EndDayOfEmployment")] Staff staffEntity)
+        public async Task<IActionResult> StaffAddition([Bind("UserName, UserPassword, PersonRoleId, StartDayOfEmployment, EndDayOfEmployment")] Staff staffEntity)
         {
             if (ModelState.IsValid)
             {
                 var userName = staffEntity.UserName;
                 var userPassword = staffEntity.UserPassword;
-                var userRole = staffEntity.UserRole;
+                var personRoleId = staffEntity.PersonRoleId;
                 var startDay = Convert.ToDateTime(staffEntity.StartDayOfEmployment);
                 var endDay = Convert.ToDateTime(staffEntity.StartDayOfEmployment);
 
@@ -102,7 +102,7 @@ namespace RestaurantManagement.WebApp.Controllers
                 }
                 else
                 {
-                    await _staffRepo.InsertAdditionalStaffMember(userName, userPassword, userRole, startDay, endDay);
+                    await _staffRepo.InsertAdditionalStaffMember(userName, userPassword, personRoleId, startDay, endDay);
                     _userLogRepo.InsertUserLog(UserAction.Add_Staff, userId);
                     ViewBag.Message = "New word added successfully!";
                     return View();

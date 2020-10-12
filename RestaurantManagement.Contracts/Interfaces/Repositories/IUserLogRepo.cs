@@ -7,6 +7,6 @@ namespace RestaurantManagement.Contracts.Interfaces.Repositories
 {
     public interface IUserLogRepo
     {
-        void InsertUserLog(UserAction userAction, int userId);
+        void InsertUserLog(UserAction userAction, int staffId);
     }
 }

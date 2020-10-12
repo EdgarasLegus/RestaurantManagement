@@ -4,11 +4,11 @@ using System.Text;
 
 namespace RestaurantManagement.Contracts.Enums
 {
-    public enum Role
+    public enum Roles
     {
         Waiter,
-        Manager,
         Chef,
+        Manager,
         Administrator
     }
 }

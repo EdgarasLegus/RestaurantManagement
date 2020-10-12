@@ -17,14 +17,14 @@ namespace RestaurantManagement.BusinessLogic.Repository
             _context = context;
         }
 
-        public void InsertUserLog(UserAction userAction, int userId)
+        public void InsertUserLog(UserAction userAction, int staffId)
         {
             //var ip = _efLogic.GetIP();
             var userLogEntity = new UserLog
             {
                 UserAction = userAction.ToString(),
                 ActionTime = DateTime.Now,
-                ModifiedBy = userId
+                StaffId = staffId
             };
             _context.UserLog.Add(userLogEntity);
             _context.SaveChanges();

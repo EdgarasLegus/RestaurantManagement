@@ -32,7 +32,7 @@ namespace RestaurantManagement.BusinessLogic.Repository
                             Id = item.Id,
                             UserName = item.UserName,
                             UserPassword = item.UserPassword,
-                            UserRole = item.UserRole,
+                            PersonRoleId = item.PersonRoleId,
                             StartDayOfEmployment = item.StartDayOfEmployment,
                             EndDayOfEmployment = item.EndDayOfEmployment
                         };
@@ -76,13 +76,13 @@ namespace RestaurantManagement.BusinessLogic.Repository
             }
         }
 
-        public async Task InsertAdditionalStaffMember(string userName, string userPassword, string userRole, DateTime startDay, DateTime endDay)
+        public async Task InsertAdditionalStaffMember(string userName, string userPassword, int personRoleId, DateTime startDay, DateTime endDay)
         {
             var additionalStaffMember = new Staff
             {
                 UserName = userName,
                 UserPassword = userPassword,
-                UserRole = userRole,
+                PersonRoleId = _context.PersonRole.Where(x => x.Id == personRoleId).Select(x => x.Id).First(),
                 StartDayOfEmployment = startDay,
                 EndDayOfEmployment = endDay
 

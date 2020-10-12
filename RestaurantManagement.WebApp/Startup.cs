@@ -53,6 +53,8 @@ namespace RestaurantManagement.WebApp
                 .AddScoped<IStaffRepo, BusinessLogic.Repository.StaffRepository>()
                 .AddScoped<ILogicHandler, BusinessLogic.Services.LogicHandler>()
                 .AddScoped<IUserLogRepo, BusinessLogic.Repository.UserLogRepository>()
+                .AddScoped<IPersonRoleService, BusinessLogic.Services.PersonRoleService>()
+                .AddScoped<IPersonRoleRepo, BusinessLogic.Repository.PersonRoleRepository>()
                 .AddHttpContextAccessor();
 
             services.AddDbContext<RestaurantManagementCodeFirstContext>(options => options.UseSqlServer(Contracts.Settings.ConfigurationSettings.GetConnectionStringCodeFirst()));

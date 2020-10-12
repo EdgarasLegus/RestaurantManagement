@@ -9,8 +9,8 @@ namespace RestaurantManagement.Contracts.Entities
         public int Id { get; set; }
         public string UserAction { get; set; }
         public DateTime ActionTime { get; set; }
-        public int ModifiedBy { get; set; }
+        public int StaffId { get; set; }
 
-        public virtual Staff ModifiedByNavigation { get; set; }
+        public virtual Staff Staff { get; set; }
     }
 }

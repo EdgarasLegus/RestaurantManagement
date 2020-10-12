@@ -1,5 +1,11 @@
 ﻿@model RestaurantManagement.Contracts.Entities.Staff
 @{ ViewData["Title"] = "Add Staff member"; }
+@{ 
+
+    var context = new RestaurantManagement.Data.RestaurantManagementCodeFirstContext();
+    var personRoleRepo = new RestaurantManagement.BusinessLogic.Repository.PersonRoleRepository(context);
+    var roleList = personRoleRepo.GetRoles().AsEnumerable();
+}
 <h2>Fill form to add new member to staff</h2>
 <div class="row">
     <div class="col-md-4">
@@ -19,10 +25,10 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="UserRole" class="control-label">User role*</label>
-                <div class="hide">Roles to choose: <br />Waiter, Administrator, Chef, Manager</div>
-                <input asp-for="UserRole" class="form-control" />
-                <span asp-validation-for="UserRole" class="text-danger"></span>
+                <label asp-for="PersonRoleId" class="control-label">Person role*</label>
+                @Html.DropDownListFor(x => x.PersonRoleId, new SelectList(roleList, "Id", "RoleName"), "--Select Role--", new {@class="form-control"})
+                @Html.ValidationMessageFor(x => x.PersonRoleId, "",  new { @class = "text-danger" })
+                @*<span asp-validation-for="PersonRoleId" class="text-danger"></span>*@
             </div>
 
             <div class="form-group">

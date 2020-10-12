@@ -26,8 +26,7 @@ namespace RestaurantManagement.Contracts.Entities
         public string UserPassword { get; set; }
 
         [Required(ErrorMessage = "Role is required")]
-        [RegularExpression(@"(^Waiter$|^Administrator$|^Chef$|^Manager$)", ErrorMessage ="Role is invalid")]
-        public string UserRole { get; set; }
+        public int PersonRoleId { get; set; }
 
         [Required(ErrorMessage = "Start date is required")]
         //[RegularExpression(@"^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$", ErrorMessage = "Date is invalid")]
@@ -38,6 +37,8 @@ namespace RestaurantManagement.Contracts.Entities
         //[RegularExpression(@"^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$", ErrorMessage = "Date is invalid")]
         [BackDateValidationChecker]
         public DateTime EndDayOfEmployment { get; set; }
+
+        public virtual PersonRole PersonRole { get; set; }
 
         public virtual ICollection<UserLog> UserLog { get; set; }
     }
