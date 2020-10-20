@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RestaurantManagement.Contracts.Entities;
-using RestaurantManagement.Contracts.Interfaces.Services;
+using RestaurantManagement.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,42 +11,32 @@ namespace RestaurantManagement.BusinessLogic.Services
 {
     public class PersonRoleService : IPersonRoleService
     {
+        private readonly ILogicHandler _logicHandler;
+
+        public PersonRoleService(ILogicHandler logicHandler)
+        {
+            _logicHandler = logicHandler;
+        }
+
         public List<PersonRole> GetInitialPersonRoles()
         {
-            var configuration = new ConfigurationBuilder()
-               .AddJsonFile(@"./appsettings.json")
-               .Build();
+            var initialPersonRolesFile = Contracts.Settings.ConfigurationSettings.GetInitialPersonRolesFromConfig();
+            var fileParts = _logicHandler.FileReader(initialPersonRolesFile);
+            var rolesList = new List<PersonRole>();
 
-            var path = configuration["InitialData:InitialPersonRoles"];
-
-            if (!File.Exists(path))
+            foreach (List<string> subList in fileParts)
             {
-                throw new Exception($"Data file {path} does not exist!");
-            }
-
-            var roleList = new List<PersonRole>();
-
-            using (StreamReader reader = new StreamReader(path))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                var role = new PersonRole()
                 {
-                    string id = line.Split(',').First();
-                    string roleName = line.Split(',').ElementAt(1);
-
-                    var role = new PersonRole()
-                    {
-                        Id = Int32.Parse(id),
-                        RoleName = roleName
-                    };
-                    if (!roleList.Any(x => x.RoleName == role.RoleName))
-                    {
-                        roleList.Add(role);
-                    }
+                    Id = Int32.Parse(subList[0]),
+                    RoleName = subList[1]
+                };
+                if (!rolesList.Any(x => x.RoleName == role.RoleName))
+                {
+                    rolesList.Add(role);
                 }
             }
-            return roleList;
-
+            return rolesList;
         }
     }
 }

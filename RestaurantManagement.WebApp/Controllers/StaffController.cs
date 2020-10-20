@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantManagement.Contracts.Entities;
 using RestaurantManagement.Contracts.Enums;
-using RestaurantManagement.Contracts.Interfaces.Repositories;
+using RestaurantManagement.Interfaces.Repositories;
 using RestaurantManagement.WebApp.Models;
 
 namespace RestaurantManagement.WebApp.Controllers
@@ -49,7 +49,7 @@ namespace RestaurantManagement.WebApp.Controllers
             }
         }
 
-        public async Task<IActionResult> StaffMember(string id)
+        public async Task<IActionResult> StaffMemberDetails(string id)
         {
             try
             {
@@ -118,7 +118,7 @@ namespace RestaurantManagement.WebApp.Controllers
 
         [HttpPost, ActionName("StaffRemoval")]
         [ValidateAntiForgeryToken]
-        public IActionResult RemovalConfirmed(string staffMemberName)
+        public async Task<IActionResult> RemovalConfirmed(string staffMemberName)
         {
             if (ModelState.IsValid)
             {
@@ -134,11 +134,97 @@ namespace RestaurantManagement.WebApp.Controllers
                 }
                 else
                 {
-                    _staffRepo.RemoveStaffMember(staffMemberName);
+                    await _staffRepo.RemoveStaffMember(staffMemberName);
                     _userLogRepo.InsertUserLog(UserAction.Remove_Staff, userId);
                     ViewBag.Message = "Selected member was deleted!";
                     return View();
                 }
+            }
+            return View();
+        }
+
+        public IActionResult StaffUpdate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult StaffUpdate(int updatableStaffMember, [Bind("UserName, UserPassword, PersonRoleId, StartDayOfEmployment, EndDayOfEmployment")] Staff staffEntity)
+        {
+            if (ModelState.IsValid)
+            {
+                //var ip = _eflogic.GetIP();
+                //var ip = HttpContext.Connection.RemoteIpAddress.ToString();
+                var exists = _staffRepo.CheckIfStaffMemberIdExists(updatableStaffMember);
+                var userId = 1;
+
+                if (!exists)
+                {
+                    ModelState.AddModelError(string.Empty, "Specified staff member does not exist!");
+                    return View();
+                }
+                else
+                {
+                    var updateCheck = _staffRepo.UpdateStaffMember(updatableStaffMember, staffEntity);
+                    if (updateCheck == true)
+                    {
+                        ModelState.AddModelError(string.Empty, "This staff member cannot be updated with your option, same member already exists!");
+                        return View();
+                    }
+                    else
+                    {
+                        _userLogRepo.InsertUserLog(UserAction.Update_Staff, userId);
+                        ViewBag.Message = "Selected member was updated!";
+                        return View();
+                    }
+                }
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> StaffEdit(int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Specified staff member does not exist!");
+                    return View();
+                }
+
+                var staffMemberId = await _staffRepo.GetStaffMemberId(id);
+
+                if (staffMemberId == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Specified staff member does not exist!");
+                    return View();
+                }
+                return View(staffMemberId);
+            }
+            return View();
+        }
+
+        [HttpPost, ActionName("StaffEdit")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> StaffEdition(int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Specified staff member does not exist!");
+                    return View();
+                }
+
+                var staffMemberId = await _staffRepo.GetStaffMemberId(id);
+
+                if (await TryUpdateModelAsync<Staff>(staffMemberId, "", 
+                    x => x.UserName, x => x.UserPassword, x => x.PersonRoleId, x => x.EndDayOfEmployment))
+                {
+                    await _staffRepo.SaveStaffMemberEdition();
+                }
+                return View(staffMemberId);
             }
             return View();
         }

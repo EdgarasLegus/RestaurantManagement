@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RestaurantManagement.Contracts.Interfaces.Services;
+using RestaurantManagement.Interfaces.Services;
 using RestaurantManagement.Data;
 using RestaurantManagement.WebApp.Models;
 

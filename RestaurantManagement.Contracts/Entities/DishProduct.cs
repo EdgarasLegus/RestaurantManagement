@@ -12,7 +12,7 @@ namespace RestaurantManagement.Contracts.Entities
         public int DishId { get; set; }
         public int ProductId { get; set; }
 
-        [Column(TypeName = "decimal(18,4)")]
+        [Column(TypeName = "decimal(18,3)")]
         public decimal Portion { get; set; }
 
         public virtual Dish Dish { get; set; }

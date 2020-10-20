@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RestaurantManagement.Contracts.Entities;
-using RestaurantManagement.Contracts.Interfaces.Services;
+using RestaurantManagement.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,46 +11,34 @@ namespace RestaurantManagement.BusinessLogic.Services
 {
     public class StaffService : IStaffService
     {
+        private readonly ILogicHandler _logicHandler;
+
+        public StaffService(ILogicHandler logicHandler)
+        {
+            _logicHandler = logicHandler;
+        }
+
         public List<Staff> GetInitialStaff()
         {
-            var configuration = new ConfigurationBuilder()
-               .AddJsonFile(@"./appsettings.json")
-               .Build();
 
-            var path = configuration["InitialData:InitialStaff"];
-
-            if (!File.Exists(path))
-            {
-                throw new Exception($"Data file {path} does not exist!");
-            }
-
+            var initialStuffFile = Contracts.Settings.ConfigurationSettings.GetInitialStaffFromConfig();
+            var fileParts = _logicHandler.FileReader(initialStuffFile);
             var staffList = new List<Staff>();
 
-            using (StreamReader reader = new StreamReader(path))
+            foreach (List<string> subList in fileParts)
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                var staff = new Staff()
                 {
-                    string id = line.Split(',').First();
-                    string userName = line.Split(',').ElementAt(1);
-                    string userPassword = line.Split(',').ElementAt(2);
-                    string personRoleId = line.Split(',').ElementAt(3);
-                    string start = line.Split(',').ElementAt(4);
-                    string end = line.Split(',').ElementAt(5);
-
-                    var staff = new Staff()
-                    {
-                        Id = Int32.Parse(id),
-                        UserName = userName,
-                        UserPassword = userPassword,
-                        PersonRoleId = Int32.Parse(personRoleId),
-                        StartDayOfEmployment = Convert.ToDateTime(start),
-                        EndDayOfEmployment = Convert.ToDateTime(end)
-                    };
-                    if (!staffList.Any(x => x.UserName == staff.UserName))
-                    {
-                        staffList.Add(staff);
-                    }
+                    Id = Int32.Parse(subList[0]),
+                    UserName = subList[1],
+                    UserPassword = subList[2],
+                    PersonRoleId = Int32.Parse(subList[3]),
+                    StartDayOfEmployment = Convert.ToDateTime(subList[4]),
+                    EndDayOfEmployment = Convert.ToDateTime(subList[5])
+                };
+                if (!staffList.Any(x => x.UserName == staff.UserName))
+                {
+                    staffList.Add(staff);
                 }
             }
             return staffList;

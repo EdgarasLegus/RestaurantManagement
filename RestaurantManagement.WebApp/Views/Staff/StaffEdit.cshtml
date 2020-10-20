@@ -1,0 +1,105 @@
+﻿@model RestaurantManagement.Contracts.Entities.Staff
+@{ ViewData["Title"] = "Update selected staff member"; }
+@{ var context = new RestaurantManagement.Data.RestaurantManagementCodeFirstContext();
+                var personRoleRepo = new RestaurantManagement.Data.PersonRoleRepository(context);
+                var roleList = personRoleRepo.GetRoles().AsEnumerable(); }
+<h2>Update</h2>
+<h4>Staff member</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="StaffEdit">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.StartDayOfEmployment)
+
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label">User name</label>
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UserPassword" class="control-label">User password*</label>
+                @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PersonRoleId" class="control-label">Person role</label>
+                @Html.DropDownListFor(x => x.PersonRoleId, new SelectList(roleList, "Id", "RoleName"), "--Select Role--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PersonRoleId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label asp-for="StartDayOfEmployment" class="control-label">Start date</label>
+                @Html.DisplayFor(model => model.StartDayOfEmployment)
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EndDayOfEmployment" class="control-label">Contract until</label>
+                @Html.EditorFor(model => model.EndDayOfEmployment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndDayOfEmployment, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="button" id="button-3">Update</button>
+            </div>
+
+            <div class="form-group">
+                <p>* - required</p>
+            </div>
+
+            <p style="color:red">@ViewBag.Message</p>
+        </form>
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-default active">&#8629 Go back</a>
+
+<style>
+    .btn-default {
+        border-color: cornflowerblue
+    }
+
+    .button {
+        display: inline-flex;
+        height: 40px;
+        width: 150px;
+        border: 2px solid #DF9924;
+        margin: 20px 20px 20px 0px;
+        color: #DF9924;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: .8em;
+        letter-spacing: 1.5px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    value {
+        color: #DF9924;
+        text-decoration: none;
+        letter-spacing: 1px;
+    }
+
+    #button-3 {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+        #button-3:hover {
+            color: #2D3142;
+            background: #DF9924;
+        }
+
+    .hide {
+        display: none;
+    }
+
+    .control-label:hover + .hide {
+        display: block;
+        font-style: italic;
+        color: darkgreen;
+    }
+</style>

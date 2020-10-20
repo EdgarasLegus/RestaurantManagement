@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RestaurantManagement.Contracts.Entities;
-using RestaurantManagement.Contracts.Interfaces.Services;
+using RestaurantManagement.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,43 +11,31 @@ namespace RestaurantManagement.BusinessLogic.Services
 {
     public class ProductService : IProductService
     {
+        private readonly ILogicHandler _logicHandler;
+
+        public ProductService(ILogicHandler logicHandler)
+        {
+            _logicHandler = logicHandler;
+        }
+
         public List<Product> GetInitialProducts()
         {
-            var configuration = new ConfigurationBuilder()
-               .AddJsonFile(@"./appsettings.json")
-               .Build();
-
-            var path = configuration["InitialData:InitialProducts"];
-
-            if (!File.Exists(path))
-            {
-                throw new Exception($"Data file {path} does not exist!");
-            }
-
+            var initialProductsFile = Contracts.Settings.ConfigurationSettings.GetInitialProductsFromConfig();
+            var fileParts = _logicHandler.FileReader(initialProductsFile);
             var productList = new List<Product>();
 
-            using (StreamReader reader = new StreamReader(path))
+            foreach (List<string> subList in fileParts)
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                var product = new Product()
                 {
-                    string id = line.Split(',').First();
-                    string productName = line.Split(',').ElementAt(1);
-                    string stockAmount = line.Split(',').ElementAt(2);
-                    string unitOfMeasure = line.Split(',').ElementAt(3);
-
-                    var product = new Product()
-                    {
-                        Id = Int32.Parse(id),
-                        ProductName = productName,
-                        StockAmount = Convert.ToDecimal(stockAmount),
-                        UnitOfMeasure = unitOfMeasure
-                    };
-                    //var matches = myList.Where(p => p.Name == nameToExtract);
-                    if (!productList.Any(x => x.ProductName == product.ProductName))
-                    {
-                        productList.Add(product);
-                    }
+                    Id = Int32.Parse(subList[0]),
+                    ProductName = subList[1],
+                    StockAmount = Convert.ToDecimal(subList[2]),
+                    UnitOfMeasure = subList[3]
+                };
+                if (!productList.Any(x => x.ProductName == product.ProductName))
+                {
+                    productList.Add(product);
                 }
             }
             return productList;

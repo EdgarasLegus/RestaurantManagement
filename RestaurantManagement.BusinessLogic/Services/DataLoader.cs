@@ -1,6 +1,5 @@
-﻿using RestaurantManagement.Contracts.Interfaces;
-using RestaurantManagement.Contracts.Interfaces.Repositories;
-using RestaurantManagement.Contracts.Interfaces.Services;
+﻿using RestaurantManagement.Interfaces.Repositories;
+using RestaurantManagement.Interfaces.Services;
 using RestaurantManagement.Data;
 using System;
 using System.Collections.Generic;

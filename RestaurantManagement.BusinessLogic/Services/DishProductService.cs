@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
-using RestaurantManagement.Contracts;
 using RestaurantManagement.Contracts.Entities;
-using RestaurantManagement.Contracts.Interfaces.Services;
+using RestaurantManagement.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,45 +11,34 @@ namespace RestaurantManagement.BusinessLogic.Services
 {
     public class DishProductService : IDishProductService
     {
+        private readonly ILogicHandler _logicHandler;
+
+        public DishProductService(ILogicHandler logicHandler)
+        {
+            _logicHandler = logicHandler;
+        }
+
         public List<DishProduct> GetInitialDishProducts()
         {
-            var configuration = new ConfigurationBuilder()
-               .AddJsonFile(@"./appsettings.json")
-               .Build();
-
-            var path = configuration["InitialData:InitialDishProducts"];
-
-            if (!File.Exists(path))
-            {
-                throw new Exception($"Data file {path} does not exist!");
-            }
+            var initialDishProductsFile = Contracts.Settings.ConfigurationSettings.GetInitialDishProductsFromConfig();
+            var fileParts = _logicHandler.FileReader(initialDishProductsFile);
             var dishProductList = new List<DishProduct>();
 
-            using (StreamReader reader = new StreamReader(path))
+            foreach (List<string> subList in fileParts)
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                var dishProduct = new DishProduct()
                 {
-                    string id = line.Split(',').First();
-                    string dishId = line.Split(',').ElementAt(1);
-                    string productId = line.Split(',').ElementAt(2);
-                    string portion = line.Split(',').ElementAt(3);
-
-                    var dishProduct = new DishProduct()
-                    {
-                        Id = Int32.Parse(id),
-                        DishId = Int32.Parse(dishId),
-                        ProductId = Int32.Parse(productId),
-                        Portion = Convert.ToDecimal(portion)
-                    };
-                    if (!dishProductList.Equals(dishProduct))
-                    {
-                        dishProductList.Add(dishProduct);
-                    }
+                    Id = Int32.Parse(subList[0]),
+                    DishId = Int32.Parse(subList[1]),
+                    ProductId = Int32.Parse(subList[2]),
+                    Portion = Convert.ToDecimal(subList[3])
+                };
+                if (!dishProductList.Equals(dishProduct))
+                {
+                    dishProductList.Add(dishProduct);
                 }
             }
             return dishProductList;
-
         }
     }
 }

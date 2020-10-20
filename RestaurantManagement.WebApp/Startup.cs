@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RestaurantManagement.Contracts.Interfaces.Repositories;
-using RestaurantManagement.Contracts.Interfaces.Services;
+using RestaurantManagement.Interfaces.Repositories;
+using RestaurantManagement.Interfaces.Services;
 using RestaurantManagement.Data;
 
 namespace RestaurantManagement.WebApp
@@ -46,15 +46,15 @@ namespace RestaurantManagement.WebApp
                 .AddScoped<IProductService, BusinessLogic.Services.ProductService>()
                 .AddScoped<IRestaurantTablesService, BusinessLogic.Services.RestaurantTableService>()
                 .AddScoped<IStaffService, BusinessLogic.Services.StaffService>()
-                .AddScoped<IDishRepo, BusinessLogic.Repository.DishRepository>()
-                .AddScoped<IDishProductRepo, BusinessLogic.Repository.DishProductRepository>()
-                .AddScoped<IProductRepo, BusinessLogic.Repository.ProductRepository>()
-                .AddScoped<IRestaurantTableRepo, BusinessLogic.Repository.RestaurantTableRepository>()
-                .AddScoped<IStaffRepo, BusinessLogic.Repository.StaffRepository>()
+                .AddScoped<IDishRepo, DishRepository>()
+                .AddScoped<IDishProductRepo, DishProductRepository>()
+                .AddScoped<IProductRepo, ProductRepository>()
+                .AddScoped<IRestaurantTableRepo, RestaurantTableRepository>()
+                .AddScoped<IStaffRepo, StaffRepository>()
                 .AddScoped<ILogicHandler, BusinessLogic.Services.LogicHandler>()
-                .AddScoped<IUserLogRepo, BusinessLogic.Repository.UserLogRepository>()
+                .AddScoped<IUserLogRepo, UserLogRepository>()
                 .AddScoped<IPersonRoleService, BusinessLogic.Services.PersonRoleService>()
-                .AddScoped<IPersonRoleRepo, BusinessLogic.Repository.PersonRoleRepository>()
+                .AddScoped<IPersonRoleRepo, PersonRoleRepository>()
                 .AddHttpContextAccessor();
 
             services.AddDbContext<RestaurantManagementCodeFirstContext>(options => options.UseSqlServer(Contracts.Settings.ConfigurationSettings.GetConnectionStringCodeFirst()));

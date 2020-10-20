@@ -15,7 +15,7 @@ namespace RestaurantManagement.Contracts.Entities
         public int Id { get; set; }
         public string ProductName { get; set; }
 
-        [Column(TypeName = "decimal(18,4)")]
+        [Column(TypeName = "decimal(18,3)")]
         public decimal StockAmount { get; set; }
         public string UnitOfMeasure { get; set; }
 
