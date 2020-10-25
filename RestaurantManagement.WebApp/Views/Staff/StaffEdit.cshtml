@@ -1,7 +1,7 @@
 ﻿@model RestaurantManagement.Contracts.Entities.Staff
 @{ ViewData["Title"] = "Update selected staff member"; }
 @{ var context = new RestaurantManagement.Data.RestaurantManagementCodeFirstContext();
-                var personRoleRepo = new RestaurantManagement.Data.PersonRoleRepository(context);
+                var personRoleRepo = new RestaurantManagement.Data.Repository.PersonRoleRepository(context);
                 var roleList = personRoleRepo.GetRoles().AsEnumerable(); }
 <h2>Update</h2>
 <h4>Staff member</h4>

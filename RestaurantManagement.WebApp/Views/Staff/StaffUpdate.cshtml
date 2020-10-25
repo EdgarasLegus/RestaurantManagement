@@ -1,8 +1,8 @@
-﻿@model RestaurantManagement.Contracts.Entities.Staff
+﻿@model RestaurantManagement.Contracts.Models.StaffUpdateModel
 @{ ViewData["Title"] = "Update selected staff member"; }
 @{ 
     var context = new RestaurantManagement.Data.RestaurantManagementCodeFirstContext();
-    var personRoleRepo = new RestaurantManagement.Data.PersonRoleRepository(context);
+    var personRoleRepo = new RestaurantManagement.Data.Repository.PersonRoleRepository(context);
     var roleList = personRoleRepo.GetRoles().AsEnumerable();
 }
 <h2>Update</h2>
@@ -33,27 +33,20 @@
                 <label asp-for="PersonRoleId" class="control-label">New Person role*</label>
                 @Html.DropDownListFor(x => x.PersonRoleId, new SelectList(roleList, "Id", "RoleName"), "--Select Role--", new { @class = "form-control" })
                 @Html.ValidationMessageFor(x => x.PersonRoleId, "", new { @class = "text-danger" })
-                @*<span asp-validation-for="PersonRoleId" class="text-danger"></span>*@
             </div>
 
-            <div class="form-group">
-            <label asp-for="StartDayOfEmployment" class="control-label">Start date*</label>
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.StartDayOfEmployment, new { @placeholder = "1st", @disabled = true})
-            </div>
-        </div>
             @*<div class="form-group">
                 <label asp-for="StartDayOfEmployment" class="control-label">Contract from*</label>
                 <input asp-for="StartDayOfEmployment" class="form-control" />
                 <span asp-validation-for="StartDayOfEmployment" class="text-danger"></span>
             </div>*@
 
-            <div class="form-group">
-                <label asp-for="EndDayOfEmployment" class="control-label">Contract until*</label>
-                @*<div class="hide">Date format: <br />YYYY-MM-DD</div>*@
-                <input asp-for="EndDayOfEmployment" class="form-control" />
-                <span asp-validation-for="EndDayOfEmployment" class="text-danger"></span>
-            </div>
+        <div class="form-group">
+            <label asp-for="EndDayOfEmployment" class="control-label">Contract until*</label>
+            @*<div class="hide">Date format: <br />YYYY-MM-DD</div>*@
+            <input asp-for="EndDayOfEmployment" class="form-control" />
+            <span asp-validation-for="EndDayOfEmployment" class="text-danger"></span>
+        </div>
 
             <div class="form-group">
                 <button type="submit" class="button" id="button-3">Update</button>

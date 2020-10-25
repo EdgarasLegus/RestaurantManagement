@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RestaurantManagement.Data
+namespace RestaurantManagement.Data.Repository
 {
     public class UserLogRepository : IUserLogRepo
     {

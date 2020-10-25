@@ -1,6 +1,6 @@
-1,TRAŠKIOS VARLIŲ ŠLAUNELĖS SU SALDŽIARŪGŠČIU PADAŽU,1,Pagrindinis patiekalas
-2,Migdolų ir ryžių miltų vafliai be glitimo,1,Desertas
-3,Viščiuko ketvirčiai su apelsinais spanguolėmis ir keptu plovu,1,Pagrindinis patiekalas
-4,Meksiketiškas kalakutienos troškinys,0,Pagrindinis patiekalas
-5,Lašišos salotos su persimonais,0,Salotos
-6,Apelsinų sultys,1,Gėrimas
+1,TRAŠKIOS VARLIŲ ŠLAUNELĖS SU SALDŽIARŪGŠČIU PADAŽU,1,Pagrindinis patiekalas,5
+2,Migdolų ir ryžių miltų vafliai be glitimo,1,Desertas,2
+3,Viščiuko ketvirčiai su apelsinais spanguolėmis ir keptu plovu,1,Pagrindinis patiekalas,0
+4,Meksiketiškas kalakutienos troškinys,0,Pagrindinis patiekalas,0
+5,Lašišos salotos su persimonais,0,Salotos,6
+6,Apelsinų sultys,1,Gėrimas,15

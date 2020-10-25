@@ -3,7 +3,7 @@
 @{ 
 
     var context = new RestaurantManagement.Data.RestaurantManagementCodeFirstContext();
-    var personRoleRepo = new RestaurantManagement.Data.PersonRoleRepository(context);
+    var personRoleRepo = new RestaurantManagement.Data.Repository.PersonRoleRepository(context);
     var roleList = personRoleRepo.GetRoles().AsEnumerable();
 }
 <h2>Fill form to add new member to staff</h2>

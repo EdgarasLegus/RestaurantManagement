@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantManagement.Contracts.Entities;
 using RestaurantManagement.Contracts.Enums;
+using RestaurantManagement.Contracts.Models;
 using RestaurantManagement.Interfaces.Repositories;
 using RestaurantManagement.WebApp.Models;
 
@@ -22,7 +23,7 @@ namespace RestaurantManagement.WebApp.Controllers
             _userLogRepo = userLogRepo;
         }
 
-        public async Task<IActionResult> Index(int? pageIndex, string searchInput, int pageSize = 10)
+        public async Task<IActionResult> Index(int? pageIndex, string searchInput, int pageSize = 2)
         {
             try
             {
@@ -37,7 +38,8 @@ namespace RestaurantManagement.WebApp.Controllers
                 {
                     staffList = await _staffRepo.GetStaff();
                 }
-
+                // Konstanta index
+                // Keisti approach - 1) Lazy loading better or 2) Delegate
                 var paginatedList = PaginatedList<Staff>.Create(staffList, pageIndex ?? 1, pageSize);
 
                 return View(paginatedList);
@@ -150,7 +152,7 @@ namespace RestaurantManagement.WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult StaffUpdate(int updatableStaffMember, [Bind("UserName, UserPassword, PersonRoleId, StartDayOfEmployment, EndDayOfEmployment")] Staff staffEntity)
+        public IActionResult StaffUpdate(int updatableStaffMember, [Bind("UserName, UserPassword, PersonRoleId, EndDayOfEmployment")] StaffUpdateModel staffEntity)
         {
             if (ModelState.IsValid)
             {
@@ -183,51 +185,51 @@ namespace RestaurantManagement.WebApp.Controllers
             return View();
         }
 
-        public async Task<IActionResult> StaffEdit(int? id)
-        {
-            if (ModelState.IsValid)
-            {
-                if (id == null)
-                {
-                    ModelState.AddModelError(string.Empty, "Specified staff member does not exist!");
-                    return View();
-                }
+        //public async Task<IActionResult> StaffEdit(int? id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (id == null)
+        //        {
+        //            ModelState.AddModelError(string.Empty, "Specified staff member does not exist!");
+        //            return View();
+        //        }
 
-                var staffMemberId = await _staffRepo.GetStaffMemberId(id);
+        //        var staffMemberId = await _staffRepo.GetStaffMemberId(id);
 
-                if (staffMemberId == null)
-                {
-                    ModelState.AddModelError(string.Empty, "Specified staff member does not exist!");
-                    return View();
-                }
-                return View(staffMemberId);
-            }
-            return View();
-        }
+        //        if (staffMemberId == null)
+        //        {
+        //            ModelState.AddModelError(string.Empty, "Specified staff member does not exist!");
+        //            return View();
+        //        }
+        //        return View(staffMemberId);
+        //    }
+        //    return View();
+        //}
 
-        [HttpPost, ActionName("StaffEdit")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> StaffEdition(int? id)
-        {
-            if (ModelState.IsValid)
-            {
-                if (id == null)
-                {
-                    ModelState.AddModelError(string.Empty, "Specified staff member does not exist!");
-                    return View();
-                }
+        //[HttpPost, ActionName("StaffEdit")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> StaffEdition(int? id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (id == null)
+        //        {
+        //            ModelState.AddModelError(string.Empty, "Specified staff member does not exist!");
+        //            return View();
+        //        }
 
-                var staffMemberId = await _staffRepo.GetStaffMemberId(id);
+        //        var staffMemberId = await _staffRepo.GetStaffMemberId(id);
 
-                if (await TryUpdateModelAsync<Staff>(staffMemberId, "", 
-                    x => x.UserName, x => x.UserPassword, x => x.PersonRoleId, x => x.EndDayOfEmployment))
-                {
-                    await _staffRepo.SaveStaffMemberEdition();
-                }
-                return View(staffMemberId);
-            }
-            return View();
-        }
+        //        if (await TryUpdateModelAsync<Staff>(staffMemberId, "", 
+        //            x => x.UserName, x => x.UserPassword, x => x.PersonRoleId, x => x.EndDayOfEmployment))
+        //        {
+        //            await _staffRepo.SaveStaffMemberEdition();
+        //        }
+        //        return View(staffMemberId);
+        //    }
+        //    return View();
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

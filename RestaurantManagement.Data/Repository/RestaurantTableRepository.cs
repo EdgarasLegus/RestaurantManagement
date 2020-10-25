@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestaurantManagement.Data
+namespace RestaurantManagement.Data.Repository
 {
     public class RestaurantTableRepository : IRestaurantTableRepo
     {

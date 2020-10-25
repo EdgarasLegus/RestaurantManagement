@@ -15,6 +15,7 @@ namespace RestaurantManagement.Contracts.Settings
         protected override ValidationResult IsValid(object objValue,
                                                        ValidationContext validationContext)
         {
+            // Panagrineti
             var dateValue = objValue as DateTime? ?? new DateTime();
             if (dateValue.Date < DateTime.Now.Date)
             {

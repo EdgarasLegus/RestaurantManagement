@@ -26,6 +26,7 @@ namespace RestaurantManagement.WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
+            // Try catch nereikia
             try
             {
                 await _dataLoader.LoadInitialData();

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestaurantManagement.Contracts.Entities;
+using RestaurantManagement.Contracts.Models;
 using RestaurantManagement.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestaurantManagement.Data
+namespace RestaurantManagement.Data.Repository
 {
     public class StaffRepository : IStaffRepo
     {
@@ -28,6 +29,7 @@ namespace RestaurantManagement.Data
                     {
                         await _context.Staff.AddAsync(staff);
                     }
+                    // Vengti Raw SQL
                     await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT RestaurantManagementData.dbo.Staff ON;");
                     await _context.SaveChangesAsync();
                     await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT RestaurantManagementData.dbo.Staff OFF");
@@ -53,10 +55,10 @@ namespace RestaurantManagement.Data
             return staffMember;
         }
 
-        public async Task<Staff> GetStaffMemberId(int? id)
+        public async Task<Staff> GetStaffMemberById(int id)
         {
-            var staffMemberId = await _context.Staff.FirstOrDefaultAsync(x => x.Id == id);
-            return staffMemberId;
+            var staffMember = await _context.Staff.FirstOrDefaultAsync(x => x.Id == id);
+            return staffMember;
         }
 
         public async Task SaveStaffMemberEdition()
@@ -105,6 +107,13 @@ namespace RestaurantManagement.Data
             await _context.SaveChangesAsync();
         }
 
+        // FOR API
+        public async Task CreateStaffMember(Staff staffEntity)
+        {
+            await _context.Staff.AddAsync(staffEntity);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task RemoveStaffMember(string staffMemberName)
         {
             var memberId = await _context.Staff.Where(x => x.UserName == staffMemberName).Select(x => x.Id).FirstAsync();
@@ -116,7 +125,14 @@ namespace RestaurantManagement.Data
            await _context.SaveChangesAsync();
         }
 
-        public bool UpdateStaffMember(int updatableStaffMember, Staff updatedStaffMember)
+        // FOR API
+        public async Task DeleteStaffMember(Staff staffEntity)
+        {
+            _context.Staff.Remove(staffEntity);
+            await _context.SaveChangesAsync();
+        }
+
+        public bool UpdateStaffMember(int updatableStaffMember, StaffUpdateModel updatedStaffMember)
         {
             var staffEntity = _context.Staff.Find(updatableStaffMember);
             //var checkExistingWord = CheckIfStaffMemberExists(staffEntity.UserName);
@@ -148,6 +164,18 @@ namespace RestaurantManagement.Data
             //    return false;
             //}
             ////_context.SaveChanges();
+        }
+
+        // FOR API
+        public async Task UpdateStaffMemberInfo(int id, StaffUpdateModel staffEntity)
+        {
+            var staffMemberEntity = await _context.Staff.FirstOrDefaultAsync(x => x.Id == id);
+
+            staffMemberEntity.UserName = staffEntity.UserName;
+            staffMemberEntity.UserPassword = staffEntity.UserPassword;
+            staffMemberEntity.PersonRoleId = staffEntity.PersonRoleId;
+            staffMemberEntity.EndDayOfEmployment = staffEntity.EndDayOfEmployment;
+            await _context.SaveChangesAsync();
         }
 
 

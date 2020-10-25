@@ -14,6 +14,12 @@ using Microsoft.Extensions.Hosting;
 using RestaurantManagement.Interfaces.Repositories;
 using RestaurantManagement.Interfaces.Services;
 using RestaurantManagement.Data;
+using AutoMapper;
+using NLog;
+using System.IO;
+using RestaurantManagement.BusinessLogic.Services;
+using RestaurantManagement.WebApp.Extensions;
+using RestaurantManagement.Data.Repository;
 
 namespace RestaurantManagement.WebApp
 {
@@ -21,6 +27,7 @@ namespace RestaurantManagement.WebApp
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
 
@@ -29,6 +36,12 @@ namespace RestaurantManagement.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // FOR MAPPING ENTITIES WITH MODELS
+            services.AddAutoMapper(typeof(Startup));
+
+            // FOR LOGGING SETUP
+            services.ConfigureLoggerService();
+
             services.AddControllersWithViews();
 
             services.AddIdentityServer()
@@ -55,6 +68,8 @@ namespace RestaurantManagement.WebApp
                 .AddScoped<IUserLogRepo, UserLogRepository>()
                 .AddScoped<IPersonRoleService, BusinessLogic.Services.PersonRoleService>()
                 .AddScoped<IPersonRoleRepo, PersonRoleRepository>()
+                .AddScoped<IOrderRepo, OrderRepository>()
+                .AddScoped<IOrderItemRepo, OrderItemRepository>()
                 .AddHttpContextAccessor();
 
             services.AddDbContext<RestaurantManagementCodeFirstContext>(options => options.UseSqlServer(Contracts.Settings.ConfigurationSettings.GetConnectionStringCodeFirst()));

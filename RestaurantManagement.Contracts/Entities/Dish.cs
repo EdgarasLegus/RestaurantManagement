@@ -16,6 +16,7 @@ namespace RestaurantManagement.Contracts.Entities
         public string DishName { get; set; }
         public bool IsOnMenu { get; set; }
         public string DishType { get; set; }
+        public int QuantityInStock { get; set; }
 
         public virtual ICollection<DishProduct> DishProduct { get; set; }
         public virtual ICollection<OrderItem> OrderItem { get; set; }

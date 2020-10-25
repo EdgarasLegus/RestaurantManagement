@@ -30,7 +30,8 @@ namespace RestaurantManagement.BusinessLogic.Services
                     Id = Int32.Parse(subList[0]),
                     DishName = subList[1],
                     IsOnMenu = _logicHandler.BooleanConverter(subList[2]),
-                    DishType = subList[3]
+                    DishType = subList[3],
+                    QuantityInStock = Int32.Parse(subList[4])
                 };
                 if (!dishesList.Any(x => x.DishName == dish.DishName))
                 {
