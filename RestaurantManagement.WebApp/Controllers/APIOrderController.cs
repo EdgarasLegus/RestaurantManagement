@@ -91,25 +91,24 @@ namespace RestaurantManagement.WebApp.Controllers
 
                 if (exists)
                 {
-                    _loggerManager.LogError($"CreateOrder(): Post new order is failed, same order alreadt exists.");
+                    _loggerManager.LogError($"CreateOrder(): Post new order is failed, same order already exists.");
                     return BadRequest("Order with same name already exists!");
                 }
                 else
                 {
                     var orderEntity = _mapper.Map<Order>(order);
-                    var orderItemEntity = _mapper.Map<OrderItem>(order.OrderItems);
 
                     await _orderRepo.CreateOrder(orderEntity);
-                    await _orderItemRepo.CreateOrderItem(orderItemEntity);
 
                     var createdOrder = _mapper.Map<OrderModel>(orderEntity);
 
-                    _loggerManager.LogInfo($"CreateOrder(): New order is successfully created");
+                    _loggerManager.LogInfo($"CreateOrder(): New order {createdOrder.OrderName} is successfully created");
                     return CreatedAtRoute("OrderById", new { id = createdOrder.Id }, createdOrder);
                 }
             }
             catch (Exception ex)
             {
+                _loggerManager.LogError($"CreateOrder() method execution failed: {ex.Message}");
                 return StatusCode(500, "Internal Server Error");
             }
         }

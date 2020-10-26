@@ -16,8 +16,8 @@ namespace RestaurantManagement.WebApp
             CreateMap<StaffCreateModel, Staff>();
             CreateMap<StaffUpdateModel, Staff>();
 
-            CreateMap<Order, OrderModel>();
-            CreateMap<OrderCreateModel, Order>();
+            CreateMap<Order, OrderModel>().ForMember(x => x.OrderItems, s => s.MapFrom(m => m.OrderItem));
+            CreateMap<OrderCreateModel, Order>().ForMember(x => x.OrderItem, s => s.MapFrom(m => m.OrderItems));
 
             CreateMap<OrderItem, OrderItemModel>();
             CreateMap<OrderItemCreateModel, OrderItem>();

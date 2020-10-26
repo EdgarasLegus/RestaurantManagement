@@ -26,6 +26,12 @@ namespace RestaurantManagement.Data.Repository
 
         public async Task CreateOrder(Order orderEntity)
         {
+            //orderEntity.OrderItemModel.Add(new OrderItemModel()
+            //{
+            //    OrderId = orderEntity.Or,
+            //    DishId
+
+            //});
             await _context.Order.AddAsync(orderEntity);
             await _context.SaveChangesAsync();
         }

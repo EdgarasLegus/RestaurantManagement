@@ -1,0 +1,17 @@
+2020-10-26 11:47:26.0550 INFO CreateOrder(): New order is successfully created
+2020-10-26 11:56:55.5406 INFO CreateOrder(): New order is successfully created
+2020-10-26 11:59:38.5093 INFO CreateOrder(): New order is successfully created
+2020-10-26 12:01:07.1354 INFO CreateOrder(): New order is successfully created
+2020-10-26 12:47:06.8849 INFO CreateOrder(): New order is successfully created
+2020-10-26 12:50:02.3508 INFO CreateOrder(): New order is successfully created
+2020-10-26 15:34:11.2910 INFO CreateOrder(): New order is successfully created
+2020-10-26 16:02:41.0564 ERROR CreateOrder(): Post new order is failed, same order already exists.
+2020-10-26 16:03:12.4636 INFO CreateOrder(): New order is successfully created
+2020-10-26 16:14:33.1653 ERROR CreateOrder(): Post new order is failed, same order already exists.
+2020-10-26 16:14:58.7644 INFO CreateOrder(): New order is successfully created
+2020-10-26 16:22:39.6695 INFO CreateOrder(): New order is successfully created
+2020-10-26 16:27:40.3355 INFO CreateOrder(): New order is successfully created
+2020-10-26 16:28:53.9192 INFO CreateOrder(): New order is successfully created
+2020-10-26 16:43:48.2621 ERROR GetOrderById() method execution failed: The provider for the source IQueryable doesn't implement IDbAsyncQueryProvider. Only providers that implement IDbAsyncQueryProvider can be used for Entity Framework asynchronous operations. For more details see http://go.microsoft.com/fwlink/?LinkId=287068.
+2020-10-26 16:44:04.9522 ERROR GetOrderById() method execution failed: The provider for the source IQueryable doesn't implement IDbAsyncQueryProvider. Only providers that implement IDbAsyncQueryProvider can be used for Entity Framework asynchronous operations. For more details see http://go.microsoft.com/fwlink/?LinkId=287068.
+2020-10-26 20:18:33.3695 ERROR GetOrders() method execution failed: The source IQueryable doesn't implement IDbAsyncEnumerable<RestaurantManagement.Contracts.Entities.Order>. Only sources that implement IDbAsyncEnumerable can be used for Entity Framework asynchronous operations. For more details see http://go.microsoft.com/fwlink/?LinkId=287068.

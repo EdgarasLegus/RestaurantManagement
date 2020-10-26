@@ -15,6 +15,6 @@ namespace RestaurantManagement.Contracts.Models
         public DateTime ModifiedDate { get;} = DateTime.Now;
         public int OrderStatus { get; } = (int)OrderStates.Created;
 
-        public IEnumerable<OrderItemModel> OrderItems { get; set; }
+        public IEnumerable<OrderItemCreateModel> OrderItems { get; set; }
     }
 }
