@@ -1,0 +1,14 @@
+2020-11-08 02:14:29.9356 ERROR CreateOrder(): Post new order is failed, same order already exists.
+2020-11-08 02:15:10.7353 INFO CreateCustomerOrder(): New order ORD0016 is successfully created! Status: 10
+2020-11-08 02:20:00.3724 ERROR CreateOrder(): Post new order is failed, same order already exists.
+2020-11-08 02:20:12.2137 INFO CreateCustomerOrder(): New order ORD0017 is successfully created! Status: 10
+2020-11-08 02:47:04.9974 INFO CreateCustomerOrder(): New order ORD0018 is successfully created! Status: 10
+2020-11-08 02:48:17.4532 WARN CreateCustomerOrder(): Order ORD0018 was declined! Status: 30
+2020-11-08 02:49:45.0908 INFO CreateCustomerOrder(): New order ORD0019 is successfully created! Status: 10
+2020-11-08 02:49:59.4466 WARN CreateCustomerOrder(): Order ORD0019 was partially declined! Status: 20
+2020-11-08 02:51:57.7335 INFO CreateCustomerOrder(): New order ORD0020 is successfully created! Status: 10
+2020-11-08 02:57:44.1221 INFO CreateCustomerOrder(): New order ORD0021 is successfully created! Status: 10
+2020-11-08 02:58:29.4593 INFO CreateCustomerOrder(): New order ORD0022 is successfully created! Status: 10
+2020-11-08 02:58:36.2231 WARN CreateCustomerOrder(): Order ORD0022 was partially declined! Status: 20
+2020-11-08 02:59:05.8286 INFO CreateCustomerOrder(): New order ORD0023 is successfully created! Status: 10
+2020-11-08 02:59:12.7667 WARN CreateCustomerOrder(): Order ORD0023 was declined! Status: 30

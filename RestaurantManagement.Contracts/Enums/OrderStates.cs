@@ -7,9 +7,13 @@ namespace RestaurantManagement.Contracts.Enums
     public enum OrderStates
     {
         Created = 10,
-        Updated = 20,
-        Ready = 30,
-        Cancelled = 40,
-        Completed = 50
+        PartiallyDeclined = 20,
+        Declined = 30,
+        Edited = 40,
+        Preparing = 50,
+        ReadyToServe = 60,
+        Updated = 70,
+        Completed = 80,
+        Cancelled = 90
     }
 }

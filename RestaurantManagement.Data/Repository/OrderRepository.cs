@@ -1,9 +1,10 @@
-﻿using RestaurantManagement.Contracts.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using RestaurantManagement.Contracts.Entities;
 using RestaurantManagement.Contracts.Models;
 using RestaurantManagement.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+//using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,14 +25,8 @@ namespace RestaurantManagement.Data.Repository
             return _context.Order.ToListAsync();
         }
 
-        public async Task CreateOrder(Order orderEntity)
+        public async Task AddOrder(Order orderEntity)
         {
-            //orderEntity.OrderItemModel.Add(new OrderItemModel()
-            //{
-            //    OrderId = orderEntity.Or,
-            //    DishId
-
-            //});
             await _context.Order.AddAsync(orderEntity);
             await _context.SaveChangesAsync();
         }
@@ -53,6 +48,36 @@ namespace RestaurantManagement.Data.Repository
         {
             var order = await _context.Order.FirstOrDefaultAsync(x => x.Id == id);
             return order;
+        }
+
+        public async Task<Order> GetOrderByName(string orderName)
+        {
+            return await _context.Order.FirstOrDefaultAsync(x => x.OrderName == orderName);
+        }
+
+        public async Task<Order> GetOrderWithItems(int id)
+        {
+            return await _context.Order.Include(x => x.OrderItem).FirstOrDefaultAsync(o => o.Id == id);
+        }
+
+        public async Task EditOrderItems(int id, OrderUpdateModel orderUpdatingEntity)
+        {
+            var orderEntity = await _context.Order.Include(x => x.OrderItem).FirstOrDefaultAsync(x => x.Id == id);
+
+            //orderEntity.OrderItem.
+        }
+
+        public async Task UpdateOrder(int id, Order orderEntity)
+        {
+            var existingOrder = await _context.Order.FirstOrDefaultAsync(x => x.Id == id);
+
+            existingOrder.OrderName = orderEntity.OrderName;
+            existingOrder.CreatedDate = orderEntity.CreatedDate;
+            existingOrder.ModifiedDate = orderEntity.ModifiedDate;
+            existingOrder.OrderStatus = orderEntity.OrderStatus;
+            existingOrder.OrderItem = orderEntity.OrderItem;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -9,5 +9,9 @@ namespace RestaurantManagement.Interfaces.Repositories
     public interface IDishRepo
     {
         Task InsertInitialDishes(List<Dish> dishList);
+        Task<List<Dish>> GetDishes();
+        Task<Dish> GetDishById(int id);
+        Task<Dish> GetDishWithProducts(int id);
+        Task<List<Dish>> GetDishStockQuantity(List<int> dishIdList);
     }
 }

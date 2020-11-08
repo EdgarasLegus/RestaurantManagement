@@ -15,3 +15,18 @@
 2020-10-26 16:43:48.2621 ERROR GetOrderById() method execution failed: The provider for the source IQueryable doesn't implement IDbAsyncQueryProvider. Only providers that implement IDbAsyncQueryProvider can be used for Entity Framework asynchronous operations. For more details see http://go.microsoft.com/fwlink/?LinkId=287068.
 2020-10-26 16:44:04.9522 ERROR GetOrderById() method execution failed: The provider for the source IQueryable doesn't implement IDbAsyncQueryProvider. Only providers that implement IDbAsyncQueryProvider can be used for Entity Framework asynchronous operations. For more details see http://go.microsoft.com/fwlink/?LinkId=287068.
 2020-10-26 20:18:33.3695 ERROR GetOrders() method execution failed: The source IQueryable doesn't implement IDbAsyncEnumerable<RestaurantManagement.Contracts.Entities.Order>. Only sources that implement IDbAsyncEnumerable can be used for Entity Framework asynchronous operations. For more details see http://go.microsoft.com/fwlink/?LinkId=287068.
+2020-10-26 20:33:05.1817 INFO GetOrders() method returned all orders list.
+2020-10-26 20:33:21.6116 INFO GetOrderById() returned order with id: 14
+2020-10-26 20:33:31.7036 INFO GetOrderItems() method returned order with items for id: 14
+2020-10-26 20:35:51.5684 INFO GetOrders() method returned all orders list.
+2020-10-26 20:42:48.6789 INFO GetOrderById() returned order with id: 14
+2020-10-26 20:43:50.8192 INFO GetOrderById() returned order with id: 14
+2020-10-26 20:51:48.5086 INFO GetOrderById() returned order with id: 13
+2020-10-26 20:51:56.7499 INFO GetOrderWithItems() method returned order with items for id: 14
+2020-10-26 23:17:44.3385 INFO GetDishes() method returned existing dishes list.
+2020-10-26 23:30:05.8524 INFO GetDishById() returned dish with id: 3
+2020-10-26 23:31:34.8376 INFO GetDishWithProducts() method returned dish with products for id: 3
+2020-10-26 23:32:00.2678 INFO GetDishWithProducts() method returned dish with products for id: 4
+2020-10-26 23:38:58.7145 INFO GetDishWithProducts() method returned dish with products for id: 4
+2020-10-26 23:39:26.6232 INFO GetDishes() method returned existing dishes list.
+2020-10-26 23:39:42.7268 INFO GetDishById() returned dish with id: 2

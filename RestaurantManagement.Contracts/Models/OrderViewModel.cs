@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RestaurantManagement.Contracts.Models
 {
-    public class OrderModel
+    public class OrderViewModel
     {
         public int Id { get; set; }
         public string OrderName { get; set; }
@@ -12,6 +12,6 @@ namespace RestaurantManagement.Contracts.Models
         public DateTime ModifiedDate { get; set; }
         public int OrderStatus { get; set; }
 
-        public IEnumerable<OrderItemModel> OrderItems { get; set; }
+        public IEnumerable<OrderItemViewModel> OrderItems { get; set; }
     }
 }

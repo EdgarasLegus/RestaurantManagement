@@ -38,7 +38,7 @@ namespace RestaurantManagement.WebApp.Controllers
             {
                 var staff = await _staffRepo.GetStaff();
                 _loggerManager.LogInfo($"GetStaff() method returned Staff list.");
-                var staffResult = _mapper.Map<IEnumerable<StaffModel>>(staff);
+                var staffResult = _mapper.Map<IEnumerable<StaffViewModel>>(staff);
                 return Ok(staffResult);
             }
             catch (Exception ex)
@@ -63,7 +63,7 @@ namespace RestaurantManagement.WebApp.Controllers
                 else
                 {
                     _loggerManager.LogInfo($"GetStaffMemberById() returned staff member with id: {id}");
-                    var staffMemberResult = _mapper.Map<StaffModel>(staffMember);
+                    var staffMemberResult = _mapper.Map<StaffViewModel>(staffMember);
                     return Ok(staffMemberResult);
                 }
             }
@@ -93,7 +93,7 @@ namespace RestaurantManagement.WebApp.Controllers
                 var staffMemberEntity = _mapper.Map<Staff>(staffMember);
                 await _staffRepo.CreateStaffMember(staffMemberEntity);
 
-                var createdMember = _mapper.Map<StaffModel>(staffMemberEntity);
+                var createdMember = _mapper.Map<StaffViewModel>(staffMemberEntity);
 
                 return CreatedAtRoute("StaffMemberById", new { id = createdMember.Id }, createdMember);
             }

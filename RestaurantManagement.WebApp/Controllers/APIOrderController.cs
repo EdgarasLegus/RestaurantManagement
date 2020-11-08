@@ -19,13 +19,15 @@ namespace RestaurantManagement.WebApp.Controllers
         private readonly IOrderItemRepo _orderItemRepo;
         private readonly IMapper _mapper;
         private readonly ILoggerManager _loggerManager;
+        private readonly IOrderService _orderService;
 
-        public APIOrderController(IOrderRepo orderRepo, IOrderItemRepo orderItemRepo, IMapper mapper, ILoggerManager loggerManager)
+        public APIOrderController(IOrderRepo orderRepo, IOrderItemRepo orderItemRepo, IMapper mapper, ILoggerManager loggerManager, IOrderService orderService)
         {
             _orderRepo = orderRepo;
             _orderItemRepo = orderItemRepo;
             _mapper = mapper;
             _loggerManager = loggerManager;
+            _orderService = orderService;
         }
 
         [HttpGet]
@@ -35,7 +37,7 @@ namespace RestaurantManagement.WebApp.Controllers
             {
                 var orders = await _orderRepo.GetOrders();
                 _loggerManager.LogInfo($"GetOrders() method returned all orders list.");
-                var orderResult = _mapper.Map<IEnumerable<OrderModel>>(orders);
+                var orderResult = _mapper.Map<IEnumerable<OrderViewModel>>(orders);
                 return Ok(orderResult);
             }
             catch (Exception ex)
@@ -60,7 +62,7 @@ namespace RestaurantManagement.WebApp.Controllers
                 else
                 {
                     _loggerManager.LogInfo($"GetOrderById() returned order with id: {id}");
-                    var orderResult = _mapper.Map<OrderModel>(order);
+                    var orderResult = _mapper.Map<OrderViewModel>(order);
                     return Ok(orderResult);
                 }
             }
@@ -96,13 +98,7 @@ namespace RestaurantManagement.WebApp.Controllers
                 }
                 else
                 {
-                    var orderEntity = _mapper.Map<Order>(order);
-
-                    await _orderRepo.CreateOrder(orderEntity);
-
-                    var createdOrder = _mapper.Map<OrderModel>(orderEntity);
-
-                    _loggerManager.LogInfo($"CreateOrder(): New order {createdOrder.OrderName} is successfully created");
+                    var createdOrder = await _orderService.CreateCustomerOrder(order);
                     return CreatedAtRoute("OrderById", new { id = createdOrder.Id }, createdOrder);
                 }
             }
@@ -118,24 +114,26 @@ namespace RestaurantManagement.WebApp.Controllers
         {
             try
             {
-                var order = await _orderRepo.GetOrderById(id);
+                var order = await _orderRepo.GetOrderWithItems(id);
                 if (order == null)
                 {
-                    _loggerManager.LogError($"GetOrderItems(): Order with id: {id}, is not found in database.");
+                    _loggerManager.LogError($"GetOrderWithItems(): Order with id: {id}, is not found in database.");
                     return NotFound();
                 }
                 else
                 {
-                    _loggerManager.LogInfo($"GetOrderItems() method returned order with items for id: {id}");
-                    var orderResult = _mapper.Map<OrderModel>(order);
+                    _loggerManager.LogInfo($"GetOrderWithItems() method returned order with items for id: {id}");
+                    var orderResult = _mapper.Map<OrderViewModel>(order);
                     return Ok(orderResult);
                 }
             }
             catch (Exception ex)
             {
-                _loggerManager.LogError($"GetOrderItems() method execution failed: {ex.Message}");
+                _loggerManager.LogError($"GetOrderWithItems() method execution failed: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }
+
+
     }
 }

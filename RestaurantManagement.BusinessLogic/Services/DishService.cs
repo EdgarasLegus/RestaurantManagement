@@ -1,20 +1,24 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RestaurantManagement.Contracts.Entities;
+using RestaurantManagement.Interfaces.Repositories;
 using RestaurantManagement.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RestaurantManagement.BusinessLogic.Services
 {
     public class DishService : IDishService
     {
         private readonly ILogicHandler _logicHandler;
+        private readonly IDishRepo _dishRepo;
 
-        public DishService(ILogicHandler logicHandler)
+        public DishService(ILogicHandler logicHandler, IDishRepo dishRepo)
         {
             _logicHandler = logicHandler;
+            _dishRepo = dishRepo;
         }
 
         public List<Dish> GetInitialDishes()
@@ -40,5 +44,11 @@ namespace RestaurantManagement.BusinessLogic.Services
             }
             return dishesList;
         }
+
+        public async Task<List<Dish>> CalculateDishStock(List<int> dishIdList)
+        {
+            return await _dishRepo.GetDishStockQuantity(dishIdList);
+        }
+
     }
 }

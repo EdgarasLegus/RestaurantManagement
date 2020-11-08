@@ -9,5 +9,6 @@ namespace RestaurantManagement.Interfaces.Repositories
     public interface IOrderItemRepo
     {
         Task CreateOrderItem(OrderItem orderItemEntity);
+        Task<List<int>> GetOrderDishesByOrderId(int id);
     }
 }

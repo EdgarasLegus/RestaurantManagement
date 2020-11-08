@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RestaurantManagement.Contracts.Models
 {
-    public class OrderItemModel
+    public class OrderItemViewModel
     {
         public int OrderId { get; set; }
         public int DishId { get; set; }

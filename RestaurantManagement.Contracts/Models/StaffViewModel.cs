@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RestaurantManagement.Contracts.Models
 {
-    public class StaffModel
+    public class StaffViewModel
     {
         public int Id { get; set; }
         public string UserName { get; set; }
