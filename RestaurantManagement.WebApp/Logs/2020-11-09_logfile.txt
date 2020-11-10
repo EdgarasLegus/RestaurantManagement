@@ -1,0 +1,10 @@
+2020-11-09 00:06:34.6393 INFO CreateCustomerOrder(): New order ORD0024 is successfully created! Status: 10
+2020-11-09 00:09:48.7531 WARN CreateCustomerOrder(): Order ORD0024 was declined! Status: 30
+2020-11-09 01:02:24.7210 INFO CreateCustomerOrder(): New order ORD0025 is successfully created! Status: 10
+2020-11-09 01:04:53.7776 WARN CreateCustomerOrder(): Order ORD0025 was declined! Status: 30
+2020-11-09 01:05:43.9521 INFO CreateCustomerOrder(): New order ORD0026 is successfully created! Status: 10
+2020-11-09 01:07:52.9411 WARN CreateCustomerOrder(): Order ORD0026 was partially declined! Status: 20
+2020-11-09 01:08:36.9580 INFO CreateCustomerOrder(): New order ORD0027 is successfully created! Status: 10
+2020-11-09 01:12:05.0909 INFO CreateCustomerOrder(): New order ORD0028 is successfully created! Status: 10
+2020-11-09 23:14:24.4820 ERROR GetOrderWithItems(): Order with id: 28, is not found in database.
+2020-11-09 23:14:35.5982 INFO GetOrderWithItems() method returned order with items for id: 1015

@@ -11,6 +11,8 @@ namespace RestaurantManagement.Contracts.Entities
         public int DishId { get; set; }
         public int Quantity { get; set; }
 
+        public int OrderItemStatus { get; set; }
+
         public virtual Dish Dish { get; set; }
         public virtual Order Order { get; set; }
     }

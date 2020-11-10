@@ -60,6 +60,7 @@ namespace RestaurantManagement.WebApp
                 .AddScoped<IRestaurantTablesService, RestaurantTableService>()
                 .AddScoped<IStaffService, StaffService>()
                 .AddScoped<IOrderService, OrderService>()
+                .AddScoped<IOrderItemService, OrderItemService>()
                 .AddScoped<IDishRepo, DishRepository>()
                 .AddScoped<IDishProductRepo, DishProductRepository>()
                 .AddScoped<IProductRepo, ProductRepository>()

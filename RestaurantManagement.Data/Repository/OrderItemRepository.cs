@@ -28,5 +28,14 @@ namespace RestaurantManagement.Data.Repository
         {
             return await _context.OrderItem.Where(x => x.OrderId == id).Select(x => x.DishId).ToListAsync();
         }
+
+        public async Task UpdateOrderDishStatus(int orderId, int dishId, int status)
+        {
+            var existingOrderItemsList = await _context.OrderItem.Where(x => x.OrderId == orderId).ToListAsync();
+            var existingOrderItem = existingOrderItemsList.FirstOrDefault(x => x.DishId == dishId);
+
+            existingOrderItem.OrderItemStatus = status;
+            await _context.SaveChangesAsync();
+        }
     }
 }
