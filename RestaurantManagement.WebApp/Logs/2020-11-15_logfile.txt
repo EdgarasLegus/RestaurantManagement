@@ -1,0 +1,23 @@
+2020-11-15 14:59:29.1066 INFO CreateCustomerOrder(): New order test is successfully created! Status: 10
+2020-11-15 15:00:24.0589 INFO CreateCustomerOrder(): New order DeclinedTestOrder is successfully created! Status: 10
+2020-11-15 15:00:33.5229 WARN CreateCustomerOrder(): Order DeclinedTestOrder was declined! Status: 30
+2020-11-15 15:01:08.4046 INFO CreateCustomerOrder(): New order PartialTestOrder is successfully created! Status: 10
+2020-11-15 15:01:11.9344 WARN CreateCustomerOrder(): Order PartialTestOrder was partially declined! Status: 20
+2020-11-15 17:01:40.5906 ERROR DeleteOrder() method execution failed: Value cannot be null. (Parameter 'entity')
+2020-11-15 17:02:32.6343 INFO DeleteCustomerOrder(): Order PartialTestOrder was deleted! Status: 30
+2020-11-15 20:49:50.2502 ERROR CreateOrder() method execution failed: An error occurred while updating the entries. See the inner exception for details.
+2020-11-15 21:29:24.8719 INFO CreateCustomerOrderItem(): New item (1056) for selected order is successfully created! Status: 10
+2020-11-15 21:32:55.0253 INFO GetOrderItemById() returned order item with id: 1056
+2020-11-15 21:34:38.5042 INFO GetOrderItemById() returned order item with id: 1041
+2020-11-15 21:35:12.9368 INFO GetOrderItemById() returned order item with id: 1041
+2020-11-15 21:35:51.0186 ERROR Order item with id: 1038 is not found in database.
+2020-11-15 21:38:02.3457 INFO GetOrderItemById() returned order item with id: 1038
+2020-11-15 21:39:52.1675 INFO CreateCustomerOrderItem(): New item (1057) for selected order is successfully created! Status: 10
+2020-11-15 21:40:12.7368 WARN CreateCustomerOrderItem(): New item (0) for selected order was declined! Status: 30
+2020-11-15 21:45:01.5961 INFO CreateCustomerOrderItem(): New item (1058) for selected order is successfully created! Status: 10
+2020-11-15 22:03:32.1280 INFO CreateCustomerOrderItem(): New item (1059) for selected order is successfully created! Status: 10
+2020-11-15 22:05:31.4660 INFO CreateCustomerOrderItem(): New item (1060) for selected order is successfully created! Status: 10
+2020-11-15 22:13:03.0910 INFO CreateCustomerOrderItem(): New item (1061) for selected order is successfully created! Status: 10
+2020-11-15 22:13:12.1041 WARN CreateCustomerOrderItem(): New item (0) for selected order was declined! Status: 30
+2020-11-15 22:24:06.2033 INFO CreateCustomerOrderItem(): New item (1062) for selected order is successfully created! Status: 10
+2020-11-15 22:27:32.7867 WARN CreateCustomerOrderItem(): New item (0) for selected order was declined! Status: 30

@@ -1,0 +1,12 @@
+2020-11-16 00:25:45.9993 INFO CreateCustomerOrderItem(): New item (1063) for selected order is successfully created! Status: 10
+2020-11-16 00:31:50.8794 INFO CreateCustomerOrderItem(): New item (1064) for selected order is successfully created! Status: 10
+2020-11-16 00:40:31.2987 INFO CreateCustomerOrderItem(): New item (1065) for selected order is successfully created! Status: 10
+2020-11-16 00:42:31.2628 INFO CreateCustomerOrderItem(): New item (1066) for selected order is successfully created! Status: 10
+2020-11-16 00:42:50.3167 WARN CreateCustomerOrderItem(): New item (0) for selected order was declined! Status: 30
+2020-11-16 00:53:56.6835 INFO CreateCustomerOrderItem(): New item (1067) for selected order is successfully created! Status: 10
+2020-11-16 01:14:25.7639 INFO CreateCustomerOrderItem(): New item (1068) for selected order is successfully created! Status: 10
+2020-11-16 01:14:34.7726 WARN CreateCustomerOrderItem(): New item (1068) for selected order was declined! Status: 30
+2020-11-16 01:17:18.5251 INFO GetOrderItemById() returned order item with id: 1068
+2020-11-16 01:18:28.9308 INFO GetOrderWithItems() method returned order with items for id: 1013
+2020-11-16 01:18:40.1163 INFO GetOrderItemById() returned order item with id: 1068
+2020-11-16 01:19:37.4832 ERROR CreateOrder() method execution failed: An error occurred while updating the entries. See the inner exception for details.

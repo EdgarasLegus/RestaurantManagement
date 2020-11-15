@@ -20,14 +20,17 @@ namespace RestaurantManagement.WebApp.Controllers
         private readonly IMapper _mapper;
         private readonly ILoggerManager _loggerManager;
         private readonly IOrderService _orderService;
+        private readonly IOrderItemService _orderItemService;
 
-        public APIOrderController(IOrderRepo orderRepo, IOrderItemRepo orderItemRepo, IMapper mapper, ILoggerManager loggerManager, IOrderService orderService)
+        public APIOrderController(IOrderRepo orderRepo, IOrderItemRepo orderItemRepo, IMapper mapper, ILoggerManager loggerManager,
+            IOrderService orderService, IOrderItemService orderItemService)
         {
             _orderRepo = orderRepo;
             _orderItemRepo = orderItemRepo;
             _mapper = mapper;
             _loggerManager = loggerManager;
             _orderService = orderService;
+            _orderItemService = orderItemService;
         }
 
         [HttpGet]
@@ -73,6 +76,37 @@ namespace RestaurantManagement.WebApp.Controllers
             }
         }
 
+        [HttpGet("{id}/item/{itemId}", Name = "OrderItemById")]
+        public async Task<IActionResult> GetOrderItemById(int id, int itemId)
+        {
+            try
+            {
+                var order = await _orderRepo.GetOrderById(id);
+                var orderItem = await _orderItemService.GetSelectedOrderItem(itemId);
+                if (order == null)
+                {
+                    _loggerManager.LogError($"Order with id: {id} is not found in database.");
+                    return NotFound();
+                }
+                else if (orderItem == null)
+                {
+                    _loggerManager.LogError($"Order item with id: {itemId} is not found in database.");
+                    return NotFound();
+                }
+                else
+                {
+                    _loggerManager.LogInfo($"GetOrderItemById() returned order item with id: {itemId}");
+                    var orderResult = _mapper.Map<OrderItemViewModel>(orderItem);
+                    return Ok(orderResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                _loggerManager.LogError($"GetOrderItemById() method execution failed: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] OrderCreateModel order)
         {
@@ -89,18 +123,9 @@ namespace RestaurantManagement.WebApp.Controllers
                     return BadRequest("Invalid order model object");
                 }
 
-                var exists = _orderRepo.CheckOrderUniqueness(order.OrderName);
-
-                if (exists)
-                {
-                    _loggerManager.LogError($"CreateOrder(): Post new order is failed, same order already exists.");
-                    return BadRequest("Order with same name already exists!");
-                }
-                else
-                {
-                    var createdOrder = await _orderService.CreateCustomerOrder(order);
-                    return CreatedAtRoute("OrderById", new { id = createdOrder.Id }, createdOrder);
-                }
+                var createdOrder = await _orderService.CreateCustomerOrder(order);
+                return CreatedAtRoute("OrderById", new { id = createdOrder.Id }, createdOrder);
+                
             }
             catch (Exception ex)
             {
@@ -108,12 +133,6 @@ namespace RestaurantManagement.WebApp.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> CancelOrder([FromBody] )
-        //{
-
-        //}
 
         [HttpGet("{id}/item")]
         public async Task<IActionResult> GetOrderItems(int id)
@@ -140,6 +159,48 @@ namespace RestaurantManagement.WebApp.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrder([FromRoute] int id)
+        {
+            try
+            {
+                //ASK
+                await _orderService.DeleteCustomerOrder(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _loggerManager.LogError($"DeleteOrder() method execution failed: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
 
+        [HttpPost("{id}/item")]
+        public async Task<IActionResult> AddOrderItem(int id, [FromBody] OrderItemCreateModel orderItem)
+        {
+            try
+            {
+                var existingOrder = await _orderService.GetExistingOrder(id);
+                if (existingOrder == null)
+                {
+                    _loggerManager.LogError($"AddOrderItem(): Post new order item is failed, order does not exist.");
+                    return BadRequest("Order is null");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid order model object");
+                }
+
+                var createdOrderItem = await _orderItemService.CreateCustomerOrderItem(id, orderItem);
+                return CreatedAtRoute("OrderItemById", new { id, itemId = createdOrderItem.Id }, createdOrderItem);
+
+            }
+            catch (Exception ex)
+            {
+                _loggerManager.LogError($"CreateOrder() method execution failed: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }

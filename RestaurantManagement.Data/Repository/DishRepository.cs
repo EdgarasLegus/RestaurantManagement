@@ -51,11 +51,9 @@ namespace RestaurantManagement.Data.Repository
             return await _context.Dish.Include(x => x.DishProduct).FirstOrDefaultAsync(o => o.Id == id);
         }
 
-        public async Task<List<Dish>> GetDishStockQuantity(List<int> dishIdList)
+        public async Task<List<Dish>> GetSelectedDishes(List<int> dishIdList)
         {
             return await _context.Dish.Where(x => dishIdList.Contains(x.Id)).ToListAsync();
         }
-
-
     }
 }

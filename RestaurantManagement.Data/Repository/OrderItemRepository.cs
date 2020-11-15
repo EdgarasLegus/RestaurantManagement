@@ -24,16 +24,40 @@ namespace RestaurantManagement.Data.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<int>> GetOrderDishesByOrderId(int id)
+        public async Task<List<int>> GetDishesIdsByOrderId(int id)
         {
             return await _context.OrderItem.Where(x => x.OrderId == id).Select(x => x.DishId).ToListAsync();
         }
 
-        public async Task UpdateOrderDishStatus(int orderId, int dishId, int status)
+        public async Task UpdateCreatedOrderItemStatus(int orderId, int dishId, int status)
         {
             var existingOrderItemsList = await _context.OrderItem.Where(x => x.OrderId == orderId).ToListAsync();
+            // BUG HERE - IF POST TWO DISH ID's, will update only the first
             var existingOrderItem = existingOrderItemsList.FirstOrDefault(x => x.DishId == dishId);
 
+            existingOrderItem.OrderItemStatus = status;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddOrderItem(OrderItem orderItemEntity)
+        {
+            await _context.OrderItem.AddAsync(orderItemEntity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<OrderItem> GetOrderItemById(int id)
+        {
+            return await _context.OrderItem.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<List<int>> GetOrderItemIdsByOrderId(int id)
+        {
+            return await _context.OrderItem.Where(x => x.OrderId == id).Select(x => x.Id).ToListAsync();
+        }
+
+        public async Task UpdatedAddedOrderItemStatus(int id , int status)
+        {
+            var existingOrderItem = await _context.OrderItem.FirstOrDefaultAsync(x => x.Id == id);
             existingOrderItem.OrderItemStatus = status;
             await _context.SaveChangesAsync();
         }

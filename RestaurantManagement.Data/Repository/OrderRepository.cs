@@ -64,7 +64,7 @@ namespace RestaurantManagement.Data.Repository
         {
             var orderEntity = await _context.Order.Include(x => x.OrderItem).FirstOrDefaultAsync(x => x.Id == id);
 
-            //orderEntity.OrderItem.
+            
         }
 
         public async Task UpdateOrder(int id, Order orderEntity)
@@ -77,6 +77,19 @@ namespace RestaurantManagement.Data.Repository
             existingOrder.OrderStatus = orderEntity.OrderStatus;
             existingOrder.OrderItem = orderEntity.OrderItem;
 
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteOrder(Order orderEntity)
+        {
+            _context.Order.Remove(orderEntity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateOrderStatus(int id, int status)
+        {
+            var existingOrder = await _context.Order.FirstOrDefaultAsync(x => x.Id == id);
+            existingOrder.OrderStatus = status;
             await _context.SaveChangesAsync();
         }
     }

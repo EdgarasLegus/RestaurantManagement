@@ -9,6 +9,7 @@ namespace RestaurantManagement.Interfaces.Services
     public interface IDishService
     {
         List<Dish> GetInitialDishes();
-        Task<List<Dish>> CalculateDishStock(List<int> dishIdList);
+        Task<List<Dish>> GetOrderedDishes(List<int> dishIdList);
+        Task<Dish> GetSingleDish(int id);
     }
 }

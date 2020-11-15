@@ -45,9 +45,14 @@ namespace RestaurantManagement.BusinessLogic.Services
             return dishesList;
         }
 
-        public async Task<List<Dish>> CalculateDishStock(List<int> dishIdList)
+        public async Task<List<Dish>> GetOrderedDishes(List<int> dishIdList)
         {
-            return await _dishRepo.GetDishStockQuantity(dishIdList);
+            return await _dishRepo.GetSelectedDishes(dishIdList);
+        }
+
+        public async Task<Dish> GetSingleDish(int id)
+        {
+            return await _dishRepo.GetDishById(id);
         }
 
     }

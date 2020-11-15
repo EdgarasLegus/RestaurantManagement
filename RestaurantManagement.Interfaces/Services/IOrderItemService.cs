@@ -1,4 +1,5 @@
 ﻿using RestaurantManagement.Contracts.Entities;
+using RestaurantManagement.Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,8 @@ namespace RestaurantManagement.Interfaces.Services
 {
     public interface IOrderItemService
     {
-        Task UpdateOrderItemsStatuses(int id, List<Dish> dishList);
+        Task UpdateCreatedOrderItemsStatuses(int id, List<Dish> dishList);
+        Task<OrderItemViewModel> CreateCustomerOrderItem(int orderId, OrderItemCreateModel orderItemCreateEntity);
+        Task<OrderItem> GetSelectedOrderItem(int id);
     }
 }

@@ -32,59 +32,90 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         public async Task<OrderViewModel> CreateCustomerOrder(OrderCreateModel orderCreateEntity)
         {
+            var orderEntity = await Create(orderCreateEntity);
+            var dishIdsList = await _orderItemRepo.GetDishesIdsByOrderId(orderEntity.Id);
+            var orderedDishList = await _dishService.GetOrderedDishes(dishIdsList);
+
+            if(OrderHasSomeItemsWithZeroStock(orderedDishList))
+            {
+                orderEntity = await PartiallyDecline(orderCreateEntity, orderedDishList);
+                return _mapper.Map<OrderViewModel>(orderEntity);
+            }
+            else if (OrderHasAllItemsWithZeroStock(orderedDishList))
+            {
+                orderEntity = await Decline(orderCreateEntity, orderedDishList);
+                return _mapper.Map<OrderViewModel>(orderEntity);
+            }
+            else
+            {
+                return _mapper.Map<OrderViewModel>(orderEntity);
+            }
+        }
+
+        public async Task DeleteCustomerOrder(int id)
+        {
+            var orderEntity = await _orderRepo.GetOrderById(id);
+            await _orderRepo.DeleteOrder(orderEntity);
+            _loggerManager.LogInfo($"DeleteCustomerOrder(): Order {orderEntity.OrderName} was deleted! Status: 30");
+        }
+
+        public async Task<Order> GetExistingOrder(int id)
+        {
+            return await _orderRepo.GetOrderWithItems(id);
+        }
+
+        private bool OrderHasSomeItemsWithZeroStock(List<Dish> orderedDishList)
+        {
+            return orderedDishList.Any(x => x.QuantityInStock == 0) && !orderedDishList.All(x => x.QuantityInStock == 0);
+        }
+
+        private bool OrderHasAllItemsWithZeroStock(List<Dish> orderedDishList)
+        {
+            return orderedDishList.All(x => x.QuantityInStock == 0);
+        }
+
+        private async Task ChangeCreatedOrderStatus(Order orderEntity, List<Dish> orderedDishList)
+        {
+            var createdOrder = await _orderRepo.GetOrderByName(orderEntity.OrderName);
+            await _orderRepo.UpdateOrder(createdOrder.Id, orderEntity);
+            //var orderItemIdsList = GetSelectedOrderItemsIds(createdOrder.Id);
+            await _orderItemService.UpdateCreatedOrderItemsStatuses(createdOrder.Id, orderedDishList);
+        }
+
+        private async Task<Order> Create(OrderCreateModel orderCreateEntity)
+        {
             var orderEntity = _mapper.Map<Order>(orderCreateEntity);
             await _orderRepo.AddOrder(orderEntity);
             _loggerManager.LogInfo($"CreateCustomerOrder(): New order {orderEntity.OrderName} is successfully created! Status: 10");
-
-            var dishIdsList = await _orderItemRepo.GetOrderDishesByOrderId(orderEntity.Id);
-            var orderedDishList = await _dishService.CalculateDishStock(dishIdsList);
-
-            if(orderedDishList.Any(x => x.QuantityInStock == 0) && !orderedDishList.All(x => x.QuantityInStock == 0))
-            {
-                var orderPartiallyDeclinedEntity = _mapper.Map<OrderPartiallyDeclinedModel>(orderCreateEntity);
-                orderEntity = _mapper.Map<Order>(orderPartiallyDeclinedEntity);
-
-                var createdOrder = await _orderRepo.GetOrderByName(orderEntity.OrderName);
-                await _orderRepo.UpdateOrder(createdOrder.Id, orderEntity);
-                await _orderItemService.UpdateOrderItemsStatuses(createdOrder.Id, orderedDishList);
-                _loggerManager.LogWarn($"CreateCustomerOrder(): Order {orderEntity.OrderName} was partially declined! Status: 20");
-
-                return _mapper.Map<OrderViewModel>(orderEntity);
-
-            }
-            else if (orderedDishList.All(x => x.QuantityInStock == 0))
-            {
-                var orderDeclinedEntity = _mapper.Map<OrderDeclinedModel>(orderCreateEntity);
-                orderEntity = _mapper.Map<Order>(orderDeclinedEntity);
-
-                var createdOrder = await _orderRepo.GetOrderByName(orderEntity.OrderName);
-                await _orderRepo.UpdateOrder(createdOrder.Id, orderEntity);
-                await _orderItemService.UpdateOrderItemsStatuses(createdOrder.Id, orderedDishList);
-                _loggerManager.LogWarn($"CreateCustomerOrder(): Order {orderEntity.OrderName} was declined! Status: 30");
-
-                return _mapper.Map<OrderViewModel>(orderEntity);
-            }
-            else
-            {
-                return _mapper.Map<OrderViewModel>(orderEntity);
-            }
-            
+            return orderEntity;
         }
 
+        private async Task<Order> PartiallyDecline(OrderCreateModel orderCreateEntity, List<Dish> orderedDishList)
+        {
+            var orderPartiallyDeclinedEntity = _mapper.Map<OrderPartiallyDeclinedModel>(orderCreateEntity);
+            var orderEntity = _mapper.Map<Order>(orderPartiallyDeclinedEntity);
+            await ChangeCreatedOrderStatus(orderEntity, orderedDishList);
+            _loggerManager.LogWarn($"CreateCustomerOrder(): Order {orderEntity.OrderName} was partially declined! Status: 20");
+            return orderEntity;
+        }
 
+        private async Task<Order> Decline(OrderCreateModel orderCreateEntity, List<Dish> orderedDishList)
+        {
+            var orderDeclinedEntity = _mapper.Map<OrderDeclinedModel>(orderCreateEntity);
+            var orderEntity = _mapper.Map<Order>(orderDeclinedEntity);
+            await ChangeCreatedOrderStatus(orderEntity, orderedDishList);
+            _loggerManager.LogWarn($"CreateCustomerOrder(): Order {orderEntity.OrderName} was declined! Status: 30");
+            return orderEntity;
+        }
 
+        private async Task<List<int>> GetSelectedOrderItemsIds(int id)
+        {
+            return await _orderItemRepo.GetOrderItemIdsByOrderId(id);
+        }
 
         private bool CheckIfOrderUnique(string orderName)
         {
-            var order = _orderRepo.GetOrderByName(orderName);
-            if (order == null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return _orderRepo.GetOrderByName(orderName) != null;
         }
     }
 }
