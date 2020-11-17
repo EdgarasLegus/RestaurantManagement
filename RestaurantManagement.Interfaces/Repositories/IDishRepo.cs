@@ -13,5 +13,6 @@ namespace RestaurantManagement.Interfaces.Repositories
         Task<Dish> GetDishById(int id);
         Task<Dish> GetDishWithProducts(int id);
         Task<List<Dish>> GetSelectedDishes(List<int> dishIdList);
+        Task UpdateDishQuantityInStock(int id, int newQty);
     }
 }

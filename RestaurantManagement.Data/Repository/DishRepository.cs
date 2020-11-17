@@ -55,5 +55,12 @@ namespace RestaurantManagement.Data.Repository
         {
             return await _context.Dish.Where(x => dishIdList.Contains(x.Id)).ToListAsync();
         }
+
+        public async Task UpdateDishQuantityInStock(int id, int newQty)
+        {
+            var dishEntity = await _context.Dish.FirstOrDefaultAsync(x => x.Id == id);
+            dishEntity.QuantityInStock = newQty;
+            await _context.SaveChangesAsync();
+        }
     }
 }

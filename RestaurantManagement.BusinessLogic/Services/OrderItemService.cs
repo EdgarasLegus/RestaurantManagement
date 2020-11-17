@@ -44,7 +44,7 @@ namespace RestaurantManagement.BusinessLogic.Services
         {
             orderItemCreateEntity = await SetOrderIdForItem(orderId, orderItemCreateEntity);
             var orderItemEntity = await CreateItem(orderItemCreateEntity);
-            await UpdateParentOrderStatus(orderItemEntity, (int)OrderStates.Edited);
+            await UpdateParentOrderStatusAndDate(orderItemEntity, (int)OrderStates.Edited);
             var orderedDish = await _dishService.GetSingleDish(orderItemEntity.DishId);
 
             if (orderedDish.QuantityInStock == 0)
@@ -61,6 +61,29 @@ namespace RestaurantManagement.BusinessLogic.Services
         public async Task<OrderItem> GetSelectedOrderItem(int id)
         {
             return await _orderItemRepo.GetOrderItemById(id);
+        }
+
+        public async Task DeleteCustomerOrderItem(int itemId)
+        {
+            var orderItemEntity = await _orderItemRepo.GetOrderItemById(itemId);
+            await _orderItemRepo.DeleteOrderItem(orderItemEntity);
+            await UpdateParentOrderStatusAndDate(orderItemEntity, (int)OrderStates.Edited);
+            _loggerManager.LogInfo($"DeleteCustomerOrderItem(): Order item {orderItemEntity.Id} was deleted!");
+        }
+
+        public async Task AdjustOrderedItemsStock(int orderId)
+        {
+            var orderItemsList = await _orderItemRepo.GetOrderItemsByOrderId(orderId);
+            foreach (var item in orderItemsList)
+            {
+                await AdjustItemsStockByStatus(item);
+            }
+        }
+
+        public async Task ChangePreparingOrderItemStatus(int orderId)
+        {
+            await _orderItemRepo.UpdateOrderItemWithPreparedStatus((int)OrderItemStates.Created, (int)OrderItemStates.Preparing);
+            _loggerManager.LogInfo($"ChangePreparingOrderStatus(): Order {orderId} is preparing!");
         }
 
         private async Task<OrderItem> CreateItem(OrderItemCreateModel orderItemCreateEntity)
@@ -80,9 +103,9 @@ namespace RestaurantManagement.BusinessLogic.Services
             return orderItemEntity;
         }
 
-        private async Task UpdateParentOrderStatus(OrderItem orderItem, int status)
+        private async Task UpdateParentOrderStatusAndDate(OrderItem orderItem, int status)
         {
-            await _orderRepo.UpdateOrderStatus(orderItem.OrderId, status);
+            await _orderRepo.UpdateOrderStatusAndDate(orderItem.OrderId, status);
         }
 
         private async Task<OrderItemCreateModel> SetOrderIdForItem(int orderId, OrderItemCreateModel orderItemCreateEntity)
@@ -95,5 +118,19 @@ namespace RestaurantManagement.BusinessLogic.Services
         {
             await _orderItemRepo.UpdatedAddedOrderItemStatus(id, status);
         }
+
+        private async Task AdjustItemsStockByStatus(OrderItem orderItemEntity)
+        {
+            if(orderItemEntity.OrderItemStatus == 10)
+            {
+                await _dishService.AdjustDishStock(orderItemEntity.DishId, orderItemEntity.Quantity);
+                _loggerManager.LogInfo($"AdjustItemsStockByStatus(): Dish ({orderItemEntity.DishId}) stock was adjusted.");
+            }
+            else
+            {
+                _loggerManager.LogWarn($"AdjustItemsStockByStatus(): Dish ({orderItemEntity.DishId}) stock hasn't been adjusted. Order Item status is not created!");
+            }
+        }
+
     }
 }

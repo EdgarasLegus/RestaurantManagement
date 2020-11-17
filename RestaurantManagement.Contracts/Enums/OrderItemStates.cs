@@ -8,6 +8,7 @@ namespace RestaurantManagement.Contracts.Enums
     {
         Created = 10,
         Declined = 30,
+        Preparing = 50,
         Completed = 80,
         Cancelled = 90
     }

@@ -11,6 +11,7 @@ namespace RestaurantManagement.Contracts.Models
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public int OrderStatus { get; set; }
+        public bool IsPreparing { get; set; }
 
         public IEnumerable<OrderItemViewModel> OrderItems { get; set; }
     }

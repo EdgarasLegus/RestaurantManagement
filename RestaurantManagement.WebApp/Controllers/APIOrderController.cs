@@ -202,5 +202,42 @@ namespace RestaurantManagement.WebApp.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+
+        [HttpDelete("{id}/item/{itemId}")]
+        public async Task<IActionResult> DeleteOrderItem([FromRoute] int id, int itemId)
+        {
+            try
+            {
+                //ASK
+                await _orderItemService.DeleteCustomerOrderItem(itemId);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _loggerManager.LogError($"DeleteOrderItem() method execution failed: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateOrder(int id, [FromBody] OrderUpdateModel orderUpdateEntity)
+        {
+            try
+            {
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid order update model object");
+                }
+
+                await _orderService.UpdateCustomerOrder(orderUpdateEntity, id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _loggerManager.LogError($"UpdateOrderItem() method execution failed: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }

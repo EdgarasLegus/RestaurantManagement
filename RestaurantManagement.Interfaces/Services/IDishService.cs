@@ -11,5 +11,6 @@ namespace RestaurantManagement.Interfaces.Services
         List<Dish> GetInitialDishes();
         Task<List<Dish>> GetOrderedDishes(List<int> dishIdList);
         Task<Dish> GetSingleDish(int id);
+        Task AdjustDishStock(int dishId, int orderedQuantity);
     }
 }

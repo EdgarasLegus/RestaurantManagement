@@ -1,0 +1,22 @@
+2020-11-17 16:31:30.4362 INFO Update(): Order updatedTest was updated!
+2020-11-17 16:32:13.6344 INFO Update(): Order updatedTest was updated!
+2020-11-17 16:32:13.7600 INFO AdjustItemsStockByStatus(): Dish (6) stock was adjusted.
+2020-11-17 16:32:13.7706 INFO AdjustItemsStockByStatus(): Dish (5) stock was adjusted.
+2020-11-17 16:32:13.7805 INFO ChangePreparingOrderStatus(): Order 1016 is preparing!
+2020-11-17 16:45:38.8137 INFO CreateCustomerOrder(): New order newtest is successfully created! Status: 10
+2020-11-17 16:46:23.7364 INFO CreateCustomerOrder(): New order newtest is successfully created! Status: 10
+2020-11-17 16:46:23.8704 WARN CreateCustomerOrder(): Order newtest was partially declined! Status: 20
+2020-11-17 16:48:45.8804 INFO CreateCustomerOrder(): New order ORD0029 is successfully created! Status: 10
+2020-11-17 16:48:46.0645 WARN CreateCustomerOrder(): Order ORD0029 was partially declined! Status: 20
+2020-11-17 16:50:16.6190 INFO DeleteCustomerOrderItem(): Order item 1081 was deleted!
+2020-11-17 16:50:32.8753 INFO DeleteCustomerOrder(): Order ORD0029 was deleted!
+2020-11-17 17:22:54.8192 INFO CreateCustomerOrder(): New order 'ORD0031' is successfully created! Status: 10
+2020-11-17 17:23:36.4941 INFO CreateCustomerOrder(): New order 'ORD0032' is successfully created! Status: 10
+2020-11-17 17:23:36.7294 WARN CreateCustomerOrder(): Order 'ORD0032' was partially declined! Status: 20
+2020-11-17 17:25:18.3580 INFO DeleteCustomerOrder(): Order 'ORD0032' was deleted!
+2020-11-17 17:26:20.2805 INFO CreateCustomerOrderItem(): New item (1088) for selected order is successfully created! Status: 10
+2020-11-17 17:28:05.0984 INFO Update(): Order '' was updated!
+2020-11-17 17:28:05.1793 INFO AdjustItemsStockByStatus(): Dish (1) stock was adjusted.
+2020-11-17 17:28:05.1946 INFO AdjustItemsStockByStatus(): Dish (2) stock was adjusted.
+2020-11-17 17:28:05.2079 INFO AdjustItemsStockByStatus(): Dish (6) stock was adjusted.
+2020-11-17 17:28:05.2207 INFO ChangePreparingOrderStatus(): Order 1022 is preparing!

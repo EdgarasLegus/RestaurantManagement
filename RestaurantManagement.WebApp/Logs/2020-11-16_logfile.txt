@@ -10,3 +10,6 @@
 2020-11-16 01:18:28.9308 INFO GetOrderWithItems() method returned order with items for id: 1013
 2020-11-16 01:18:40.1163 INFO GetOrderItemById() returned order item with id: 1068
 2020-11-16 01:19:37.4832 ERROR CreateOrder() method execution failed: An error occurred while updating the entries. See the inner exception for details.
+2020-11-16 01:28:24.1080 INFO CreateCustomerOrderItem(): New item (1070) for selected order is successfully created! Status: 10
+2020-11-16 01:30:22.7165 INFO CreateCustomerOrderItem(): New item (1071) for selected order is successfully created! Status: 10
+2020-11-16 15:31:09.1412 INFO DeleteCustomerOrderItem(): Order item 1071 was deleted!

@@ -55,5 +55,17 @@ namespace RestaurantManagement.BusinessLogic.Services
             return await _dishRepo.GetDishById(id);
         }
 
+        public async Task AdjustDishStock(int dishId, int orderedQuantity)
+        {
+            var dish = await GetSingleDish(dishId);
+            var newQty = dish.QuantityInStock - orderedQuantity;
+            await UpdateDishStock(dishId, newQty);
+        }
+
+        private async Task UpdateDishStock(int id, int newQty)
+        {
+            await _dishRepo.UpdateDishQuantityInStock(id, newQty);
+        }
+
     }
 }

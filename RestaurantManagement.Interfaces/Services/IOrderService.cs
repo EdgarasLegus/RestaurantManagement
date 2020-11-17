@@ -12,6 +12,7 @@ namespace RestaurantManagement.Interfaces.Services
         Task<OrderViewModel> CreateCustomerOrder(OrderCreateModel orderCreateEntity);
         Task DeleteCustomerOrder(int id);
         Task<Order> GetExistingOrder(int id);
+        Task UpdateCustomerOrder(OrderUpdateModel orderUpdateEntity, int orderId);
 
     }
 }

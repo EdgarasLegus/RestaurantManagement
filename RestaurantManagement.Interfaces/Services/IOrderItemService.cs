@@ -12,5 +12,7 @@ namespace RestaurantManagement.Interfaces.Services
         Task UpdateCreatedOrderItemsStatuses(int id, List<Dish> dishList);
         Task<OrderItemViewModel> CreateCustomerOrderItem(int orderId, OrderItemCreateModel orderItemCreateEntity);
         Task<OrderItem> GetSelectedOrderItem(int id);
+        Task DeleteCustomerOrderItem(int itemId);
+        Task AdjustOrderedItemsStock(int orderId);
     }
 }

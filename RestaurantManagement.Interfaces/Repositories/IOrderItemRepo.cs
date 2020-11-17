@@ -15,5 +15,8 @@ namespace RestaurantManagement.Interfaces.Repositories
         Task<OrderItem> GetOrderItemById(int id);
         Task<List<int>> GetOrderItemIdsByOrderId(int id);
         Task UpdatedAddedOrderItemStatus(int id, int status);
+        Task DeleteOrderItem(OrderItem orderItemEntity);
+        Task<List<OrderItem>> GetOrderItemsByOrderId(int id);
+        Task UpdateOrderItemWithPreparedStatus(int currentStatus, int newStatus);
     }
 }

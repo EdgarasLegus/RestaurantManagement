@@ -7,9 +7,9 @@ namespace RestaurantManagement.Contracts.Models
 {
     public class OrderUpdateModel
     {
+        public string OrderName { get; set; }
         public DateTime ModifiedDate { get; } = DateTime.Now;
-        public int OrderStatus { get; set; }
-
+        public bool IsPreparing { get; set; }
         public IEnumerable<OrderItemUpdateModel> OrderItems { get; set; }
     }
 }

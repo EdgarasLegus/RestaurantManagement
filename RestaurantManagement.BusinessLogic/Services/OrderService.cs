@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RestaurantManagement.Contracts.Entities;
+using RestaurantManagement.Contracts.Enums;
 using RestaurantManagement.Contracts.Models;
 using RestaurantManagement.Interfaces.Repositories;
 using RestaurantManagement.Interfaces.Services;
@@ -56,12 +57,24 @@ namespace RestaurantManagement.BusinessLogic.Services
         {
             var orderEntity = await _orderRepo.GetOrderById(id);
             await _orderRepo.DeleteOrder(orderEntity);
-            _loggerManager.LogInfo($"DeleteCustomerOrder(): Order {orderEntity.OrderName} was deleted! Status: 30");
+            _loggerManager.LogInfo($"DeleteCustomerOrder(): Order '{orderEntity.OrderName}' was deleted!");
         }
 
         public async Task<Order> GetExistingOrder(int id)
         {
             return await _orderRepo.GetOrderWithItems(id);
+        }
+
+        public async Task UpdateCustomerOrder(OrderUpdateModel orderUpdateEntity, int orderId)
+        {
+            if(orderUpdateEntity.IsPreparing == false)
+            {
+                await Update(orderUpdateEntity, orderId);
+            }
+            else
+            {
+                await Prepare(orderUpdateEntity, orderId);
+            }
         }
 
         private bool OrderHasSomeItemsWithZeroStock(List<Dish> orderedDishList)
@@ -86,7 +99,7 @@ namespace RestaurantManagement.BusinessLogic.Services
         {
             var orderEntity = _mapper.Map<Order>(orderCreateEntity);
             await _orderRepo.AddOrder(orderEntity);
-            _loggerManager.LogInfo($"CreateCustomerOrder(): New order {orderEntity.OrderName} is successfully created! Status: 10");
+            _loggerManager.LogInfo($"CreateCustomerOrder(): New order '{orderEntity.OrderName}' is successfully created! Status: 10");
             return orderEntity;
         }
 
@@ -95,7 +108,7 @@ namespace RestaurantManagement.BusinessLogic.Services
             var orderPartiallyDeclinedEntity = _mapper.Map<OrderPartiallyDeclinedModel>(orderCreateEntity);
             var orderEntity = _mapper.Map<Order>(orderPartiallyDeclinedEntity);
             await ChangeCreatedOrderStatus(orderEntity, orderedDishList);
-            _loggerManager.LogWarn($"CreateCustomerOrder(): Order {orderEntity.OrderName} was partially declined! Status: 20");
+            _loggerManager.LogWarn($"CreateCustomerOrder(): Order '{orderEntity.OrderName}' was partially declined! Status: 20");
             return orderEntity;
         }
 
@@ -104,7 +117,7 @@ namespace RestaurantManagement.BusinessLogic.Services
             var orderDeclinedEntity = _mapper.Map<OrderDeclinedModel>(orderCreateEntity);
             var orderEntity = _mapper.Map<Order>(orderDeclinedEntity);
             await ChangeCreatedOrderStatus(orderEntity, orderedDishList);
-            _loggerManager.LogWarn($"CreateCustomerOrder(): Order {orderEntity.OrderName} was declined! Status: 30");
+            _loggerManager.LogWarn($"CreateCustomerOrder(): Order '{orderEntity.OrderName}' was declined! Status: 30");
             return orderEntity;
         }
 
@@ -117,5 +130,27 @@ namespace RestaurantManagement.BusinessLogic.Services
         {
             return _orderRepo.GetOrderByName(orderName) != null;
         }
+
+        private async Task Update(OrderUpdateModel orderUpdateEntity, int id)
+        {
+            var orderEntity = _mapper.Map<Order>(orderUpdateEntity);
+            await _orderRepo.UpdateOrder(id, orderEntity);
+            _loggerManager.LogInfo($"Update(): Order '{orderEntity.OrderName}' was updated!");
+
+        }
+
+        private async Task Prepare(OrderUpdateModel orderUpdateEntity, int orderId)
+        {
+            await Update(orderUpdateEntity, orderId);
+            await _orderItemService.AdjustOrderedItemsStock(orderId);
+            await ChangePreparingOrderStatus(orderId);
+        }
+
+        private async Task ChangePreparingOrderStatus(int orderId)
+        {
+            await _orderRepo.UpdateOrderStatusAndDate(orderId, (int)OrderStates.Preparing);
+            _loggerManager.LogInfo($"ChangePreparingOrderStatus(): Order {orderId} is preparing!");
+        }
+
     }
 }
