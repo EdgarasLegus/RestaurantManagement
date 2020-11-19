@@ -13,7 +13,7 @@ using RestaurantManagement.Interfaces.Services;
 
 namespace RestaurantManagement.WebApp.Controllers
 {
-    [Route("api/staff")]
+    [Route("api/v1/staff")]
     [ApiController]
     public class APIStaffController : ControllerBase
     {

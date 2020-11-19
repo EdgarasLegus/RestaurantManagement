@@ -11,13 +11,11 @@ namespace RestaurantManagement.Interfaces.Repositories
     {
         Task<List<Order>> GetOrders();
         Task AddOrder(Order orderEntity);
-        bool CheckOrderUniqueness(string orderName);
         Task<Order> GetOrderById(int id);
-        Task<Order> GetOrderByName(string orderName);
         Task<Order> GetOrderWithItems(int id);
-        Task EditOrderItems(int id, OrderUpdateModel orderUpdatingEntity);
         Task UpdateOrder(int id, Order orderEntity);
         Task DeleteOrder(Order orderEntity);
         Task UpdateOrderStatusAndDate(int id, int status);
+        Task UpdateExistingOrder(int id, Order orderEntity, int status);
     }
 }

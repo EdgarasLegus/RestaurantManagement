@@ -31,40 +31,15 @@ namespace RestaurantManagement.Data.Repository
             await _context.SaveChangesAsync();
         }
 
-        public bool CheckOrderUniqueness(string orderName)
-        {
-            var orderCheck = _context.Order.Where(x => x.OrderName == orderName).Select(x => x.OrderName).Count();
-            if (orderCheck > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         public async Task<Order> GetOrderById(int id)
         {
             var order = await _context.Order.FirstOrDefaultAsync(x => x.Id == id);
             return order;
         }
 
-        public async Task<Order> GetOrderByName(string orderName)
-        {
-            return await _context.Order.FirstOrDefaultAsync(x => x.OrderName == orderName);
-        }
-
         public async Task<Order> GetOrderWithItems(int id)
         {
             return await _context.Order.Include(x => x.OrderItem).FirstOrDefaultAsync(o => o.Id == id);
-        }
-
-        public async Task EditOrderItems(int id, OrderUpdateModel orderUpdatingEntity)
-        {
-            var orderEntity = await _context.Order.Include(x => x.OrderItem).FirstOrDefaultAsync(x => x.Id == id);
-
-            
         }
 
         public async Task UpdateOrder(int id, Order orderEntity)
@@ -92,6 +67,16 @@ namespace RestaurantManagement.Data.Repository
             var existingOrder = await _context.Order.FirstOrDefaultAsync(x => x.Id == id);
             existingOrder.OrderStatus = status;
             existingOrder.ModifiedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateExistingOrder(int id, Order orderEntity, int status)
+        {
+            var existingOrder = await _context.Order.FirstOrDefaultAsync(x => x.Id == id);
+            existingOrder.OrderName = orderEntity.OrderName;
+            existingOrder.ModifiedDate = orderEntity.ModifiedDate;
+            existingOrder.OrderStatus = status;
+            existingOrder.IsPreparing = orderEntity.IsPreparing;
             await _context.SaveChangesAsync();
         }
     }

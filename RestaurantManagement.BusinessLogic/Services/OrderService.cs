@@ -39,12 +39,12 @@ namespace RestaurantManagement.BusinessLogic.Services
 
             if(OrderHasSomeItemsWithZeroStock(orderedDishList))
             {
-                orderEntity = await PartiallyDecline(orderCreateEntity, orderedDishList);
+                orderEntity = await PartiallyDecline(orderEntity, orderedDishList);
                 return _mapper.Map<OrderViewModel>(orderEntity);
             }
             else if (OrderHasAllItemsWithZeroStock(orderedDishList))
             {
-                orderEntity = await Decline(orderCreateEntity, orderedDishList);
+                orderEntity = await Decline(orderEntity, orderedDishList);
                 return _mapper.Map<OrderViewModel>(orderEntity);
             }
             else
@@ -89,9 +89,8 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         private async Task ChangeCreatedOrderStatus(Order orderEntity, List<Dish> orderedDishList)
         {
-            var createdOrder = await _orderRepo.GetOrderByName(orderEntity.OrderName);
+            var createdOrder = await _orderRepo.GetOrderById(orderEntity.Id);
             await _orderRepo.UpdateOrder(createdOrder.Id, orderEntity);
-            //var orderItemIdsList = GetSelectedOrderItemsIds(createdOrder.Id);
             await _orderItemService.UpdateCreatedOrderItemsStatuses(createdOrder.Id, orderedDishList);
         }
 
@@ -103,19 +102,21 @@ namespace RestaurantManagement.BusinessLogic.Services
             return orderEntity;
         }
 
-        private async Task<Order> PartiallyDecline(OrderCreateModel orderCreateEntity, List<Dish> orderedDishList)
+        private async Task<Order> PartiallyDecline(Order orderEntity, List<Dish> orderedDishList)
         {
-            var orderPartiallyDeclinedEntity = _mapper.Map<OrderPartiallyDeclinedModel>(orderCreateEntity);
-            var orderEntity = _mapper.Map<Order>(orderPartiallyDeclinedEntity);
+            //var orderPartiallyDeclinedEntity = _mapper.Map<OrderPartiallyDeclinedModel>(orderCreateEntity);
+            //var orderEntity = _mapper.Map<Order>(orderPartiallyDeclinedEntity);
+            orderEntity.OrderStatus = (int)OrderStates.PartiallyDeclined;
             await ChangeCreatedOrderStatus(orderEntity, orderedDishList);
             _loggerManager.LogWarn($"CreateCustomerOrder(): Order '{orderEntity.OrderName}' was partially declined! Status: 20");
             return orderEntity;
         }
 
-        private async Task<Order> Decline(OrderCreateModel orderCreateEntity, List<Dish> orderedDishList)
+        private async Task<Order> Decline(Order orderEntity, List<Dish> orderedDishList)
         {
-            var orderDeclinedEntity = _mapper.Map<OrderDeclinedModel>(orderCreateEntity);
-            var orderEntity = _mapper.Map<Order>(orderDeclinedEntity);
+            //var orderDeclinedEntity = _mapper.Map<OrderDeclinedModel>(orderCreateEntity);
+            //var orderEntity = _mapper.Map<Order>(orderDeclinedEntity);
+            orderEntity.OrderStatus = (int)OrderStates.Declined;
             await ChangeCreatedOrderStatus(orderEntity, orderedDishList);
             _loggerManager.LogWarn($"CreateCustomerOrder(): Order '{orderEntity.OrderName}' was declined! Status: 30");
             return orderEntity;
@@ -126,15 +127,10 @@ namespace RestaurantManagement.BusinessLogic.Services
             return await _orderItemRepo.GetOrderItemIdsByOrderId(id);
         }
 
-        private bool CheckIfOrderUnique(string orderName)
-        {
-            return _orderRepo.GetOrderByName(orderName) != null;
-        }
-
         private async Task Update(OrderUpdateModel orderUpdateEntity, int id)
         {
             var orderEntity = _mapper.Map<Order>(orderUpdateEntity);
-            await _orderRepo.UpdateOrder(id, orderEntity);
+            await _orderRepo.UpdateExistingOrder(id, orderEntity, (int)OrderStates.Edited);
             _loggerManager.LogInfo($"Update(): Order '{orderEntity.OrderName}' was updated!");
 
         }

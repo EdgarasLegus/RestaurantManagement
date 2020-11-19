@@ -1,0 +1,19 @@
+2020-11-20 00:12:18.4975 INFO Update(): Order 'oldtest' was updated!
+2020-11-20 00:14:17.4178 INFO Update(): Order 'oldtest' was updated!
+2020-11-20 00:14:17.5382 INFO AdjustItemsStockByStatus(): Dish (1) stock was adjusted.
+2020-11-20 00:14:17.5382 WARN AdjustItemsStockByStatus(): Dish (3) stock hasn't been adjusted. Order Item status is not created!
+2020-11-20 00:14:17.5544 INFO ChangePreparingOrderStatus(): Order 1025 is preparing!
+2020-11-20 01:25:05.9086 INFO Update(): Order 'NAMETESTORDER' was updated!
+2020-11-20 01:26:27.9303 INFO Update(): Order 'NAMETESTORDER' was updated!
+2020-11-20 01:26:29.6443 INFO AdjustItemsStockByStatus(): Dish (3) stock was adjusted.
+2020-11-20 01:26:29.6801 INFO AdjustItemsStockByStatus(): Dish (2) stock was adjusted.
+2020-11-20 01:26:39.2126 INFO ChangePreparingOrderStatus(): Order 1020 is preparing!
+2020-11-20 01:29:47.2841 INFO Update(): Order 'NAMING_TEST_ORDER' was updated!
+2020-11-20 01:30:43.4295 INFO Update(): Order 'NAMING_TEST_ORDER' was updated!
+2020-11-20 01:30:44.3744 INFO AdjustItemsStockByStatus(): Dish (3) stock was adjusted.
+2020-11-20 01:30:44.3898 INFO AdjustItemsStockByStatus(): Dish (2) stock was adjusted.
+2020-11-20 01:30:47.0932 INFO ChangePreparingOrderStatus(): Order 1020 is preparing!
+2020-11-20 01:35:27.7480 INFO Update(): Order 'NAMING_TEST_ORDER' was updated!
+2020-11-20 01:35:28.7936 INFO AdjustItemsStockByStatus(): Dish (3) stock was adjusted.
+2020-11-20 01:35:28.7936 INFO AdjustItemsStockByStatus(): Dish (2) stock was adjusted.
+2020-11-20 01:35:51.9268 INFO ChangePreparingOrderStatus(): Order 1020 is preparing!

@@ -11,7 +11,7 @@ using RestaurantManagement.Interfaces.Services;
 
 namespace RestaurantManagement.WebApp.Controllers
 {
-    [Route("api/order")]
+    [Route("api/v1/orders")]
     [ApiController]
     public class APIOrderController : ControllerBase
     {
@@ -76,7 +76,7 @@ namespace RestaurantManagement.WebApp.Controllers
             }
         }
 
-        [HttpGet("{id}/item/{itemId}", Name = "OrderItemById")]
+        [HttpGet("{id}/items/{itemId}", Name = "OrderItemById")]
         public async Task<IActionResult> GetOrderItemById(int id, int itemId)
         {
             try
@@ -134,7 +134,7 @@ namespace RestaurantManagement.WebApp.Controllers
             }
         }
 
-        [HttpGet("{id}/item")]
+        [HttpGet("{id}/items")]
         public async Task<IActionResult> GetOrderItems(int id)
         {
             try
@@ -175,7 +175,7 @@ namespace RestaurantManagement.WebApp.Controllers
             }
         }
 
-        [HttpPost("{id}/item")]
+        [HttpPost("{id}/items")]
         public async Task<IActionResult> AddOrderItem(int id, [FromBody] OrderItemCreateModel orderItem)
         {
             try
@@ -203,7 +203,7 @@ namespace RestaurantManagement.WebApp.Controllers
             }
         }
 
-        [HttpDelete("{id}/item/{itemId}")]
+        [HttpDelete("{id}/items/{itemId}")]
         public async Task<IActionResult> DeleteOrderItem([FromRoute] int id, int itemId)
         {
             try

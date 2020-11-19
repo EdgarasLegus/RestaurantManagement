@@ -10,7 +10,7 @@ using RestaurantManagement.Interfaces.Services;
 
 namespace RestaurantManagement.WebApp.Controllers
 {
-    [Route("api/dish")]
+    [Route("api/v1/dishes")]
     [ApiController]
     public class APIDishController : ControllerBase
     {
@@ -69,7 +69,7 @@ namespace RestaurantManagement.WebApp.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
-        [HttpGet("{id}/product")]
+        [HttpGet("{id}/products")]
         public async Task<IActionResult> GetDishProducts(int id)
         {
             try
