@@ -1,0 +1,4 @@
+2020-11-21 16:16:49.8502 INFO Update(): Order 'ORD0020' was updated!
+2020-11-21 16:16:50.7618 WARN AdjustItemsStockByStatus(): Dish '1' stock hasn't been adjusted. Order Item '1016' status is not created or dish '1' has 0 stock!
+2020-11-21 16:16:50.8187 INFO AdjustItemsStockByStatus(): Dish (6) stock was adjusted.
+2020-11-21 16:16:53.3276 INFO ChangePreparingOrderStatus(): Order 1007 is preparing!

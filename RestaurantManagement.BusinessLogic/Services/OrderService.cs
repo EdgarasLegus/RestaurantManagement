@@ -122,23 +122,17 @@ namespace RestaurantManagement.BusinessLogic.Services
             return orderEntity;
         }
 
-        private async Task<List<int>> GetSelectedOrderItemsIds(int id)
-        {
-            return await _orderItemRepo.GetOrderItemIdsByOrderId(id);
-        }
-
         private async Task Update(OrderUpdateModel orderUpdateEntity, int id)
         {
             var orderEntity = _mapper.Map<Order>(orderUpdateEntity);
             await _orderRepo.UpdateExistingOrder(id, orderEntity, (int)OrderStates.Edited);
-            _loggerManager.LogInfo($"Update(): Order '{orderEntity.OrderName}' was updated!");
-
+            _loggerManager.LogInfo($"Update(): Order '{orderEntity.Id}' was updated!");
         }
 
         private async Task Prepare(OrderUpdateModel orderUpdateEntity, int orderId)
         {
             await Update(orderUpdateEntity, orderId);
-            await _orderItemService.AdjustOrderedItemsStock(orderId);
+            await _orderItemService.PrepareOrderItems(orderId);
             await ChangePreparingOrderStatus(orderId);
         }
 

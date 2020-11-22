@@ -71,26 +71,26 @@ namespace RestaurantManagement.BusinessLogic.Services
             _loggerManager.LogInfo($"DeleteCustomerOrderItem(): Order item {orderItemEntity.Id} was deleted!");
         }
 
-        public async Task AdjustOrderedItemsStock(int orderId)
+        public async Task PrepareOrderItems(int orderId)
         {
             var orderItemsList = await _orderItemRepo.GetOrderItemsByOrderId(orderId);
             foreach (var item in orderItemsList)
             {
-                await AdjustItemsStockByStatus(item);
+                await PrepareOrderItem(item);
             }
         }
 
-        public async Task ChangePreparingOrderItemStatus(int orderId)
+        public async Task ChangePreparingOrderItemStatus(OrderItem orderItemEntity)
         {
-            await _orderItemRepo.UpdateOrderItemWithPreparedStatus((int)OrderItemStates.Created, (int)OrderItemStates.Preparing);
-            _loggerManager.LogInfo($"ChangePreparingOrderStatus(): Order {orderId} is preparing!");
+            await _orderItemRepo.UpdateOrderItemWithPreparingStatus(orderItemEntity, (int)OrderItemStates.Preparing);
+            _loggerManager.LogInfo($"ChangePreparingOrderItemStatus(): Order item {orderItemEntity.Id} is preparing!");
         }
 
         private async Task<OrderItem> CreateItem(OrderItemCreateModel orderItemCreateEntity)
         {
             var orderItemEntity = _mapper.Map<OrderItem>(orderItemCreateEntity);
             await _orderItemRepo.AddOrderItem(orderItemEntity);
-            _loggerManager.LogInfo($"CreateCustomerOrderItem(): New item ({orderItemEntity.Id}) for selected order is successfully created! Status: 10");
+            _loggerManager.LogInfo($"CreateItem(): New item '{orderItemEntity.Id}' for selected order is successfully created! Status: 10");
             return orderItemEntity;
         }
 
@@ -99,7 +99,7 @@ namespace RestaurantManagement.BusinessLogic.Services
             //var orderItemDeclinedEntity = _mapper.Map<OrderItemDeclinedModel>(orderItemCreateEntity);
             //var orderItemEntity = _mapper.Map<OrderItem>(orderItemDeclinedEntity);
             await UpdateAddedOrderItemStatus(orderItemEntity.Id, (int)OrderItemStates.Declined);
-            _loggerManager.LogWarn($"CreateCustomerOrderItem(): New item ({orderItemEntity.Id}) for selected order was declined! Status: 30");
+            _loggerManager.LogWarn($"DeclineItem(): Item '{orderItemEntity.Id}' for selected order was declined! Status: 30");
             return orderItemEntity;
         }
 
@@ -119,16 +119,36 @@ namespace RestaurantManagement.BusinessLogic.Services
             await _orderItemRepo.UpdatedAddedOrderItemStatus(id, status);
         }
 
-        private async Task AdjustItemsStockByStatus(OrderItem orderItemEntity)
+        private async Task<bool> OrderItemStatusIsCreatedAndAvalaibleInStock(OrderItem orderItemEntity)
         {
-            if(orderItemEntity.OrderItemStatus == 10)
+            var orderedDish = await _dishService.GetSingleDish(orderItemEntity.DishId);
+            return orderItemEntity.OrderItemStatus == 10 && orderedDish.QuantityInStock != 0;
+        }
+
+        private async Task PerformItemPreparation(OrderItem orderItemEntity)
+        {
+            await _dishService.AdjustDishStock(orderItemEntity.DishId, orderItemEntity.Quantity);
+            _loggerManager.LogInfo($"AdjustItemsStockByStatus(): Dish ({orderItemEntity.DishId}) stock was adjusted.");
+            await ChangePreparingOrderItemStatus(orderItemEntity);
+        }
+
+        private async Task DeclineItemPreparation(OrderItem orderItemEntity)
+        {
+            _loggerManager.LogWarn($"AdjustItemsStockByStatus(): Dish '{orderItemEntity.DishId}' stock hasn't been adjusted. " +
+                    $"Order Item '{orderItemEntity.Id}' status is not created or dish '{orderItemEntity.DishId}' has 0 stock!" +
+                    $"Order Item won't be prepared.");
+            await DeclineItem(orderItemEntity);
+        }
+
+        private async Task PrepareOrderItem(OrderItem orderItemEntity)
+        {
+            if (await OrderItemStatusIsCreatedAndAvalaibleInStock(orderItemEntity))
             {
-                await _dishService.AdjustDishStock(orderItemEntity.DishId, orderItemEntity.Quantity);
-                _loggerManager.LogInfo($"AdjustItemsStockByStatus(): Dish ({orderItemEntity.DishId}) stock was adjusted.");
+                await PerformItemPreparation(orderItemEntity);
             }
             else
             {
-                _loggerManager.LogWarn($"AdjustItemsStockByStatus(): Dish ({orderItemEntity.DishId}) stock hasn't been adjusted. Order Item status is not created!");
+                await DeclineItemPreparation(orderItemEntity);
             }
         }
 

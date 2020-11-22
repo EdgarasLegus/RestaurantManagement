@@ -1,0 +1,12 @@
+2020-11-22 00:19:50.0024 INFO Update(): Order 'ORD0021' was updated!
+2020-11-22 00:19:50.7939 WARN AdjustItemsStockByStatus(): Dish '1' stock hasn't been adjusted. Order Item '1016' status is not created or dish '1' has 0 stock!Order Item won't be prepared.
+2020-11-22 00:19:50.8468 WARN DeclineItem(): Item '1016' for selected order was declined! Status: 30
+2020-11-22 00:19:50.9201 INFO AdjustItemsStockByStatus(): Dish (6) stock was adjusted.
+2020-11-22 00:19:50.9533 INFO ChangePreparingOrderItemStatus(): Order item 1017 is preparing!
+2020-11-22 00:19:53.2442 INFO ChangePreparingOrderStatus(): Order 1007 is preparing!
+2020-11-22 00:22:30.7738 INFO Update(): Order 'ORD0021' was updated!
+2020-11-22 00:22:31.3624 WARN AdjustItemsStockByStatus(): Dish '1' stock hasn't been adjusted. Order Item '1018' status is not created or dish '1' has 0 stock!Order Item won't be prepared.
+2020-11-22 00:22:31.3741 WARN DeclineItem(): Item '1018' for selected order was declined! Status: 30
+2020-11-22 00:22:31.3741 INFO AdjustItemsStockByStatus(): Dish (6) stock was adjusted.
+2020-11-22 00:22:31.3992 INFO ChangePreparingOrderItemStatus(): Order item 1019 is preparing!
+2020-11-22 00:22:33.1967 INFO ChangePreparingOrderStatus(): Order 1008 is preparing!

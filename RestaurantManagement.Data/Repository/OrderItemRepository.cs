@@ -73,9 +73,9 @@ namespace RestaurantManagement.Data.Repository
             return await _context.OrderItem.Where(x => x.OrderId == id).ToListAsync();
         }
 
-        public async Task UpdateOrderItemWithPreparedStatus(int currentStatus, int newStatus)
+        public async Task UpdateOrderItemWithPreparingStatus(OrderItem orderItemEntity, int newStatus)
         {
-            var existingOrderItem = await _context.OrderItem.Where(x => x.OrderItemStatus == currentStatus).FirstOrDefaultAsync();
+            var existingOrderItem = await _context.OrderItem.Where(x => x.Id == orderItemEntity.Id).FirstOrDefaultAsync();
             existingOrderItem.OrderItemStatus = newStatus;
             await _context.SaveChangesAsync();
         }
