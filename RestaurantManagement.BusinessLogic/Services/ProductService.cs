@@ -20,23 +20,20 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         public List<Product> GetInitialProducts()
         {
+            // use IOptions
             var initialProductsFile = Contracts.Settings.ConfigurationSettings.GetInitialProductsFromConfig();
             var fileParts = _logicHandler.FileReader(initialProductsFile);
             var productList = new List<Product>();
 
-            foreach (List<string> subList in fileParts)
+            foreach (var product in fileParts.Select(subList => new Product()
             {
-                var product = new Product()
-                {
-                    Id = Int32.Parse(subList[0]),
-                    ProductName = subList[1],
-                    StockAmount = Convert.ToDecimal(subList[2]),
-                    UnitOfMeasure = subList[3]
-                };
-                if (!productList.Any(x => x.ProductName == product.ProductName))
-                {
-                    productList.Add(product);
-                }
+                Id = int.Parse(subList[0]),
+                ProductName = subList[1],
+                StockAmount = Convert.ToDecimal(subList[2]),
+                UnitOfMeasure = subList[3]
+            }).Where(product => productList.All(x => x.ProductName != product.ProductName)))
+            {
+                productList.Add(product);
             }
             return productList;
 

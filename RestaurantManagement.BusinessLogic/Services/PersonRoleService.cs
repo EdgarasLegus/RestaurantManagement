@@ -20,21 +20,18 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         public List<PersonRole> GetInitialPersonRoles()
         {
+            // use IOptions for getting configuration
             var initialPersonRolesFile = Contracts.Settings.ConfigurationSettings.GetInitialPersonRolesFromConfig();
             var fileParts = _logicHandler.FileReader(initialPersonRolesFile);
             var rolesList = new List<PersonRole>();
 
-            foreach (List<string> subList in fileParts)
+            foreach (var role in fileParts.Select(subList => new PersonRole()
             {
-                var role = new PersonRole()
-                {
-                    Id = Int32.Parse(subList[0]),
-                    RoleName = subList[1]
-                };
-                if (!rolesList.Any(x => x.RoleName == role.RoleName))
-                {
-                    rolesList.Add(role);
-                }
+                Id = int.Parse(subList[0]),
+                RoleName = subList[1]
+            }).Where(role => rolesList.All(x => x.RoleName != role.RoleName)))
+            {
+                rolesList.Add(role);
             }
             return rolesList;
         }

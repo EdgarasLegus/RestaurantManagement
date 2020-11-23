@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RestaurantManagement.Contracts.Entities
 {
-    public partial class OrderItem
+    public class OrderItem
     {
         public int Id { get; set; }
         public int OrderId { get; set; }

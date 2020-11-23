@@ -16,7 +16,7 @@ namespace RestaurantManagement.BusinessLogic.Services
     {
         private readonly IOrderItemRepo _orderItemRepo;
         private readonly IMapper _mapper;
-        private readonly ILoggerManager _loggerManager;
+        private readonly ILoggerManager _loggerManager; // use ILogger<OrderItemService>
         private readonly IDishService _dishService;
         private readonly IOrderRepo _orderRepo;
 
@@ -31,31 +31,28 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         public async Task UpdateCreatedOrderItemsStatuses(int id, List<Dish> dishList)
         {
-            foreach (var dish in dishList)
-            {
-                if (dish.QuantityInStock == 0)
-                {
-                    await _orderItemRepo.UpdateCreatedOrderItemStatus(id, dish.Id, (int)OrderItemStates.Declined);
-                }
-            }
+            // each task will be runed in sync. Can be more multithreaded
+            var tasks = dishList.Where(dish => dish.QuantityInStock == 0)
+                .Select(dish => _orderItemRepo.UpdateCreatedOrderItemStatus(id, dish.Id, (int)OrderItemStates.Declined))
+                .ToList();
+
+            await Task.WhenAll(tasks);
         }
 
         public async Task<OrderItemViewModel> CreateCustomerOrderItem(int orderId, OrderItemCreateModel orderItemCreateEntity)
         {
-            orderItemCreateEntity = await SetOrderIdForItem(orderId, orderItemCreateEntity);
+            orderItemCreateEntity = SetOrderIdForItem(orderId, orderItemCreateEntity);
             var orderItemEntity = await CreateItem(orderItemCreateEntity);
             await UpdateParentOrderStatusAndDate(orderItemEntity, (int)OrderStates.Edited);
             var orderedDish = await _dishService.GetSingleDish(orderItemEntity.DishId);
 
-            if (orderedDish.QuantityInStock == 0)
-            {
-                orderItemEntity = await DeclineItem(orderItemEntity);
+            //simplified code
+            if (orderedDish.QuantityInStock != 0)
                 return _mapper.Map<OrderItemViewModel>(orderItemEntity);
-            }
-            else
-            {
-                return _mapper.Map<OrderItemViewModel>(orderItemEntity);
-            }
+
+            orderItemEntity = await DeclineItem(orderItemEntity);
+            return _mapper.Map<OrderItemViewModel>(orderItemEntity);
+
         }
 
         public async Task<OrderItem> GetSelectedOrderItem(int id)
@@ -66,6 +63,7 @@ namespace RestaurantManagement.BusinessLogic.Services
         public async Task DeleteCustomerOrderItem(int itemId)
         {
             var orderItemEntity = await _orderItemRepo.GetOrderItemById(itemId);
+            // null check if order not exists
             await _orderItemRepo.DeleteOrderItem(orderItemEntity);
             await UpdateParentOrderStatusAndDate(orderItemEntity, (int)OrderStates.Edited);
             _loggerManager.LogInfo($"DeleteCustomerOrderItem(): Order item {orderItemEntity.Id} was deleted!");
@@ -76,6 +74,7 @@ namespace RestaurantManagement.BusinessLogic.Services
             var orderItemsList = await _orderItemRepo.GetOrderItemsByOrderId(orderId);
             foreach (var item in orderItemsList)
             {
+                // todo add to tasklist and use Task.WhenAll()
                 await PrepareOrderItem(item);
             }
         }
@@ -85,6 +84,7 @@ namespace RestaurantManagement.BusinessLogic.Services
             var orderItemsList = await _orderItemRepo.GetOrderItemsByOrderId(orderId);
             foreach (var item in orderItemsList)
             {
+                // todo add to tasklist and use Task.WhenAll()
                 await ReadyToServeOrderItem(item);
             }
         }
@@ -116,12 +116,12 @@ namespace RestaurantManagement.BusinessLogic.Services
         private async Task<bool> ParentOrderHasAnyPreparingOrPreparedItems(int orderId)
         {
             var orderItemList = await _orderItemRepo.GetOrderItemsByOrderId(orderId);
-            return orderItemList.Any(x => x.OrderItemStatus == 50) || orderItemList.Any(x => x.OrderItemStatus == 60);
+            return orderItemList.Any(x => x.OrderItemStatus == 50) || orderItemList.Any(x => x.OrderItemStatus == 60); //use enums for code clearity. enum can be used in entoity also
         }
 
         private async Task UpdateParentOrderStatusAndDate(OrderItem orderItem, int status)
         {
-            if(await ParentOrderHasAnyPreparingOrPreparedItems(orderItem.OrderId))
+            if (await ParentOrderHasAnyPreparingOrPreparedItems(orderItem.OrderId))
             {
                 await _orderRepo.UpdateOrderStatusAndDate(orderItem.OrderId, (int)OrderStates.Updated);
             }
@@ -131,12 +131,14 @@ namespace RestaurantManagement.BusinessLogic.Services
             }
         }
 
-        private async Task<OrderItemCreateModel> SetOrderIdForItem(int orderId, OrderItemCreateModel orderItemCreateEntity)
+        // no async needed here
+        private static OrderItemCreateModel SetOrderIdForItem(int orderId, OrderItemCreateModel orderItemCreateEntity)
         {
             orderItemCreateEntity.OrderId = orderId;
             return orderItemCreateEntity;
         }
 
+        // not much logic here. this private method is not needed can use repo call instgead
         private async Task UpdateAddedOrderItemStatus(int id, int status)
         {
             await _orderItemRepo.UpdatedAddedOrderItemStatus(id, status);
@@ -148,11 +150,13 @@ namespace RestaurantManagement.BusinessLogic.Services
             return orderItemEntity.OrderItemStatus == 10 && orderedDish.QuantityInStock != 0;
         }
 
+        // async and task not needed for sync code
         private async Task<bool> OrderItemIsPreparing(OrderItem orderItemEntity)
         {
             return orderItemEntity.OrderItemStatus == 50;
         }
 
+        // async and task not needed for sync code
         private async Task<bool> OrderItemIsAlreadyPreparingOrPrepared(OrderItem orderItemEntity)
         {
             return orderItemEntity.OrderItemStatus == 50 || orderItemEntity.OrderItemStatus == 60;

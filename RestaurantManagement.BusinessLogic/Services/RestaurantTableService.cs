@@ -20,21 +20,18 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         public List<RestaurantTable> GetInitialRestaurantTables()
         {
+            // use IOptions
             var initialRestaurantTablesFile = Contracts.Settings.ConfigurationSettings.GetInitialRestaurantTablesFromConfig();
             var fileParts = _logicHandler.FileReader(initialRestaurantTablesFile);
             var tablesList = new List<RestaurantTable>();
 
-            foreach (List<string> subList in fileParts)
+            foreach (var tables in fileParts.Select(subList => new RestaurantTable()
             {
-                var tables = new RestaurantTable()
-                {
-                    Id = Int32.Parse(subList[0]),
-                    TableName = subList[1],
-                };
-                if (!tablesList.Any(x => x.TableName == tables.TableName))
-                {
-                    tablesList.Add(tables);
-                }
+                Id = int.Parse(subList[0]),
+                TableName = subList[1],
+            }).Where(tables => tablesList.All(x => x.TableName != tables.TableName)))
+            {
+                tablesList.Add(tables);
             }
             return tablesList;
 

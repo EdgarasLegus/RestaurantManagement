@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RestaurantManagement.Contracts.Entities
 {
-    public partial class Product
+    public class Product
     {
         public Product()
         {

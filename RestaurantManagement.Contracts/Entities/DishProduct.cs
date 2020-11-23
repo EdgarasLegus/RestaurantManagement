@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RestaurantManagement.Contracts.Entities
 {
-    public partial class DishProduct
+    public class DishProduct
     {
         public int Id { get; set; }
         public int DishId { get; set; }

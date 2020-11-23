@@ -4,6 +4,8 @@ using System.Text;
 
 namespace RestaurantManagement.Interfaces.Services
 {
+
+    // this interface is not needed. use built in ILogger<T>
     public interface ILoggerManager
     {
         void LogDebug(string message);

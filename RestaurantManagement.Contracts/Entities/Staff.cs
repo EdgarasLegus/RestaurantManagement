@@ -8,7 +8,7 @@ using System.Text;
 namespace RestaurantManagement.Contracts.Entities
 {
     // Partial nereikia naudoti
-    public partial class Staff
+    public class Staff
     {
         public Staff()
         {

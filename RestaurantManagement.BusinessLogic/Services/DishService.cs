@@ -37,7 +37,7 @@ namespace RestaurantManagement.BusinessLogic.Services
                     DishType = subList[3],
                     QuantityInStock = Int32.Parse(subList[4])
                 };
-                if (!dishesList.Any(x => x.DishName == dish.DishName))
+                if (dishesList.All(x => x.DishName != dish.DishName))
                 {
                     dishesList.Add(dish);
                 }

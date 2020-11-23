@@ -88,16 +88,19 @@ namespace RestaurantManagement.BusinessLogic.Services
             }
         }
 
+        // can be moved to Order entity
         private bool OrderIsJustUpdated(OrderUpdateModel orderUpdateEntity)
         {
             return orderUpdateEntity.IsPreparing == false && orderUpdateEntity.IsReady == false;
         }
 
+        // can be moved to Order entity
         private bool OrderIsToBePrepared(OrderUpdateModel orderUpdateEntity)
         {
             return orderUpdateEntity.IsPreparing == true && orderUpdateEntity.IsReady == false;
         }
 
+        // can be moved to Order entity
         private bool OrderIsToBeReady(OrderUpdateModel orderUpdateEntity)
         {
             return orderUpdateEntity.IsPreparing == false && orderUpdateEntity.IsReady == true;
@@ -105,7 +108,7 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         private bool OrderHasSomeItemsWithZeroStock(List<Dish> orderedDishList)
         {
-            return orderedDishList.Any(x => x.QuantityInStock == 0) && !orderedDishList.All(x => x.QuantityInStock == 0);
+            return orderedDishList.Any(x => x.QuantityInStock == 0) && orderedDishList.Any(x => x.QuantityInStock != 0);
         }
 
         private bool OrderHasAllItemsWithZeroStock(List<Dish> orderedDishList)
@@ -200,6 +203,7 @@ namespace RestaurantManagement.BusinessLogic.Services
             return order.IsPreparing == false && order.IsReady == false;
         }
 
+        // should not be async
         private async Task<bool> AllModelFlagsAreFalse(OrderUpdateModel orderUpdateEntity)
         {
             return orderUpdateEntity.IsPreparing == false && orderUpdateEntity.IsReady == false;

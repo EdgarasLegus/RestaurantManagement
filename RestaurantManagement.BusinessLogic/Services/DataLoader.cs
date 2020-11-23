@@ -10,7 +10,7 @@ namespace RestaurantManagement.BusinessLogic.Services
 {
     public class DataLoader : IDataLoader
     {
-        private readonly RestaurantManagementCodeFirstContext _context;
+        private readonly RestaurantManagementCodeFirstContext _context; // not used field use context or repositories
         private readonly IStaffService _staffService;
         private readonly IStaffRepo _staffRepo;
         private readonly IRestaurantTablesService _restaurantTableService;

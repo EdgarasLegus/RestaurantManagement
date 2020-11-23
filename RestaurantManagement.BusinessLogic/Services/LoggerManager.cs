@@ -6,6 +6,7 @@ using System.Text;
 
 namespace RestaurantManagement.BusinessLogic.Services
 {
+    // your own implementation is not needed. You can use build in logging
     public class LoggerManager : ILoggerManager
     {
         private static ILogger logger = LogManager.GetCurrentClassLogger();

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using static System.Int32;
 
 namespace RestaurantManagement.BusinessLogic.Services
 {
@@ -20,19 +21,22 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         public List<DishProduct> GetInitialDishProducts()
         {
+            // use IOptions<T> instead for getting configurations. this way the code will not be testable
             var initialDishProductsFile = Contracts.Settings.ConfigurationSettings.GetInitialDishProductsFromConfig();
             var fileParts = _logicHandler.FileReader(initialDishProductsFile);
             var dishProductList = new List<DishProduct>();
 
-            foreach (List<string> subList in fileParts)
+            // can be converted to linq
+            foreach (var subList in fileParts)
             {
-                var dishProduct = new DishProduct()
+                var dishProduct = new DishProduct
                 {
-                    Id = Int32.Parse(subList[0]),
-                    DishId = Int32.Parse(subList[1]),
-                    ProductId = Int32.Parse(subList[2]),
+                    Id = Parse(subList[0]),
+                    DishId = Parse(subList[1]),
+                    ProductId = Parse(subList[2]),
                     Portion = Convert.ToDecimal(subList[3])
                 };
+                // equals will not work here. beccause comparing two different object types List<DoshProducs> equals DishProduct will always be false
                 if (!dishProductList.Equals(dishProduct))
                 {
                     dishProductList.Add(dishProduct);
