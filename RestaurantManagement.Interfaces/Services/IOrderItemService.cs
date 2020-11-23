@@ -14,6 +14,6 @@ namespace RestaurantManagement.Interfaces.Services
         Task<OrderItem> GetSelectedOrderItem(int id);
         Task DeleteCustomerOrderItem(int itemId);
         Task PrepareOrderItems(int orderId);
-        Task ChangePreparingOrderItemStatus(OrderItem orderItemEntity);
+        Task ReadyToServeOrderItems(int orderId);
     }
 }

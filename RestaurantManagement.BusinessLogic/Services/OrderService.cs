@@ -21,7 +21,8 @@ namespace RestaurantManagement.BusinessLogic.Services
         private readonly IMapper _mapper;
         private readonly ILoggerManager _loggerManager;
 
-        public OrderService(IDishService dishService, IOrderItemService orderItemService, IOrderRepo orderRepo, IOrderItemRepo orderItemRepo, IMapper mapper, ILoggerManager loggerManager)
+        public OrderService(IDishService dishService, IOrderItemService orderItemService, IOrderRepo orderRepo,
+            IOrderItemRepo orderItemRepo, IMapper mapper, ILoggerManager loggerManager)
         {
             _dishService = dishService;
             _orderItemService = orderItemService;
@@ -37,7 +38,7 @@ namespace RestaurantManagement.BusinessLogic.Services
             var dishIdsList = await _orderItemRepo.GetDishesIdsByOrderId(orderEntity.Id);
             var orderedDishList = await _dishService.GetOrderedDishes(dishIdsList);
 
-            if(OrderHasSomeItemsWithZeroStock(orderedDishList))
+            if (OrderHasSomeItemsWithZeroStock(orderedDishList))
             {
                 orderEntity = await PartiallyDecline(orderEntity, orderedDishList);
                 return _mapper.Map<OrderViewModel>(orderEntity);
@@ -53,6 +54,11 @@ namespace RestaurantManagement.BusinessLogic.Services
             }
         }
 
+        public async Task<Order> GetExistingOrder(int id)
+        {
+            return await _orderRepo.GetOrderWithItems(id);
+        }
+
         public async Task DeleteCustomerOrder(int id)
         {
             var orderEntity = await _orderRepo.GetOrderById(id);
@@ -60,21 +66,41 @@ namespace RestaurantManagement.BusinessLogic.Services
             _loggerManager.LogInfo($"DeleteCustomerOrder(): Order '{orderEntity.OrderName}' was deleted!");
         }
 
-        public async Task<Order> GetExistingOrder(int id)
-        {
-            return await _orderRepo.GetOrderWithItems(id);
-        }
-
         public async Task UpdateCustomerOrder(OrderUpdateModel orderUpdateEntity, int orderId)
         {
-            if(orderUpdateEntity.IsPreparing == false)
+            if (OrderIsJustUpdated(orderUpdateEntity))
             {
                 await Update(orderUpdateEntity, orderId);
             }
-            else
+            else if (OrderIsToBePrepared(orderUpdateEntity))
             {
                 await Prepare(orderUpdateEntity, orderId);
             }
+            else if (OrderIsToBeReady(orderUpdateEntity))
+            {
+                await ReadyToServe(orderUpdateEntity, orderId);
+            }
+            else
+            {
+                _loggerManager.LogError($"UpdateCustomerOrder(): Order '{orderId}' cannot" +
+                    $" be preparing and ready in same time! " +
+                    $" No changes were applied.");
+            }
+        }
+
+        private bool OrderIsJustUpdated(OrderUpdateModel orderUpdateEntity)
+        {
+            return orderUpdateEntity.IsPreparing == false && orderUpdateEntity.IsReady == false;
+        }
+
+        private bool OrderIsToBePrepared(OrderUpdateModel orderUpdateEntity)
+        {
+            return orderUpdateEntity.IsPreparing == true && orderUpdateEntity.IsReady == false;
+        }
+
+        private bool OrderIsToBeReady(OrderUpdateModel orderUpdateEntity)
+        {
+            return orderUpdateEntity.IsPreparing == false && orderUpdateEntity.IsReady == true;
         }
 
         private bool OrderHasSomeItemsWithZeroStock(List<Dish> orderedDishList)
@@ -98,35 +124,39 @@ namespace RestaurantManagement.BusinessLogic.Services
         {
             var orderEntity = _mapper.Map<Order>(orderCreateEntity);
             await _orderRepo.AddOrder(orderEntity);
-            _loggerManager.LogInfo($"CreateCustomerOrder(): New order '{orderEntity.OrderName}' is successfully created! Status: 10");
+            _loggerManager.LogInfo($"CreateCustomerOrder(): New order '{orderEntity.OrderName}' is" +
+                $" successfully created! Status: 10");
             return orderEntity;
         }
 
         private async Task<Order> PartiallyDecline(Order orderEntity, List<Dish> orderedDishList)
         {
-            //var orderPartiallyDeclinedEntity = _mapper.Map<OrderPartiallyDeclinedModel>(orderCreateEntity);
-            //var orderEntity = _mapper.Map<Order>(orderPartiallyDeclinedEntity);
             orderEntity.OrderStatus = (int)OrderStates.PartiallyDeclined;
             await ChangeCreatedOrderStatus(orderEntity, orderedDishList);
-            _loggerManager.LogWarn($"CreateCustomerOrder(): Order '{orderEntity.OrderName}' was partially declined! Status: 20");
+            _loggerManager.LogWarn($"CreateCustomerOrder(): Order '{orderEntity.OrderName}' was" +
+                $" partially declined! Status: 20");
             return orderEntity;
         }
 
         private async Task<Order> Decline(Order orderEntity, List<Dish> orderedDishList)
         {
-            //var orderDeclinedEntity = _mapper.Map<OrderDeclinedModel>(orderCreateEntity);
-            //var orderEntity = _mapper.Map<Order>(orderDeclinedEntity);
             orderEntity.OrderStatus = (int)OrderStates.Declined;
             await ChangeCreatedOrderStatus(orderEntity, orderedDishList);
-            _loggerManager.LogWarn($"CreateCustomerOrder(): Order '{orderEntity.OrderName}' was declined! Status: 30");
+            _loggerManager.LogWarn($"CreateCustomerOrder(): Order '{orderEntity.OrderName}' was" +
+                $" declined! Status: 30");
             return orderEntity;
         }
 
         private async Task Update(OrderUpdateModel orderUpdateEntity, int id)
         {
-            var orderEntity = _mapper.Map<Order>(orderUpdateEntity);
-            await _orderRepo.UpdateExistingOrder(id, orderEntity, (int)OrderStates.Edited);
-            _loggerManager.LogInfo($"Update(): Order '{orderEntity.Id}' was updated!");
+            if (await AllModelFlagsAreFalse(orderUpdateEntity))
+            {
+                await AllowPartialUpdate(orderUpdateEntity, id);
+            }
+            else
+            {
+                await AllowUpdate(orderUpdateEntity, id);
+            }
         }
 
         private async Task Prepare(OrderUpdateModel orderUpdateEntity, int orderId)
@@ -139,7 +169,61 @@ namespace RestaurantManagement.BusinessLogic.Services
         private async Task ChangePreparingOrderStatus(int orderId)
         {
             await _orderRepo.UpdateOrderStatusAndDate(orderId, (int)OrderStates.Preparing);
-            _loggerManager.LogInfo($"ChangePreparingOrderStatus(): Order {orderId} is preparing!");
+            _loggerManager.LogInfo($"ChangePreparingOrderStatus(): Order {orderId} is" +
+                $" in preparing status.");
+        }
+
+        private async Task ChangeReadyOrderStatus(int orderId)
+        {
+            await _orderRepo.UpdateOrderStatusAndDate(orderId, (int)OrderStates.ReadyToServe);
+            _loggerManager.LogInfo($"ChangeReadyOrderStatus(): Order {orderId} is" +
+                $" in ready to serve status.");
+        }
+
+        private async Task ReadyToServe(OrderUpdateModel orderUpdateEntity, int orderId)
+        {
+            if (await PreparingAndReadyFlagsAreFalse(orderId))
+            {
+                _loggerManager.LogError($"ReadyToServe(): Order {orderId} cannot be" +
+                    $" put in 'Ready to Serve' status." +
+                    $" No items have been prepared or served.");
+            }
+            else
+            {
+                await AllowReadyToServe(orderUpdateEntity, orderId);
+            }
+        }
+
+        private async Task<bool> PreparingAndReadyFlagsAreFalse(int orderId)
+        {
+            var order = await _orderRepo.GetOrderById(orderId);
+            return order.IsPreparing == false && order.IsReady == false;
+        }
+
+        private async Task<bool> AllModelFlagsAreFalse(OrderUpdateModel orderUpdateEntity)
+        {
+            return orderUpdateEntity.IsPreparing == false && orderUpdateEntity.IsReady == false;
+        }
+
+        private async Task AllowReadyToServe(OrderUpdateModel orderUpdateEntity, int orderId)
+        {
+            await Update(orderUpdateEntity, orderId);
+            await _orderItemService.ReadyToServeOrderItems(orderId);
+            await ChangeReadyOrderStatus(orderId);
+        }
+
+        private async Task AllowUpdate(OrderUpdateModel orderUpdateEntity, int id)
+        {
+            var orderEntity = _mapper.Map<Order>(orderUpdateEntity);
+            await _orderRepo.UpdateExistingOrder(id, orderEntity, (int)OrderStates.Edited);
+            _loggerManager.LogInfo($"Update(): Order '{id}' was updated!");
+        }
+
+        private async Task AllowPartialUpdate(OrderUpdateModel orderUpdateEntity, int id)
+        {
+            var orderEntity = _mapper.Map<Order>(orderUpdateEntity);
+            await _orderRepo.UpdateOrderNameAndStatus(id, orderEntity, (int)OrderStates.Edited);
+            _loggerManager.LogWarn($"AllowPartialUpdate(): Order '{id}' was partially updated. Flags update was rollbacked.");
         }
 
     }

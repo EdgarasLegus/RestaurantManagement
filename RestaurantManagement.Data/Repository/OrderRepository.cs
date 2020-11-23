@@ -52,6 +52,7 @@ namespace RestaurantManagement.Data.Repository
             existingOrder.OrderStatus = orderEntity.OrderStatus;
             existingOrder.OrderItem = orderEntity.OrderItem;
             existingOrder.IsPreparing = orderEntity.IsPreparing;
+            existingOrder.IsReady = orderEntity.IsReady;
 
             await _context.SaveChangesAsync();
         }
@@ -77,6 +78,16 @@ namespace RestaurantManagement.Data.Repository
             existingOrder.ModifiedDate = orderEntity.ModifiedDate;
             existingOrder.OrderStatus = status;
             existingOrder.IsPreparing = orderEntity.IsPreparing;
+            existingOrder.IsReady = orderEntity.IsReady;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateOrderNameAndStatus(int id, Order orderEntity, int status)
+        {
+            var existingOrder = await _context.Order.FirstOrDefaultAsync(x => x.Id == id);
+            existingOrder.OrderName = orderEntity.OrderName;
+            existingOrder.ModifiedDate = orderEntity.ModifiedDate;
+            existingOrder.OrderStatus = status;
             await _context.SaveChangesAsync();
         }
     }

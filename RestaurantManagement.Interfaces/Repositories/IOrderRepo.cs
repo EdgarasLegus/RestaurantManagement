@@ -17,5 +17,6 @@ namespace RestaurantManagement.Interfaces.Repositories
         Task DeleteOrder(Order orderEntity);
         Task UpdateOrderStatusAndDate(int id, int status);
         Task UpdateExistingOrder(int id, Order orderEntity, int status);
+        Task UpdateOrderNameAndStatus(int id, Order orderEntity, int status);
     }
 }

@@ -17,6 +17,7 @@ namespace RestaurantManagement.Contracts.Entities
         public DateTime ModifiedDate { get; set; }
         public int OrderStatus { get; set; }
         public bool IsPreparing { get; set; }
+        public bool IsReady { get; set; }
 
         public virtual ICollection<OrderItem> OrderItem { get; set; }
     }
