@@ -1,0 +1,35 @@
+2020-12-01 00:23:32.9625 INFO CreateItem(): New item '1105' for selected order is successfully created! Status: 10
+2020-12-01 00:24:07.0609 WARN DeclineItem(): Item '1105' for selected order was declined! Status: 30
+2020-12-01 00:37:31.7990 INFO CreateItem(): New item '1106' for selected order is successfully created! Status: 10
+2020-12-01 00:37:36.4085 WARN DeclineItem(): Item '1106' for selected order was declined! Status: 30
+2020-12-01 00:50:24.1569 INFO Update(): Order '1015' was updated!
+2020-12-01 00:50:24.2850 INFO PerformItemPreparation(): Dish (6) stock was adjusted.
+2020-12-01 00:50:24.3016 INFO ChangePreparingOrderItemStatus(): Order item 1042 is preparing!
+2020-12-01 00:50:24.3016 INFO PerformItemPreparation(): Dish (5) stock was adjusted.
+2020-12-01 00:50:24.3137 INFO ChangePreparingOrderItemStatus(): Order item 1043 is preparing!
+2020-12-01 00:50:24.3137 INFO ChangePreparingOrderStatus(): Order 1015 is in preparing status.
+2020-12-01 01:00:19.1647 INFO Update(): Order '1015' was updated!
+2020-12-01 01:00:24.1277 INFO ChangeReadyOrderItemStatus(): Order item 1042 is ready to serve!
+2020-12-01 01:00:26.4516 INFO ChangeReadyOrderItemStatus(): Order item 1043 is ready to serve!
+2020-12-01 01:00:26.4722 INFO ChangeReadyOrderStatus(): Order 1015 is in ready to serve status.
+2020-12-01 01:00:51.1601 INFO Update(): Order '1015' was updated!
+2020-12-01 01:00:51.1601 WARN ReadyToServerOrderItem(): Item '1042' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-12-01 01:00:51.2094 WARN ReadyToServerOrderItem(): Item '1043' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-12-01 01:00:51.2335 INFO ChangeReadyOrderStatus(): Order 1015 is in ready to serve status.
+2020-12-01 01:01:00.7657 INFO Update(): Order '1015' was updated!
+2020-12-01 01:01:18.1366 WARN ReadyToServerOrderItem(): Item '1042' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-12-01 01:01:23.6787 WARN ReadyToServerOrderItem(): Item '1043' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-12-01 01:01:23.6930 INFO ChangeReadyOrderStatus(): Order 1015 is in ready to serve status.
+2020-12-01 01:09:00.2038 INFO Update(): Order '1015' was updated!
+2020-12-01 01:09:04.8117 WARN PrepareOrderItem(): Item '1042' cannot be preparing! This item is already in 'Preparing' or in 'ReadyToServe' status.
+2020-12-01 01:09:08.3739 WARN PrepareOrderItem(): Item '1043' cannot be preparing! This item is already in 'Preparing' or in 'ReadyToServe' status.
+2020-12-01 01:09:08.3962 INFO ChangePreparingOrderStatus(): Order 1015 is in preparing status.
+2020-12-01 01:22:29.0639 INFO CreateCustomerOrder(): New order 'RefactorTest' is successfully created! Status: 10
+2020-12-01 01:22:29.3109 WARN CreateCustomerOrder(): Order 'RefactorTest' was partially declined! Status: 20
+2020-12-01 01:29:55.3307 WARN AllowPartialUpdate(): Order '1027' was partially updated. Flags update was rollbacked.
+2020-12-01 01:30:39.5726 INFO Update(): Order '1027' was updated!
+2020-12-01 01:30:39.6529 WARN DeclineItemPreparation(): Dish '1' stock hasn't been adjusted. Order Item '1107' status is not created or dish '1' has 0 stock!Order Item won't be prepared.
+2020-12-01 01:30:39.6529 WARN DeclineItem(): Item '1107' for selected order was declined! Status: 30
+2020-12-01 01:30:39.6853 INFO PerformItemPreparation(): Dish (6) stock was adjusted.
+2020-12-01 01:30:39.6853 INFO ChangePreparingOrderItemStatus(): Order item 1108 is preparing!
+2020-12-01 01:30:39.7065 INFO ChangePreparingOrderStatus(): Order 1027 is in preparing status.

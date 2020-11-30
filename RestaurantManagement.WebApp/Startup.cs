@@ -20,6 +20,7 @@ using System.IO;
 using RestaurantManagement.BusinessLogic.Services;
 using RestaurantManagement.WebApp.Extensions;
 using RestaurantManagement.Data.Repository;
+using RestaurantManagement.Contracts.Settings;
 
 namespace RestaurantManagement.WebApp
 {
@@ -41,6 +42,10 @@ namespace RestaurantManagement.WebApp
 
             // FOR LOGGING SETUP
             services.ConfigureLoggerService();
+
+            //FOR IOPTIONS SETUP
+            services.Configure<ConfigurationSettings>(Configuration.GetSection(
+                                        ConfigurationSettings.InitialData));
 
             services.AddControllersWithViews();
 

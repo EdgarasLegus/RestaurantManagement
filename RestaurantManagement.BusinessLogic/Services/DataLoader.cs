@@ -10,7 +10,6 @@ namespace RestaurantManagement.BusinessLogic.Services
 {
     public class DataLoader : IDataLoader
     {
-        private readonly RestaurantManagementCodeFirstContext _context;
         private readonly IStaffService _staffService;
         private readonly IStaffRepo _staffRepo;
         private readonly IRestaurantTablesService _restaurantTableService;
@@ -24,11 +23,10 @@ namespace RestaurantManagement.BusinessLogic.Services
         private readonly IPersonRoleService _personRoleService;
         private readonly IPersonRoleRepo _personRoleRepo;
 
-        public DataLoader(RestaurantManagementCodeFirstContext context, IStaffService staffService, IStaffRepo staffRepo, IRestaurantTablesService restaurantTablesService,
+        public DataLoader(IStaffService staffService, IStaffRepo staffRepo, IRestaurantTablesService restaurantTablesService,
             IRestaurantTableRepo restaurantTableRepo, IProductService productService, IProductRepo productRepo, IDishService dishService, IDishRepo dishRepo,
             IDishProductService dishProductService, IDishProductRepo dishProductRepo, IPersonRoleService personRoleService, IPersonRoleRepo personRoleRepo)
         {
-            _context = context;
             _staffService = staffService;
             _staffRepo = staffRepo;
             _restaurantTableService = restaurantTablesService;

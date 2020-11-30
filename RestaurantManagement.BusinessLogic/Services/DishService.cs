@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using RestaurantManagement.Contracts.Entities;
+using RestaurantManagement.Contracts.Settings;
 using RestaurantManagement.Interfaces.Repositories;
 using RestaurantManagement.Interfaces.Services;
 using System;
@@ -14,16 +16,18 @@ namespace RestaurantManagement.BusinessLogic.Services
     {
         private readonly ILogicHandler _logicHandler;
         private readonly IDishRepo _dishRepo;
+        private readonly ConfigurationSettings _options;
 
-        public DishService(ILogicHandler logicHandler, IDishRepo dishRepo)
+        public DishService(ILogicHandler logicHandler, IDishRepo dishRepo, IOptions<ConfigurationSettings> options)
         {
             _logicHandler = logicHandler;
             _dishRepo = dishRepo;
+            _options = options.Value;
         }
 
         public List<Dish> GetInitialDishes()
         {
-            var initialDishesFile = Contracts.Settings.ConfigurationSettings.GetInitialDishesFromConfig();
+            var initialDishesFile = _options.InitialDishes;
             var fileParts = _logicHandler.FileReader(initialDishesFile);
             var dishesList = new List<Dish>();
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RestaurantManagement.Contracts.Entities
 {
-    public partial class UserLog
+    public class UserLog
     {
         public int Id { get; set; }
         public string UserAction { get; set; }

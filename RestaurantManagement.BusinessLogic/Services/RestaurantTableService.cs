@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using RestaurantManagement.Contracts.Entities;
+using RestaurantManagement.Contracts.Settings;
 using RestaurantManagement.Interfaces.Services;
 using System;
 using System.Collections.Generic;
@@ -12,32 +14,29 @@ namespace RestaurantManagement.BusinessLogic.Services
     public class RestaurantTableService : IRestaurantTablesService
     {
         private readonly ILogicHandler _logicHandler;
+        private readonly ConfigurationSettings _options;
 
-        public RestaurantTableService(ILogicHandler logicHandler)
+        public RestaurantTableService(ILogicHandler logicHandler, IOptions<ConfigurationSettings> options)
         {
             _logicHandler = logicHandler;
+            _options = options.Value;
         }
 
         public List<RestaurantTable> GetInitialRestaurantTables()
         {
-            var initialRestaurantTablesFile = Contracts.Settings.ConfigurationSettings.GetInitialRestaurantTablesFromConfig();
+            var initialRestaurantTablesFile = _options.InitialRestaurantTables;
             var fileParts = _logicHandler.FileReader(initialRestaurantTablesFile);
             var tablesList = new List<RestaurantTable>();
 
-            foreach (List<string> subList in fileParts)
+            foreach (var tables in fileParts.Select(subList => new RestaurantTable()
             {
-                var tables = new RestaurantTable()
-                {
-                    Id = Int32.Parse(subList[0]),
-                    TableName = subList[1],
-                };
-                if (!tablesList.Any(x => x.TableName == tables.TableName))
-                {
-                    tablesList.Add(tables);
-                }
+                Id = int.Parse(subList[0]),
+                TableName = subList[1],
+            }).Where(tables => tablesList.All(x => x.TableName != tables.TableName)))
+            {
+                tablesList.Add(tables);
             }
             return tablesList;
-
         }
     }
 }

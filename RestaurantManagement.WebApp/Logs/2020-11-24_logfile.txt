@@ -1,0 +1,20 @@
+2020-11-24 17:03:55.3768 INFO Update(): Order '1008' was updated!
+2020-11-24 17:03:55.5062 WARN DeclineItemPreparation(): Dish '1' stock hasn't been adjusted. Order Item '1018' status is not created or dish '1' has 0 stock!Order Item won't be prepared.
+2020-11-24 17:03:55.5245 WARN DeclineItem(): Item '1018' for selected order was declined! Status: 30
+2020-11-24 17:03:55.5322 WARN PrepareOrderItem(): Item '1019' cannot be preparing! This item is already in 'Preparing' or in 'ReadyToServe' status.
+2020-11-24 17:03:55.5322 WARN DeclineItemPreparation(): Dish '4' stock hasn't been adjusted. Order Item '1093' status is not created or dish '4' has 0 stock!Order Item won't be prepared.
+2020-11-24 17:03:55.5322 WARN DeclineItem(): Item '1093' for selected order was declined! Status: 30
+2020-11-24 17:03:55.5451 WARN PrepareOrderItem(): Item '1096' cannot be preparing! This item is already in 'Preparing' or in 'ReadyToServe' status.
+2020-11-24 17:03:55.5451 WARN PrepareOrderItem(): Item '1097' cannot be preparing! This item is already in 'Preparing' or in 'ReadyToServe' status.
+2020-11-24 17:03:55.5451 WARN PrepareOrderItem(): Item '1098' cannot be preparing! This item is already in 'Preparing' or in 'ReadyToServe' status.
+2020-11-24 17:03:55.5639 INFO ChangePreparingOrderStatus(): Order 1008 is in preparing status.
+2020-11-24 17:06:14.4443 INFO Update(): Order '1008' was updated!
+2020-11-24 17:06:14.4603 WARN ReadyToServerOrderItem(): Item '1018' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-11-24 17:06:14.4603 WARN ReadyToServerOrderItem(): Item '1019' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-11-24 17:06:14.4603 WARN ReadyToServerOrderItem(): Item '1093' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-11-24 17:06:14.4682 WARN ReadyToServerOrderItem(): Item '1096' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-11-24 17:06:14.4682 WARN ReadyToServerOrderItem(): Item '1097' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-11-24 17:06:14.5089 INFO ChangeReadyOrderItemStatus(): Order item 1098 is ready to serve!
+2020-11-24 17:06:14.5152 INFO ChangeReadyOrderStatus(): Order 1008 is in ready to serve status.
+2020-11-24 17:08:02.8124 INFO CreateItem(): New item '1099' for selected order is successfully created! Status: 10
+2020-11-24 17:12:29.2726 WARN AllowPartialUpdate(): Order '1008' was partially updated. Flags update was rollbacked.

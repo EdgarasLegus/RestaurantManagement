@@ -38,24 +38,24 @@ namespace RestaurantManagement.BusinessLogic.Services
                     await _orderItemRepo.UpdateCreatedOrderItemStatus(id, dish.Id, (int)OrderItemStates.Declined);
                 }
             }
+            //var tasks = dishList.Where(dish => dish.QuantityInStock == 0)
+            //    .Select(dish => _orderItemRepo.UpdateCreatedOrderItemStatus(id, dish.Id, (int)OrderItemStates.Declined))
+            //    .ToList();
+            //await Task.WhenAll(tasks);
         }
 
         public async Task<OrderItemViewModel> CreateCustomerOrderItem(int orderId, OrderItemCreateModel orderItemCreateEntity)
         {
-            orderItemCreateEntity = await SetOrderIdForItem(orderId, orderItemCreateEntity);
+            orderItemCreateEntity = SetOrderIdForItem(orderId, orderItemCreateEntity);
             var orderItemEntity = await CreateItem(orderItemCreateEntity);
             await UpdateParentOrderStatusAndDate(orderItemEntity, (int)OrderStates.Edited);
             var orderedDish = await _dishService.GetSingleDish(orderItemEntity.DishId);
 
-            if (orderedDish.QuantityInStock == 0)
-            {
-                orderItemEntity = await DeclineItem(orderItemEntity);
+            if (orderedDish.QuantityInStock != 0)
                 return _mapper.Map<OrderItemViewModel>(orderItemEntity);
-            }
-            else
-            {
-                return _mapper.Map<OrderItemViewModel>(orderItemEntity);
-            }
+
+            orderItemEntity = await DeclineItem(orderItemEntity);
+            return _mapper.Map<OrderItemViewModel>(orderItemEntity);
         }
 
         public async Task<OrderItem> GetSelectedOrderItem(int id)
@@ -66,9 +66,15 @@ namespace RestaurantManagement.BusinessLogic.Services
         public async Task DeleteCustomerOrderItem(int itemId)
         {
             var orderItemEntity = await _orderItemRepo.GetOrderItemById(itemId);
-            await _orderItemRepo.DeleteOrderItem(orderItemEntity);
-            await UpdateParentOrderStatusAndDate(orderItemEntity, (int)OrderStates.Edited);
-            _loggerManager.LogInfo($"DeleteCustomerOrderItem(): Order item {orderItemEntity.Id} was deleted!");
+
+            if(orderItemEntity == null)
+                _loggerManager.LogError($"DeleteCustomerOrderItem(): Order item {itemId} was not found!");
+            else
+            {
+                await _orderItemRepo.DeleteOrderItem(orderItemEntity);
+                await UpdateParentOrderStatusAndDate(orderItemEntity, (int)OrderStates.Edited);
+                _loggerManager.LogInfo($"DeleteCustomerOrderItem(): Order item {orderItemEntity.Id} was deleted!");
+            }
         }
 
         public async Task PrepareOrderItems(int orderId)
@@ -77,6 +83,7 @@ namespace RestaurantManagement.BusinessLogic.Services
             foreach (var item in orderItemsList)
             {
                 await PrepareOrderItem(item);
+                //var task = orderItemsList.Select(orderItem => PrepareOrderItem(orderItem)).ToList();
             }
         }
 
@@ -107,7 +114,7 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         private async Task<OrderItem> DeclineItem(OrderItem orderItemEntity)
         {
-            await UpdateAddedOrderItemStatus(orderItemEntity.Id, (int)OrderItemStates.Declined);
+            await _orderItemRepo.UpdatedAddedOrderItemStatus(orderItemEntity.Id, (int)OrderItemStates.Declined);
             _loggerManager.LogWarn($"DeclineItem(): Item '{orderItemEntity.Id}' for" +
                 $" selected order was declined! Status: 30");
             return orderItemEntity;
@@ -116,7 +123,8 @@ namespace RestaurantManagement.BusinessLogic.Services
         private async Task<bool> ParentOrderHasAnyPreparingOrPreparedItems(int orderId)
         {
             var orderItemList = await _orderItemRepo.GetOrderItemsByOrderId(orderId);
-            return orderItemList.Any(x => x.OrderItemStatus == 50) || orderItemList.Any(x => x.OrderItemStatus == 60);
+            return orderItemList.Any(x => x.OrderItemStatus == (int)OrderItemStates.Preparing)
+                || orderItemList.Any(x => x.OrderItemStatus == (int)OrderItemStates.ReadyToServe);
         }
 
         private async Task UpdateParentOrderStatusAndDate(OrderItem orderItem, int status)
@@ -131,31 +139,28 @@ namespace RestaurantManagement.BusinessLogic.Services
             }
         }
 
-        private async Task<OrderItemCreateModel> SetOrderIdForItem(int orderId, OrderItemCreateModel orderItemCreateEntity)
+        private static OrderItemCreateModel SetOrderIdForItem(int orderId, OrderItemCreateModel orderItemCreateEntity)
         {
             orderItemCreateEntity.OrderId = orderId;
             return orderItemCreateEntity;
         }
 
-        private async Task UpdateAddedOrderItemStatus(int id, int status)
-        {
-            await _orderItemRepo.UpdatedAddedOrderItemStatus(id, status);
-        }
-
         private async Task<bool> OrderItemStatusIsCreatedAndAvalaibleInStock(OrderItem orderItemEntity)
         {
             var orderedDish = await _dishService.GetSingleDish(orderItemEntity.DishId);
-            return orderItemEntity.OrderItemStatus == 10 && orderedDish.QuantityInStock != 0;
+            return orderItemEntity.OrderItemStatus == (int)OrderItemStates.Created
+                && orderedDish.QuantityInStock != 0;
         }
 
-        private async Task<bool> OrderItemIsPreparing(OrderItem orderItemEntity)
+        private bool OrderItemIsPreparing(OrderItem orderItemEntity)
         {
-            return orderItemEntity.OrderItemStatus == 50;
+            return orderItemEntity.OrderItemStatus == (int)OrderItemStates.Preparing;
         }
 
-        private async Task<bool> OrderItemIsAlreadyPreparingOrPrepared(OrderItem orderItemEntity)
+        private bool OrderItemIsAlreadyPreparingOrPrepared(OrderItem orderItemEntity)
         {
-            return orderItemEntity.OrderItemStatus == 50 || orderItemEntity.OrderItemStatus == 60;
+            return orderItemEntity.OrderItemStatus == (int)OrderItemStates.Preparing 
+                || orderItemEntity.OrderItemStatus == (int)OrderItemStates.ReadyToServe;
         }
 
         private async Task PerformItemPreparation(OrderItem orderItemEntity)
@@ -182,7 +187,7 @@ namespace RestaurantManagement.BusinessLogic.Services
             {
                 await PerformItemPreparation(orderItemEntity);
             }
-            else if (await OrderItemIsAlreadyPreparingOrPrepared(orderItemEntity))
+            else if (OrderItemIsAlreadyPreparingOrPrepared(orderItemEntity))
             {
                 _loggerManager.LogWarn($"PrepareOrderItem(): Item '{orderItemEntity.Id}' cannot be" +
                     $" preparing! This item is already " +
@@ -208,7 +213,7 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         private async Task ReadyToServeOrderItem(OrderItem orderItemEntity)
         {
-            if (await OrderItemIsPreparing(orderItemEntity))
+            if (OrderItemIsPreparing(orderItemEntity))
             {
                 await PerformReadyToServe(orderItemEntity);
             }

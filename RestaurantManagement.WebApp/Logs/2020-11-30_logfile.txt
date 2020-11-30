@@ -1,0 +1,8 @@
+2020-11-30 22:46:36.3245 INFO CreateCustomerOrder(): New order 'RefactorTest' is successfully created! Status: 10
+2020-11-30 22:46:37.0246 ERROR CreateOrder() method execution failed: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+2020-11-30 23:11:56.3004 INFO CreateItem(): New item '1102' for selected order is successfully created! Status: 10
+2020-11-30 23:24:15.6857 INFO CreateItem(): New item '1103' for selected order is successfully created! Status: 10
+2020-11-30 23:24:35.7103 INFO CreateItem(): New item '1104' for selected order is successfully created! Status: 10
+2020-11-30 23:24:51.3940 WARN DeclineItem(): Item '1104' for selected order was declined! Status: 30
+2020-11-30 23:42:03.4742 ERROR DeleteCustomerOrderItem(): Order item 1105 was not found!
+2020-11-30 23:43:32.9082 ERROR DeleteCustomerOrderItem(): Order item 1105 was not found!

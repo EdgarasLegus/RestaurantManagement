@@ -8,7 +8,7 @@ using System.Text;
 namespace RestaurantManagement.Contracts.Entities
 {
     // Partial nereikia naudoti
-    public partial class Staff
+    public class Staff
     {
         public Staff()
         {
@@ -31,7 +31,6 @@ namespace RestaurantManagement.Contracts.Entities
         public int PersonRoleId { get; set; }
 
         [Required(ErrorMessage = "Start date is required")]
-        //[RegularExpression(@"^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$", ErrorMessage = "Date is invalid")]
         [BackDateValidationChecker]
         public DateTime StartDayOfEmployment { get; set; }
 

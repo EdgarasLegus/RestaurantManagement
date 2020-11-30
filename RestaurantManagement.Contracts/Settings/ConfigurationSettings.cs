@@ -7,6 +7,14 @@ namespace RestaurantManagement.Contracts.Settings
 {
     public class ConfigurationSettings
     {
+        public const string InitialData = "InitialData";
+        public string InitialStaff { get; set; }
+        public string InitialRestaurantTables { get; set; }
+        public string InitialProducts { get; set; }
+        public string InitialPersonRoles { get; set; }
+        public string InitialDishes { get; set; }
+        public string InitialDishProducts { get; set; }
+
         private static readonly IConfiguration configuration = new ConfigurationBuilder()
                 .AddJsonFile(@"./appsettings.json")
                 .Build();
@@ -21,42 +29,6 @@ namespace RestaurantManagement.Contracts.Settings
         {
             var connectionString = configuration["ConnectionProperties:ConnectionStringCodeFirst"];
             return connectionString;
-        }
-
-        public static string GetInitialStaffFromConfig()
-        {
-            var initialStaffFile = configuration["InitialData:InitialStaff"];
-            return initialStaffFile;
-        }
-
-        public static string GetInitialRestaurantTablesFromConfig()
-        {
-            var initialRestaurantTablesFile = configuration["InitialData:InitialRestaurantTables"];
-            return initialRestaurantTablesFile;
-        }
-
-        public static string GetInitialProductsFromConfig()
-        {
-            var initialProductsFile = configuration["InitialData:InitialProducts"];
-            return initialProductsFile;
-        }
-
-        public static string GetInitialPersonRolesFromConfig()
-        {
-            var initialPersonRolesFile = configuration["InitialData:InitialPersonRoles"];
-            return initialPersonRolesFile;
-        }
-
-        public static string GetInitialDishesFromConfig()
-        {
-            var initialDishesFile = configuration["InitialData:InitialDishes"];
-            return initialDishesFile;
-        }
-
-        public static string GetInitialDishProductsFromConfig()
-        {
-            var initialDishProductsFile = configuration["InitialData:InitialDishProducts"];
-            return initialDishProductsFile;
         }
     }
 }

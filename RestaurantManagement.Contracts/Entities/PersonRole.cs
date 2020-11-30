@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace RestaurantManagement.Contracts.Entities
 {
-    public partial class PersonRole
+    public class PersonRole
     {
         public PersonRole()
         {

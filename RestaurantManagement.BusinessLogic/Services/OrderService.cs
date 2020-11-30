@@ -105,7 +105,8 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         private bool OrderHasSomeItemsWithZeroStock(List<Dish> orderedDishList)
         {
-            return orderedDishList.Any(x => x.QuantityInStock == 0) && !orderedDishList.All(x => x.QuantityInStock == 0);
+            return orderedDishList.Any(x => x.QuantityInStock == 0) 
+                && orderedDishList.Any(x => x.QuantityInStock != 0);
         }
 
         private bool OrderHasAllItemsWithZeroStock(List<Dish> orderedDishList)
@@ -149,7 +150,7 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         private async Task Update(OrderUpdateModel orderUpdateEntity, int id)
         {
-            if (await AllModelFlagsAreFalse(orderUpdateEntity))
+            if (AllModelFlagsAreFalse(orderUpdateEntity))
             {
                 await AllowPartialUpdate(orderUpdateEntity, id);
             }
@@ -200,9 +201,10 @@ namespace RestaurantManagement.BusinessLogic.Services
             return order.IsPreparing == false && order.IsReady == false;
         }
 
-        private async Task<bool> AllModelFlagsAreFalse(OrderUpdateModel orderUpdateEntity)
+        private bool AllModelFlagsAreFalse(OrderUpdateModel orderUpdateEntity)
         {
-            return orderUpdateEntity.IsPreparing == false && orderUpdateEntity.IsReady == false;
+            return orderUpdateEntity.IsPreparing == false 
+                && orderUpdateEntity.IsReady == false;
         }
 
         private async Task AllowReadyToServe(OrderUpdateModel orderUpdateEntity, int orderId)
