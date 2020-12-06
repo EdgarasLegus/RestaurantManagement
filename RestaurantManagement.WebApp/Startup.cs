@@ -79,6 +79,7 @@ namespace RestaurantManagement.WebApp
                 .AddScoped<IOrderItemRepo, OrderItemRepository>()
                 .AddHttpContextAccessor();
 
+            // Configuration.GetConnectionString("yourconnection sttring"); this way is more clean
             services.AddDbContext<RestaurantManagementCodeFirstContext>(options => options.UseSqlServer(Contracts.Settings.ConfigurationSettings.GetConnectionStringCodeFirst()));
         }
 

@@ -10,7 +10,6 @@ namespace RestaurantManagement.Interfaces.Repositories
     {
         Task CreateOrderItem(OrderItem orderItemEntity);
         Task<List<int>> GetDishesIdsByOrderId(int id);
-        Task UpdateCreatedOrderItemStatus(int orderId, int dishId, int status);
         Task AddOrderItem(OrderItem orderItemEntity);
         Task<OrderItem> GetOrderItemById(int id);
         Task<List<int>> GetOrderItemIdsByOrderId(int id);
@@ -18,5 +17,6 @@ namespace RestaurantManagement.Interfaces.Repositories
         Task DeleteOrderItem(OrderItem orderItemEntity);
         Task<List<OrderItem>> GetOrderItemsByOrderId(int id);
         Task UpdateOrderItemStatus(OrderItem orderItemEntity, int newStatus);
+        Task UpdateItemQtyAndFlag(int itemId, OrderItem orderItemEntity);
     }
 }

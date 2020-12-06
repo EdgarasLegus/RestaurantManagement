@@ -9,11 +9,12 @@ namespace RestaurantManagement.Interfaces.Services
 {
     public interface IOrderItemService
     {
-        Task UpdateCreatedOrderItemsStatuses(int id, List<Dish> dishList);
+        Task UpdateCreatedOrderItemsStatuses(int orderId);
         Task<OrderItemViewModel> CreateCustomerOrderItem(int orderId, OrderItemCreateModel orderItemCreateEntity);
         Task<OrderItem> GetSelectedOrderItem(int id);
         Task DeleteCustomerOrderItem(int itemId);
         Task PrepareOrderItems(int orderId);
         Task ReadyToServeOrderItems(int orderId);
+        Task UpdateCustomerOrderItem(int itemId, OrderItemUpdateModel orderItemUpdateEntity);
     }
 }

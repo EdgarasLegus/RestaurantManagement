@@ -88,6 +88,8 @@ namespace RestaurantManagement.BusinessLogic.Services
             }
         }
 
+
+        // Review
         private bool OrderIsJustUpdated(OrderUpdateModel orderUpdateEntity)
         {
             return orderUpdateEntity.IsPreparing == false && orderUpdateEntity.IsReady == false;
@@ -114,11 +116,11 @@ namespace RestaurantManagement.BusinessLogic.Services
             return orderedDishList.All(x => x.QuantityInStock == 0);
         }
 
-        private async Task ChangeCreatedOrderStatus(Order orderEntity, List<Dish> orderedDishList)
+        private async Task ChangeCreatedOrderStatus(Order orderEntity)
         {
             var createdOrder = await _orderRepo.GetOrderById(orderEntity.Id);
             await _orderRepo.UpdateOrder(createdOrder.Id, orderEntity);
-            await _orderItemService.UpdateCreatedOrderItemsStatuses(createdOrder.Id, orderedDishList);
+            await _orderItemService.UpdateCreatedOrderItemsStatuses(createdOrder.Id);
         }
 
         private async Task<Order> Create(OrderCreateModel orderCreateEntity)
@@ -133,7 +135,7 @@ namespace RestaurantManagement.BusinessLogic.Services
         private async Task<Order> PartiallyDecline(Order orderEntity, List<Dish> orderedDishList)
         {
             orderEntity.OrderStatus = (int)OrderStates.PartiallyDeclined;
-            await ChangeCreatedOrderStatus(orderEntity, orderedDishList);
+            await ChangeCreatedOrderStatus(orderEntity);
             _loggerManager.LogWarn($"CreateCustomerOrder(): Order '{orderEntity.OrderName}' was" +
                 $" partially declined! Status: 20");
             return orderEntity;
@@ -142,7 +144,7 @@ namespace RestaurantManagement.BusinessLogic.Services
         private async Task<Order> Decline(Order orderEntity, List<Dish> orderedDishList)
         {
             orderEntity.OrderStatus = (int)OrderStates.Declined;
-            await ChangeCreatedOrderStatus(orderEntity, orderedDishList);
+            await ChangeCreatedOrderStatus(orderEntity);
             _loggerManager.LogWarn($"CreateCustomerOrder(): Order '{orderEntity.OrderName}' was" +
                 $" declined! Status: 30");
             return orderEntity;

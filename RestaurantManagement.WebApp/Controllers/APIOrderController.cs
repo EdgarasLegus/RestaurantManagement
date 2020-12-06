@@ -224,6 +224,13 @@ namespace RestaurantManagement.WebApp.Controllers
         {
             try
             {
+                var existingOrder = await _orderService.GetExistingOrder(id);
+                if (existingOrder == null)
+                {
+                    _loggerManager.LogError($"UpdateOrder(): Put request is " +
+                        $"failed, order does not exist.");
+                    return BadRequest("Order does not exist");
+                }
 
                 if (!ModelState.IsValid)
                 {
@@ -231,6 +238,42 @@ namespace RestaurantManagement.WebApp.Controllers
                 }
 
                 await _orderService.UpdateCustomerOrder(orderUpdateEntity, id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _loggerManager.LogError($"UpdateOrderItem() method execution failed: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [HttpPut("{id}/items/{itemId}")]
+        public async Task<IActionResult> UpdateOrderItem(int id, int itemId, [FromBody] OrderItemUpdateModel orderItemUpdateEntity)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid order item update model object");
+                }
+
+                var existingOrder = await _orderService.GetExistingOrder(id);
+                if (existingOrder == null)
+                {
+                    _loggerManager.LogError($"UpdateOrderItem(): Put request is " +
+                        $"failed, order does not exist.");
+                    return BadRequest("Order does not exist");
+                }
+
+                var existingOrderItem = await _orderItemService.GetSelectedOrderItem(itemId);
+                if (existingOrderItem == null)
+                {
+                    _loggerManager.LogError($"UpdateOrderItem(): Put request is " +
+                        $"failed, order item does not exist.");
+                    return BadRequest("Order item does not exist");
+                }
+
+                await _orderItemService.UpdateCustomerOrderItem(itemId, orderItemUpdateEntity);
                 return NoContent();
             }
             catch (Exception ex)

@@ -29,16 +29,6 @@ namespace RestaurantManagement.Data.Repository
             return await _context.OrderItem.Where(x => x.OrderId == id).Select(x => x.DishId).ToListAsync();
         }
 
-        public async Task UpdateCreatedOrderItemStatus(int orderId, int dishId, int status)
-        {
-            var existingOrderItemsList = await _context.OrderItem.Where(x => x.OrderId == orderId).ToListAsync();
-            // BUG HERE - IF POST TWO DISH ID's, will update only the first
-            var existingOrderItem = existingOrderItemsList.FirstOrDefault(x => x.DishId == dishId);
-
-            existingOrderItem.OrderItemStatus = status;
-            await _context.SaveChangesAsync();
-        }
-
         public async Task AddOrderItem(OrderItem orderItemEntity)
         {
             await _context.OrderItem.AddAsync(orderItemEntity);
@@ -77,6 +67,14 @@ namespace RestaurantManagement.Data.Repository
         {
             var existingOrderItem = await _context.OrderItem.Where(x => x.Id == orderItemEntity.Id).FirstOrDefaultAsync();
             existingOrderItem.OrderItemStatus = newStatus;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateItemQtyAndFlag(int itemId, OrderItem orderItemEntity)
+        {
+            var existingOrderItem = await _context.OrderItem.Where(x => x.Id == itemId).FirstOrDefaultAsync();
+            existingOrderItem.Quantity = orderItemEntity.Quantity;
+            existingOrderItem.IsServed = orderItemEntity.IsServed;
             await _context.SaveChangesAsync();
         }
     }
