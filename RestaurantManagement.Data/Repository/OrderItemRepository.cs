@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace RestaurantManagement.Data.Repository
 {
-    public class OrderItemRepository : IOrderItemRepo
+    public class OrderItemRepository : Repository<OrderItem>, IOrderItemRepo
     {
         private readonly RestaurantManagementCodeFirstContext _context;
 
-        public OrderItemRepository(RestaurantManagementCodeFirstContext context)
+        public OrderItemRepository(RestaurantManagementCodeFirstContext context) : base(context)
         {
             _context = context;
         }

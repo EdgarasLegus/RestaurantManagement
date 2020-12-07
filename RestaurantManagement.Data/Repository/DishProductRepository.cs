@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestaurantManagement.Contracts.Entities;
+using RestaurantManagement.Interfaces;
 using RestaurantManagement.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace RestaurantManagement.Data.Repository
 {
-    public class DishProductRepository : IDishProductRepo
+    public class DishProductRepository : Repository<DishProduct>, IDishProductRepo 
     {
         private readonly RestaurantManagementCodeFirstContext _context;
 
-        public DishProductRepository(RestaurantManagementCodeFirstContext context)
+        public DishProductRepository(RestaurantManagementCodeFirstContext context) :base(context)
         {
             _context = context;
         }
@@ -35,5 +36,7 @@ namespace RestaurantManagement.Data.Repository
                 }
             }
         }
+
+
     }
 }

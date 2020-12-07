@@ -21,6 +21,7 @@ using RestaurantManagement.BusinessLogic.Services;
 using RestaurantManagement.WebApp.Extensions;
 using RestaurantManagement.Data.Repository;
 using RestaurantManagement.Contracts.Settings;
+using RestaurantManagement.Interfaces;
 
 namespace RestaurantManagement.WebApp
 {
@@ -67,7 +68,7 @@ namespace RestaurantManagement.WebApp
                 .AddScoped<IOrderService, OrderService>()
                 .AddScoped<IOrderItemService, OrderItemService>()
                 .AddScoped<IDishRepo, DishRepository>()
-                .AddScoped<IDishProductRepo, DishProductRepository>()
+                //.AddScoped<IDishProductRepo, DishProductRepository>()
                 .AddScoped<IProductRepo, ProductRepository>()
                 .AddScoped<IRestaurantTableRepo, RestaurantTableRepository>()
                 .AddScoped<IStaffRepo, StaffRepository>()
@@ -77,6 +78,7 @@ namespace RestaurantManagement.WebApp
                 .AddScoped<IPersonRoleRepo, PersonRoleRepository>()
                 .AddScoped<IOrderRepo, OrderRepository>()
                 .AddScoped<IOrderItemRepo, OrderItemRepository>()
+                .AddScoped<IUnitOfWork, UnitOfWork>()
                 .AddHttpContextAccessor();
 
             // Configuration.GetConnectionString("yourconnection sttring"); this way is more clean

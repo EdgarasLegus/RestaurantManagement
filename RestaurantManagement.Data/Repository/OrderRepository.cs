@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace RestaurantManagement.Data.Repository
 {
-    public class OrderRepository : IOrderRepo
+    public class OrderRepository : Repository<Order>, IOrderRepo
     {
         private readonly RestaurantManagementCodeFirstContext _context;
 
-        public OrderRepository(RestaurantManagementCodeFirstContext context)
+        public OrderRepository(RestaurantManagementCodeFirstContext context) : base(context)
         {
             _context = context;
         }

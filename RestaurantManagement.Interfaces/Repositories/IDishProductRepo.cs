@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantManagement.Interfaces.Repositories
 {
-    public interface IDishProductRepo
+    public interface IDishProductRepo : IRepository<DishProduct>
     {
         Task InsertInitialDishProducts(List<DishProduct> dishProductList);
     }

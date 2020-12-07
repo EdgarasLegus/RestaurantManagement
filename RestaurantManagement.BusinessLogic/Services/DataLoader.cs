@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using RestaurantManagement.Interfaces;
 
 namespace RestaurantManagement.BusinessLogic.Services
 {
@@ -22,11 +23,13 @@ namespace RestaurantManagement.BusinessLogic.Services
         private readonly IDishProductRepo _dishProductRepo;
         private readonly IPersonRoleService _personRoleService;
         private readonly IPersonRoleRepo _personRoleRepo;
+        private readonly IUnitOfWork _unitOfWork;
 
         public DataLoader(IStaffService staffService, IStaffRepo staffRepo, IRestaurantTablesService restaurantTablesService,
             IRestaurantTableRepo restaurantTableRepo, IProductService productService, IProductRepo productRepo, IDishService dishService, IDishRepo dishRepo,
-            IDishProductService dishProductService, IDishProductRepo dishProductRepo, IPersonRoleService personRoleService, IPersonRoleRepo personRoleRepo)
+            IDishProductService dishProductService, /*IDishProductRepo dishProductRepo,*/ IPersonRoleService personRoleService, IPersonRoleRepo personRoleRepo, IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
             _staffService = staffService;
             _staffRepo = staffRepo;
             _restaurantTableService = restaurantTablesService;
@@ -36,7 +39,7 @@ namespace RestaurantManagement.BusinessLogic.Services
             _dishService = dishService;
             _dishRepo = dishRepo;
             _dishProductService = dishProductService;
-            _dishProductRepo = dishProductRepo;
+            _dishProductRepo = unitOfWork.DishProductRepo;
             _personRoleService = personRoleService;
             _personRoleRepo = personRoleRepo;
         }

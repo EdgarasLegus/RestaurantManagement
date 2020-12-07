@@ -2,6 +2,7 @@
 using RestaurantManagement.Contracts.Entities;
 using RestaurantManagement.Contracts.Enums;
 using RestaurantManagement.Contracts.Models;
+using RestaurantManagement.Interfaces;
 using RestaurantManagement.Interfaces.Repositories;
 using RestaurantManagement.Interfaces.Services;
 using System;
@@ -20,9 +21,10 @@ namespace RestaurantManagement.BusinessLogic.Services
         private readonly IDishService _dishService;
         private readonly IOrderRepo _orderRepo;
 
-        public OrderItemService(IOrderItemRepo orderItemRepo, IMapper mapper, ILoggerManager loggerManager, IDishService dishService, IOrderRepo orderRepo)
+        public OrderItemService(/*IOrderItemRepo orderItemRepo,*/ IMapper mapper, ILoggerManager loggerManager, 
+            IDishService dishService, IOrderRepo orderRepo, IUnitOfWork unitOfWork)
         {
-            _orderItemRepo = orderItemRepo;
+            _orderItemRepo = unitOfWork.OrderItemRepo;
             _mapper = mapper;
             _loggerManager = loggerManager;
             _dishService = dishService;

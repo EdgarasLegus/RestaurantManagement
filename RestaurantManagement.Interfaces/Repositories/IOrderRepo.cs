@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantManagement.Interfaces.Repositories
 {
-    public interface IOrderRepo
+    public interface IOrderRepo : IRepository<Order>
     {
         Task<List<Order>> GetOrders();
         Task AddOrder(Order orderEntity);
