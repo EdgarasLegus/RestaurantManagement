@@ -21,22 +21,18 @@ namespace RestaurantManagement.Data.Repository
 
         public async Task InsertInitialDishProducts(List<DishProduct> dishProductList)
         {
-            using (var transaction = _context.Database.BeginTransaction())
+            await using var transaction = await _context.Database.BeginTransactionAsync();
+            if (!_context.DishProduct.Any())
             {
-                if (!_context.DishProduct.Any())
+                foreach (var dishProduct in dishProductList)
                 {
-                    foreach (var dishProduct in dishProductList)
-                    {
-                        await _context.DishProduct.AddAsync(dishProduct);
-                    }
-                    await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT RestaurantManagementData.dbo.DishProduct ON;");
-                    await _context.SaveChangesAsync();
-                    await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT RestaurantManagementData.dbo.DishProduct OFF");
-                    transaction.Commit();
+                    await _context.DishProduct.AddAsync(dishProduct);
                 }
+                await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT RestaurantManagementData.dbo.DishProduct ON;");
+                await _context.SaveChangesAsync();
+                await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT RestaurantManagementData.dbo.DishProduct OFF");
+                await transaction.CommitAsync();
             }
         }
-
-
     }
 }

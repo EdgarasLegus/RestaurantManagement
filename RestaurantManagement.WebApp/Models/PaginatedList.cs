@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace RestaurantManagement.WebApp.Models
 {
     public class PaginatedList<T> : List<T>
     {
-        public int PageIndex { get; private set; }
-        public int TotalPages { get; private set; }
+        public int PageIndex { get; }
+        public int TotalPages { get; }
 
-        private PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
+        private PaginatedList(IEnumerable<T> items, int count, int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
@@ -18,21 +17,9 @@ namespace RestaurantManagement.WebApp.Models
             this.AddRange(items);
         }
 
-        public bool HasPreviousPage
-        {
-            get
-            {
-                return (PageIndex > 1);
-            }
-        }
+        public bool HasPreviousPage => (PageIndex > 1);
 
-        public bool HasNextPage
-        {
-            get
-            {
-                return (PageIndex < TotalPages);
-            }
-        }
+        public bool HasNextPage => (PageIndex < TotalPages);
 
         public static PaginatedList<T> Create(List<T> source, int pageIndex, int pageSize)
         {

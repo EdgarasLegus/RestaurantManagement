@@ -7,7 +7,8 @@ using System.Text;
 
 namespace RestaurantManagement.Data
 {
-    public partial class RestaurantManagementCodeFirstContext : DbContext
+    // todo rename RestaurantManagmentContext
+    public class RestaurantManagementCodeFirstContext : DbContext
     {
         public RestaurantManagementCodeFirstContext()
         {
