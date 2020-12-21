@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RestaurantManagement.Interfaces.Repositories
+namespace RestaurantManagement.Interfaces.Services
 {
-    public interface IUserLogRepo
+    public interface IUserLogService
     {
         void InsertUserLog(UserAction userAction, int staffId);
     }

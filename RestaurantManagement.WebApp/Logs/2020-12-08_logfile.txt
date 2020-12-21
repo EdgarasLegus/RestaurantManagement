@@ -1,0 +1,4 @@
+2020-12-08 17:07:35.1605 INFO UpdateItem(): Item '1113' was updated. Quantity remaining the same, as it cannot be changed in prepared item.
+2020-12-08 17:07:36.7561 INFO ChangeOrderItemStatusToServed(): Order item 1113 is served!
+2020-12-08 17:07:36.7701 INFO UpdateItem(): Item '1113' status was updated. Status: 75.
+2020-12-08 17:07:37.6452 INFO UpdateParentOrderStatusAndDate(): Order '1029' status was updated! Status: 70

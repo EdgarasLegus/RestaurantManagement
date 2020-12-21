@@ -17,15 +17,16 @@ namespace RestaurantManagement.WebApp.Controllers
     [ApiController]
     public class APIStaffController : ControllerBase
     {
-        private readonly IStaffRepo _staffRepo;
         private readonly IMapper _mapper;
         private readonly ILoggerManager _loggerManager;
+        private readonly IStaffService _staffService;
 
-        public APIStaffController(IStaffRepo staffRepo, IMapper mapper, ILoggerManager loggerManager)
+        public APIStaffController(IMapper mapper, ILoggerManager loggerManager,
+            IStaffService staffService)
         {
-            _staffRepo = staffRepo;
             _mapper = mapper;
             _loggerManager = loggerManager;
+            _staffService = staffService;
         }
 
         [HttpGet]
@@ -36,7 +37,7 @@ namespace RestaurantManagement.WebApp.Controllers
             // Id , externalID
             try
             {
-                var staff = await _staffRepo.GetStaff();
+                var staff = await _staffService.GetStaff();
                 _loggerManager.LogInfo($"GetStaff() method returned Staff list.");
                 var staffResult = _mapper.Map<IEnumerable<StaffViewModel>>(staff);
                 return Ok(staffResult);
@@ -53,7 +54,7 @@ namespace RestaurantManagement.WebApp.Controllers
         {
             try
             {
-                var staffMember = await _staffRepo.GetStaffMemberById(id);
+                var staffMember = await _staffService.GetStaffMemberById(id);
 
                 if(staffMember == null)
                 {
@@ -89,16 +90,12 @@ namespace RestaurantManagement.WebApp.Controllers
                 {
                     return BadRequest("Invalid staff member model object");
                 }
-
-                var staffMemberEntity = _mapper.Map<Staff>(staffMember);
-                await _staffRepo.CreateStaffMember(staffMemberEntity);
-
-                var createdMember = _mapper.Map<StaffViewModel>(staffMemberEntity);
-
+                var createdMember = await _staffService.CreateStaffMember(staffMember);
                 return CreatedAtRoute("StaffMemberById", new { id = createdMember.Id }, createdMember);
             }
             catch (Exception ex)
             {
+                _loggerManager.LogError($"CreateStaffMember() method execution failed: {ex.Message}");
                 return StatusCode(500, "Internal Server Error");
             }
         }
@@ -118,12 +115,13 @@ namespace RestaurantManagement.WebApp.Controllers
                     return BadRequest("Invalid staff member model object");
                 }
 
-                await _staffRepo.UpdateStaffMemberInfo(id, staffMember);
+                await _staffService.UpdateStaffMember(id, staffMember);
 
                 return NoContent();
             }
             catch (Exception ex)
             {
+                _loggerManager.LogError($"UpdateStaffMember() method execution failed: {ex.Message}");
                 return StatusCode(500, "Internal Server Error");
             }
         }
@@ -133,20 +131,12 @@ namespace RestaurantManagement.WebApp.Controllers
         {
             try
             {
-                var staffMember = await _staffRepo.GetStaffMemberById(id);
-
-                if (staffMember == null)
-                {
-                    return NotFound();
-                }
-
-                await _staffRepo.DeleteStaffMember(staffMember);
-
+                await _staffService.DeleteStaffMember(id);
                 return NoContent();
-
             }
             catch (Exception ex)
             {
+                _loggerManager.LogError($"DeleteStaffMember() method execution failed: {ex.Message}");
                 return StatusCode(500, "Internal Server Error");
             }
         }

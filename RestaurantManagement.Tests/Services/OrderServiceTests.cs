@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using RestaurantManagement.BusinessLogic.Services;
 using RestaurantManagement.Contracts.Models;
+using RestaurantManagement.Interfaces;
 using RestaurantManagement.Interfaces.Repositories;
 using RestaurantManagement.Interfaces.Services;
 using System;
@@ -16,16 +17,15 @@ namespace RestaurantManagement.Tests.Services
         private IOrderService _orderService;
         private IDishService _dishServiceMock;
         private IOrderItemService _orderItemServiceMock;
-        private IOrderRepo _orderRepoMock;
-        private IOrderItemRepo _orderItemRepoMock;
         private IMapper _mapper;
         private ILoggerManager _loggerManager;
+        private IUnitOfWork _unitOfWorkMock;
 
         [SetUp]
         public void Setup()
         {
             _orderService = new OrderService(_dishServiceMock, _orderItemServiceMock,
-                _orderRepoMock, _orderItemRepoMock, _mapper, _loggerManager);
+                _mapper, _loggerManager, _unitOfWorkMock);
 
         }
 

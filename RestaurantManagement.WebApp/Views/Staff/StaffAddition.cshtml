@@ -1,10 +1,16 @@
 ﻿@model RestaurantManagement.Contracts.Entities.Staff
 @{ ViewData["Title"] = "Add Staff member"; }
 @{ 
-
     var context = new RestaurantManagement.Data.RestaurantManagementCodeFirstContext();
-    var personRoleRepo = new RestaurantManagement.Data.Repository.PersonRoleRepository(context);
-    var roleList = personRoleRepo.GetRoles().AsEnumerable();
+    var unitOfWork = new RestaurantManagement.Data.UnitOfWork(context);
+
+    var logicHandler = new RestaurantManagement.BusinessLogic.Services.LogicHandler();
+
+    var configurationSettings = new RestaurantManagement.Contracts.Settings.ConfigurationSettings();
+    Microsoft.Extensions.Options.IOptions<RestaurantManagement.Contracts.Settings.ConfigurationSettings> options = Microsoft.Extensions.Options.Options.Create(configurationSettings);
+
+    var personRoleService = new RestaurantManagement.BusinessLogic.Services.PersonRoleService(logicHandler, options, unitOfWork);
+    var roleList = await personRoleService.GetRoles();
 }
 <h2>Fill form to add new member to staff</h2>
 <div class="row">

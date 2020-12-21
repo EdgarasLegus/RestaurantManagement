@@ -1,0 +1,10 @@
+2020-12-21 01:20:00.9191 WARN UpdateStaffMember(): Staff member 1009 was not updated! Same name already exists!
+2020-12-21 01:21:41.3210 WARN UpdateStaffMember(): Staff member 1009 was not updated! Same name already exists!
+2020-12-21 01:40:05.8491 INFO GetOrders() method returned all orders list.
+2020-12-21 01:48:44.5701 INFO CreateCustomerOrder(): New order 'AddTest' is successfully created! Status: 10
+2020-12-21 01:55:33.7214 INFO CreateCustomerOrder(): New order 'AddTest' is successfully created! Status: 10
+2020-12-21 01:57:51.6028 INFO CreateCustomerOrder(): New order 'QTYTest' is successfully created! Status: 10
+2020-12-21 01:58:27.9821 INFO CreateCustomerOrder(): New order 'QTY1Test' is successfully created! Status: 10
+2020-12-21 01:58:28.0583 WARN CheckCreatedOrderItem(): Item '1125' will have status declined! This item currently has 0 stock. Status: '30'
+2020-12-21 01:58:28.0741 WARN CreateCustomerOrder(): Order 'QTY1Test' was partially declined! Status: 20
+2020-12-21 01:58:56.9497 INFO CreateCustomerOrder(): New order 'AmountTest' is successfully created! Status: 10

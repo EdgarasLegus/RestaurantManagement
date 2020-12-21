@@ -3,6 +3,7 @@ using NSubstitute;
 using NUnit.Framework;
 using RestaurantManagement.Contracts.Entities;
 using RestaurantManagement.Interfaces.Repositories;
+using RestaurantManagement.Interfaces.Services;
 using RestaurantManagement.WebApp.Controllers;
 using RestaurantManagement.WebApp.Models;
 using System;
@@ -13,18 +14,16 @@ namespace RestaurantManagement.Tests
 {
     public class StaffControllerTests
     {
-        IStaffRepo _staffRepoMock;
-        IUserLogRepo _userLogRepoMock;
-
+        IUserLogService _userLogServiceMock;
+        IStaffService _staffServiceMock;
         StaffController _staffController;
 
         [SetUp]
         public void Setup()
         {
-            _staffRepoMock = Substitute.For<IStaffRepo>();
-            _userLogRepoMock = Substitute.For<IUserLogRepo>();
-
-            _staffController = new StaffController(_staffRepoMock, _userLogRepoMock);
+            _staffServiceMock = Substitute.For<IStaffService>();
+            _userLogServiceMock = Substitute.For<IUserLogService>();
+            _staffController = new StaffController(_userLogServiceMock, _staffServiceMock);
         }
 
         [Test]
@@ -41,12 +40,12 @@ namespace RestaurantManagement.Tests
 
             var testStaffList = new List<Staff>() { testStaffEntity };
 
-            _staffRepoMock.SearchStaff(Arg.Any<string>()).Returns(testStaffList);
+            _staffServiceMock.SearchStaff(Arg.Any<string>()).Returns(testStaffList);
 
             var result = await _staffController.Index(1, testStaffEntity.UserName) as ViewResult;
             var model = result.ViewData.Model as PaginatedList<Staff>;
 
-            await _staffRepoMock.Received().SearchStaff(Arg.Any<string>());
+            await _staffServiceMock.Received().SearchStaff(Arg.Any<string>());
 
             Assert.AreEqual(testStaffList, model);
         }
@@ -65,12 +64,12 @@ namespace RestaurantManagement.Tests
             };
             var testStaffList = new List<Staff>() { testStaffEntity };
 
-            _staffRepoMock.GetStaff().Returns(testStaffList);
+            _staffServiceMock.GetStaff().Returns(testStaffList);
 
             var result = await _staffController.Index(1, searchMember) as ViewResult;
             var model = result.ViewData.Model as PaginatedList<Staff>;
 
-            await _staffRepoMock.Received().GetStaff();
+            await _staffServiceMock.Received().GetStaff();
 
             Assert.AreEqual(testStaffList, model);
 
@@ -90,12 +89,12 @@ namespace RestaurantManagement.Tests
 
             var testStaffList = new List<Staff>() { testStaffEntity };
 
-            _staffRepoMock.GetStaffMember(testStaffEntity.UserName).Returns(testStaffList);
+            _staffServiceMock.GetStaffMember(testStaffEntity.UserName).Returns(testStaffList);
 
             var result = await _staffController.StaffMemberDetails(testStaffEntity.UserName) as ViewResult;
             var model = result.ViewData.Model as Staff;
 
-            await _staffRepoMock.Received().GetStaffMember(testStaffEntity.UserName);
+            await _staffServiceMock.Received().GetStaffMember(testStaffEntity.UserName);
 
             Assert.AreEqual(testStaffList, model);
         }
@@ -145,7 +144,7 @@ namespace RestaurantManagement.Tests
 
             var alertMessage = "User with same name already exists!";
 
-            _staffRepoMock.CheckIfStaffMemberExists(testStaffEntity.UserName).Returns(true);
+            _staffServiceMock.CheckIfStaffMemberExists(testStaffEntity.UserName).Returns(true);
 
             var viewResult = await _staffController.StaffAddition(testStaffEntity) as ViewResult;
 
@@ -159,7 +158,7 @@ namespace RestaurantManagement.Tests
             }
             var actualMessage = string.Join(",", errorList.ToArray());
 
-            _staffRepoMock.Received().CheckIfStaffMemberExists(testStaffEntity.UserName);
+            await _staffServiceMock.Received().CheckIfStaffMemberExists(testStaffEntity.UserName);
 
             Assert.AreEqual(alertMessage, actualMessage);
         }
@@ -176,12 +175,12 @@ namespace RestaurantManagement.Tests
                 EndDayOfEmployment = new DateTime(2025, 10, 26)
             };
 
-            _staffRepoMock.CheckIfStaffMemberExists(testStaffEntity.UserName).Returns(false);
+            _staffServiceMock.CheckIfStaffMemberExists(testStaffEntity.UserName).Returns(false);
 
             var viewResult = await _staffController.StaffAddition(testStaffEntity) as ViewResult;
             var message = "New word added successfully!";
 
-            _staffRepoMock.Received().CheckIfStaffMemberExists(testStaffEntity.UserName);
+            await _staffServiceMock.Received().CheckIfStaffMemberExists(testStaffEntity.UserName);
             Assert.AreEqual(message, _staffController.ViewBag.Message);
 
         }

@@ -12,30 +12,23 @@ namespace RestaurantManagement.Data
     {
         
         private readonly RestaurantManagementCodeFirstContext _context;
+        private readonly Dictionary<Type, object> _repositories;
 
         public UnitOfWork(RestaurantManagementCodeFirstContext context)
         {
             _context = context;
+            _repositories = new Dictionary<Type, object>();
+
             DishProductRepo = new DishProductRepository(_context);
             DishRepo = new DishRepository(_context);
             OrderItemRepo = new OrderItemRepository(_context);
             OrderRepo = new OrderRepository(_context);
-            PersonRoleRepo = new PersonRoleRepository(_context);
-            ProductRepo = new ProductRepository(_context);
-            RestaurantTableRepo = new RestaurantTableRepository(_context);
-            StaffRepo = new StaffRepository(_context);
-            UserLogRepo = new UserLogRepository(_context);
         }
 
         public IDishProductRepo DishProductRepo { get; }
         public IDishRepo DishRepo { get; }
         public IOrderItemRepo OrderItemRepo { get; }
         public IOrderRepo OrderRepo { get; }
-        public IPersonRoleRepo PersonRoleRepo { get; }
-        public IProductRepo ProductRepo { get; }
-        public IRestaurantTableRepo RestaurantTableRepo { get; }
-        public IStaffRepo StaffRepo { get; }
-        public IUserLogRepo UserLogRepo { get; }
 
         public Task<int> Commit()
         {
@@ -45,6 +38,16 @@ namespace RestaurantManagement.Data
         public void Dispose()
         {
             _context.Dispose();
+        }
+
+        public IRepository<T> GetRepository<T>() where T: class
+        {
+            var targetType = typeof(T);
+            if (!_repositories.ContainsKey(targetType))
+            {
+                _repositories[targetType] = new Repository<T>(this._context);
+            }
+            return (IRepository<T>)this._repositories[targetType];
         }
 
     }

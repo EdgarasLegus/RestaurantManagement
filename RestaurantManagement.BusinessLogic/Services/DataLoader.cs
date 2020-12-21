@@ -6,49 +6,43 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using RestaurantManagement.Interfaces;
+using RestaurantManagement.Contracts.Entities;
 
 namespace RestaurantManagement.BusinessLogic.Services
 {
     public class DataLoader : IDataLoader
     {
         private readonly IStaffService _staffService;
-        private readonly IStaffRepo _staffRepo;
         private readonly IRestaurantTablesService _restaurantTableService;
-        private readonly IRestaurantTableRepo _restaurantTableRepo;
         private readonly IProductService _productService;
-        private readonly IProductRepo _productRepo;
         private readonly IDishService _dishService;
         private readonly IDishRepo _dishRepo;
         private readonly IDishProductService _dishProductService;
         private readonly IDishProductRepo _dishProductRepo;
         private readonly IPersonRoleService _personRoleService;
-        private readonly IPersonRoleRepo _personRoleRepo;
         private readonly IUnitOfWork _unitOfWork;
 
-        public DataLoader(IStaffService staffService, IStaffRepo staffRepo, IRestaurantTablesService restaurantTablesService,
-            IRestaurantTableRepo restaurantTableRepo, IProductService productService, IProductRepo productRepo, IDishService dishService, IDishRepo dishRepo,
-            IDishProductService dishProductService, /*IDishProductRepo dishProductRepo,*/ IPersonRoleService personRoleService, IPersonRoleRepo personRoleRepo, IUnitOfWork unitOfWork)
+
+
+        public DataLoader(IStaffService staffService, IRestaurantTablesService restaurantTablesService, 
+            IProductService productService, IDishService dishService, IDishRepo dishRepo,
+            IDishProductService dishProductService,
+            /*IDishProductRepo dishProductRepo,*/ IPersonRoleService personRoleService,
+            IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             _staffService = staffService;
-            _staffRepo = staffRepo;
             _restaurantTableService = restaurantTablesService;
-            _restaurantTableRepo = restaurantTableRepo;
             _productService = productService;
-            _productRepo = productRepo;
             _dishService = dishService;
             _dishRepo = dishRepo;
             _dishProductService = dishProductService;
             _dishProductRepo = unitOfWork.DishProductRepo;
             _personRoleService = personRoleService;
-            _personRoleRepo = personRoleRepo;
         }
 
         public async Task LoadInitialData()
         {
-            //await _staffRepo.InsertInitialStaff(_staffService.GetInitialStaff());
-            //await _restaurantTableRepo.InsertInitialRestaurantTables(_restaurantTableService.GetInitialRestaurantTables());
-            //await _productRepo.InsertInitialProducts(_productService.GetInitialProducts());
             //await _dishRepo.InsertInitialDishes(_dishService.GetInitialDishes());
             //await _dishProductRepo.InsertInitialDishProducts(_dishProductService.GetInitialDishProducts());
             await LoadRoles();
@@ -63,24 +57,24 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         private async Task LoadRoles()
         {
-            await _personRoleRepo.InsertInitialPersonRoles(_personRoleService.GetInitialPersonRoles());
+            await _unitOfWork.GetRepository<PersonRole>().InsertInitialEntity(_personRoleService.GetInitialPersonRoles());
         }
 
         private async Task LoadStaff()
         {
-            await _staffRepo.InsertInitialStaff(_staffService.GetInitialStaff());
+            await _unitOfWork.GetRepository<Staff>().InsertInitialEntity(_staffService.GetInitialStaff());
             //await _context.SaveChangesAsync();
         }
 
         private async Task LoadTables()
         {
-            await _restaurantTableRepo.InsertInitialRestaurantTables(_restaurantTableService.GetInitialRestaurantTables());
+            await _unitOfWork.GetRepository<RestaurantTable>().InsertInitialEntity(_restaurantTableService.GetInitialRestaurantTables());
             //await _context.SaveChangesAsync();
         }
 
         private async Task LoadProducts()
         {
-            await _productRepo.InsertInitialProducts(_productService.GetInitialProducts());
+            await _unitOfWork.GetRepository<Product>().InsertInitialEntity(_productService.GetInitialProducts());
             //await _context.SaveChangesAsync();
         }
 

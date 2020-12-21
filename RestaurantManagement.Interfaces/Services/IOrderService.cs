@@ -9,6 +9,7 @@ namespace RestaurantManagement.Interfaces.Services
 {
     public interface IOrderService
     {
+        Task<List<Order>> GetOrders();
         Task<OrderViewModel> CreateCustomerOrder(OrderCreateModel orderCreateEntity);
         Task DeleteCustomerOrder(int id);
         Task<Order> GetExistingOrder(int id);

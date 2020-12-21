@@ -51,5 +51,5 @@
 @foreach (var item in Model)
 {
 <ul>
-    <a asp-action="StaffMemberDetails" asp-route-id="@item.UserName">@item.UserName</a>
+    <a asp-action="StaffMemberDetails" asp-route-member="@item.UserName">@item.UserName</a>
 </ul>}

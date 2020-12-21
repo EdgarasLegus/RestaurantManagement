@@ -12,11 +12,7 @@ namespace RestaurantManagement.Interfaces
         IDishRepo DishRepo { get; }
         IOrderItemRepo OrderItemRepo { get; }
         IOrderRepo OrderRepo { get; }
-        IPersonRoleRepo PersonRoleRepo { get; }
-        IProductRepo ProductRepo { get; }
-        IRestaurantTableRepo RestaurantTableRepo { get; }
-        IStaffRepo StaffRepo { get; }
-        IUserLogRepo UserLogRepo { get; }
         Task<int> Commit();
+        IRepository<T> GetRepository<T>() where T : class;
     }
 }

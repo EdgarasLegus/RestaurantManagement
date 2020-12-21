@@ -1,4 +1,4 @@
-﻿@model IEnumerable<string>
+﻿@model int
 @{ ViewData["Title"] = "Remove member from staff"; }
 <h2>Fill form to remove member from staff</h2>
 <div class="row">
@@ -7,8 +7,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label class="control-label">User name*</label>
-                <input name="staffMemberName" class="form-control" />
+                <label class="control-label">User ID*</label>
+                <input name="id" class="form-control" />
             </div>
 
             <div class="form-group">

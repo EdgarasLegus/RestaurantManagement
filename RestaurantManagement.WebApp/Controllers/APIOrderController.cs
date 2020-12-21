@@ -38,7 +38,7 @@ namespace RestaurantManagement.WebApp.Controllers
         {
             try
             {
-                var orders = await _orderRepo.GetOrders();
+                var orders = await _orderService.GetOrders();
                 _loggerManager.LogInfo($"GetOrders() method returned all orders list.");
                 var orderResult = _mapper.Map<IEnumerable<OrderViewModel>>(orders);
                 return Ok(orderResult);
@@ -122,10 +122,8 @@ namespace RestaurantManagement.WebApp.Controllers
                 {
                     return BadRequest("Invalid order model object");
                 }
-
                 var createdOrder = await _orderService.CreateCustomerOrder(order);
                 return CreatedAtRoute("OrderById", new { id = createdOrder.Id }, createdOrder);
-                
             }
             catch (Exception ex)
             {

@@ -1,0 +1,18 @@
+2020-12-20 14:32:20.2117 INFO GetStaff() method returned Staff list.
+2020-12-20 15:49:45.4222 INFO GetStaffMemberById() returned staff member with id: 2
+2020-12-20 18:15:28.3241 INFO DeleteStaffMember(): Staff member 'Benas Suokas' was deleted!
+2020-12-20 18:17:05.8147 ERROR DeleteStaffMember(): Staff member 1111 was not found!
+2020-12-20 18:17:05.9493 ERROR DeleteStaffMember() method execution failed: Value cannot be null. (Parameter 'entity')
+2020-12-20 18:19:15.1054 INFO CreateStaffMember(): New staff member 'Benas Suokas' is successfully created!
+2020-12-20 19:03:02.0840 INFO DeleteStaffMember(): Staff member 'Benas Suokas' was deleted!
+2020-12-20 19:29:31.8560 ERROR UpdateStaffMember(): Staff member 1009 was not found!
+2020-12-20 19:30:45.3094 ERROR UpdateStaffMember(): Staff member 1009 was not found!
+2020-12-20 19:32:25.3845 ERROR UpdateStaffMember(): Staff member 1009 was not found!
+2020-12-20 19:59:55.7271 INFO UpdateStaffMember.Update(): Staff member '1005' was updated!
+2020-12-20 20:13:28.0275 WARN UpdateStaffMember(): Staff member 1005 was not updated! Same name already exists!
+2020-12-20 20:14:37.5229 WARN UpdateStaffMember(): Staff member 1005 was not updated! Same name already exists!
+2020-12-20 20:18:37.4209 WARN UpdateStaffMember(): Staff member 1005 was not updated! Same name already exists!
+2020-12-20 20:19:19.5591 INFO UpdateStaffMember.Update(): Staff member '1005' was updated!
+2020-12-20 21:08:24.4435 INFO GetStaff() method returned Staff list.
+2020-12-20 21:24:38.5092 INFO DeleteStaffMember(): Staff member 'Kristijonas Jarasius' was deleted!
+2020-12-20 21:36:27.2836 INFO DeleteStaffMember(): Staff member 'Edgaras Jonusaitis' was deleted!

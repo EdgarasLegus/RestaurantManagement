@@ -22,16 +22,31 @@ namespace RestaurantManagement.BusinessLogic.Services
         private readonly IMapper _mapper;
         private readonly ILoggerManager _loggerManager;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IRepository<Order> _orderTempRepo;
 
-        public OrderService(IDishService dishService, IOrderItemService orderItemService, /*IOrderRepo orderRepo,*/
-            IOrderItemRepo orderItemRepo, IMapper mapper, ILoggerManager loggerManager, IUnitOfWork unitOfWork)
+        public OrderService(IDishService dishService, IOrderItemService orderItemService, IOrderRepo orderRepo,
+            /*IOrderItemRepo orderItemRepo,*/ IMapper mapper, ILoggerManager loggerManager, IUnitOfWork unitOfWork)
         {
             _dishService = dishService;
             _orderItemService = orderItemService;
-            _orderRepo = unitOfWork.OrderRepo;
-            _orderItemRepo = orderItemRepo;
+            _orderRepo = orderRepo;
+            _unitOfWork = unitOfWork;
+            _orderItemRepo = unitOfWork.OrderItemRepo;
             _mapper = mapper;
             _loggerManager = loggerManager;
+
+            _orderTempRepo = _unitOfWork.GetRepository<Order>();
+        }
+
+        public async Task<List<Order>> GetOrders()
+        {
+            return await _orderTempRepo.Get();
+        }
+
+        public async Task AddOrder(Order orderEntity)
+        {
+            await _orderTempRepo.Add(orderEntity);
+            await _unitOfWork.Commit();
         }
 
         public async Task<OrderViewModel> CreateCustomerOrder(OrderCreateModel orderCreateEntity)
