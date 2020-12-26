@@ -10,8 +10,8 @@ namespace RestaurantManagement.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        Task<T> GetById(int id);
+        //IEnumerable<T> GetAll();
+        //Task<T> GetById(int id);
         Task<List<T>> Get(Expression<Func<T, bool>> expression = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
         Task<T> GetFirstOrDefault(Expression<Func<T, bool>> expression = null,

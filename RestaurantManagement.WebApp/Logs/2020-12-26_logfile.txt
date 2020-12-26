@@ -1,0 +1,21 @@
+2020-12-26 15:19:01.1748 INFO DeleteCustomerOrder(): Order 'AmountTest' was deleted!
+2020-12-26 15:21:52.8971 INFO CreateCustomerOrder(): New order 'CrTest' is successfully created! Status: 10
+2020-12-26 15:22:54.3684 INFO CreateCustomerOrder(): New order 'PartTest' is successfully created! Status: 10
+2020-12-26 15:23:04.4904 WARN CheckCreatedOrderItem(): Item '1130' will have status declined! This item currently has 0 stock. Status: '30'
+2020-12-26 15:23:04.4904 WARN CreateCustomerOrder(): Order 'PartTest' was partially declined! Status: 20
+2020-12-26 15:23:22.5215 INFO CreateCustomerOrder(): New order 'DecTest' is successfully created! Status: 10
+2020-12-26 15:23:29.1169 WARN CheckCreatedOrderItem(): Item '1132' will have status declined! This item currently has 0 stock. Status: '30'
+2020-12-26 15:23:29.1169 WARN CheckCreatedOrderItem(): Item '1133' will have status declined! This item currently has 0 stock. Status: '30'
+2020-12-26 15:23:29.1286 WARN CreateCustomerOrder(): Order 'DecTest' was declined! Status: 30
+2020-12-26 15:24:02.1413 INFO Update(): Order '1036' was updated!
+2020-12-26 15:24:02.1849 WARN DeclineItemPreparation(): Dish '3' stock hasn't been adjusted. Order Item '1130' ordered dish '3' has 0 stock!Order Item won't be prepared.
+2020-12-26 15:24:02.1926 WARN DeclineItem(): Item '1130' for selected order was declined! Status: 30
+2020-12-26 15:24:02.2209 INFO PerformItemPreparation(): Dish (1) stock was adjusted.
+2020-12-26 15:24:02.2858 INFO ChangePreparingOrderItemStatus(): Order item 1131 is preparing!
+2020-12-26 15:24:02.3051 INFO ChangePreparingOrderStatus(): Order 1036 is in preparing status.
+2020-12-26 15:25:46.7162 INFO Update(): Order '1036' was updated!
+2020-12-26 15:25:46.7328 WARN ReadyToServerOrderItem(): Item '1130' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-12-26 15:25:46.7445 INFO ChangeReadyOrderItemStatus(): Order item 1131 is ready to serve!
+2020-12-26 15:25:46.7535 INFO ChangeReadyOrderStatus(): Order 1036 is in ready to serve status.
+2020-12-26 15:28:29.0493 INFO GetOrderById() returned order with id: 13
+2020-12-26 15:28:44.7805 INFO GetOrderItemById() returned order item with id: 1068

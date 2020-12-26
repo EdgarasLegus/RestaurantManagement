@@ -55,7 +55,7 @@ namespace RestaurantManagement.WebApp.Controllers
         {
             try
             {
-                var order = await _orderRepo.GetOrderById(id);
+                var order = await _orderService.GetOrderById(id);
 
                 if (order == null)
                 {
@@ -81,7 +81,7 @@ namespace RestaurantManagement.WebApp.Controllers
         {
             try
             {
-                var order = await _orderRepo.GetOrderById(id);
+                var order = await _orderService.GetOrderById(id);
                 var orderItem = await _orderItemService.GetSelectedOrderItem(itemId);
                 if (order == null)
                 {

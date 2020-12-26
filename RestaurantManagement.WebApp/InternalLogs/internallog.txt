@@ -31622,3 +31622,970 @@
 2020-12-21 01:58:28.0583 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-21_logfile.txt with allowFileSharedWriting=False
 2020-12-21 01:58:28.0741 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-21_logfile.txt with allowFileSharedWriting=False
 2020-12-21 01:58:56.9497 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-21_logfile.txt with allowFileSharedWriting=False
+2020-12-22 17:15:57.1899 Debug ScanAssembly('NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2020-12-22 17:15:57.5507 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c)
+2020-12-22 17:15:57.5507 Debug Search for auto loading files in location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-22 17:15:57.5507 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (RestaurantManagement.WebApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null)
+2020-12-22 17:15:57.5507 Debug Auto loading based on AppDomain-BaseDirectory found location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-22 17:15:57.5507 Debug Start auto loading, location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-22 17:15:57.5729 Trace Assembly 'Microsoft.Extensions.Logging, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-22 17:15:57.5729 Trace Assembly 'Microsoft.Extensions.Logging.Abstractions, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-22 17:15:57.5729 Debug Auto loading done
+2020-12-22 17:15:57.5729 Info Message Template Auto Format enabled
+2020-12-22 17:15:57.6032 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:15:57.6032 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-22 17:15:57.6131 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-22 17:15:57.6131 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-22 17:15:57.6131 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:15:57.6131 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:15:57.6131 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:15:57.6131 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-22 17:15:57.6131 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-22 17:15:57.6131 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:15:57.6131 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:15:57.6131 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:15:57.6131 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:15:57.6131 Trace Scanning LoggerNameLayoutRenderer 'Layout Renderer: ${logger}'
+2020-12-22 17:15:57.6131 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:15:57.6131 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-22 17:15:57.6349 Debug Setting 'NLog.Targets.FileTarget.name' to 'logfile'
+2020-12-22 17:15:57.6349 Debug Setting 'NLog.Targets.FileTarget.fileName' to 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-22 17:15:57.6349 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:15:57.6349 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-22 17:15:57.6349 Debug Setting 'NLog.Targets.FileTarget.layout' to '${longdate} ${level:uppercase=true} ${message}'
+2020-12-22 17:15:57.6349 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:15:57.6349 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-22 17:15:57.6349 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-22 17:15:57.6349 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-22 17:15:57.6349 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:15:57.6349 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:15:57.6349 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:15:57.6349 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-22 17:15:57.6349 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-22 17:15:57.6442 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:15:57.6442 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:15:57.6442 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:15:57.6442 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:15:57.6442 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-22 17:15:57.6442 Info Adding target FileTarget(Name=logfile)
+2020-12-22 17:15:57.6442 Debug Registered target logfile: NLog.Targets.FileTarget
+2020-12-22 17:15:57.6442 Trace ParseRulesElement
+2020-12-22 17:15:57.6717 Debug Watching path 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp' filter 'nlog.config' for changes.
+2020-12-22 17:15:57.6717 Debug --- NLog configuration dump ---
+2020-12-22 17:15:57.6717 Debug Targets:
+2020-12-22 17:15:57.6717 Debug File Target[logfile]
+2020-12-22 17:15:57.6717 Debug Rules:
+2020-12-22 17:15:57.6815 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]
+2020-12-22 17:15:57.6815 Debug --- End of NLog configuration dump ---
+2020-12-22 17:15:57.6815 Trace FindReachableObject<System.Object>:
+2020-12-22 17:15:57.6815 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]'
+2020-12-22 17:15:57.6815 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2020-12-22 17:15:57.6920 Trace  Scanning FileTarget 'File Target[logfile]'
+2020-12-22 17:15:57.6920 Trace   Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-22 17:15:57.6920 Trace   Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-22 17:15:57.6920 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:15:57.6920 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:15:57.6920 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-22 17:15:57.6920 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:15:57.6920 Trace   Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-22 17:15:57.6920 Trace   Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-22 17:15:57.6920 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:15:57.6920 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-22 17:15:57.6920 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:15:57.6920 Trace    Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-22 17:15:57.6920 Trace     Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-22 17:15:57.6920 Trace     Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:15:57.6920 Trace      Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:15:57.6920 Trace      Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:15:57.6920 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:15:57.6920 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-22 17:15:57.6920 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-22 17:15:57.6920 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2020-12-22 17:15:57.6920 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2020-12-22 17:15:57.6920 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp/nlog.config
+2020-12-22 17:15:57.6920 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2020-12-22 17:15:57.7106 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2020-12-22 17:15:57.7106 Trace Initializing Layout Renderer: ${message}
+2020-12-22 17:15:57.7106 Trace Initializing Layout Renderer: ${literal}
+2020-12-22 17:15:57.7106 Trace Initializing Layout Renderer: ${level}
+2020-12-22 17:15:57.7106 Trace Initializing SimpleLayout=Layout Renderer: ${level}
+2020-12-22 17:15:57.7106 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:15:57.7106 Trace Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:15:57.7106 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:15:57.7106 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:15:57.7287 Trace Initializing Layout Renderer: ${uppercase}
+2020-12-22 17:15:57.7287 Trace Initializing Layout Renderer: ${literal}
+2020-12-22 17:15:57.7287 Trace Initializing Layout Renderer: ${longdate}
+2020-12-22 17:15:57.7287 Trace Initializing '${longdate} ${level:uppercase=true} ${message}'
+2020-12-22 17:15:57.7287 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:15:57.7287 Trace Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-22 17:15:57.7287 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:15:57.7287 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-22 17:15:57.7287 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:15:57.7287 Trace  Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-22 17:15:57.7287 Trace   Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-22 17:15:57.7287 Trace   Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:15:57.7287 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:15:57.7287 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:15:57.7287 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:15:57.7287 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-22 17:15:57.7616 Trace Initializing Layout Renderer: ${literal}
+2020-12-22 17:15:57.7616 Trace Initializing Layout Renderer: ${shortdate}
+2020-12-22 17:15:57.7616 Trace Initializing Layout Renderer: ${literal}
+2020-12-22 17:15:57.7616 Trace Initializing 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-22 17:15:57.7616 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:15:57.7616 Trace Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-22 17:15:57.7616 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:15:57.7616 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:15:57.7616 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-22 17:15:57.7616 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:15:57.7616 Trace Initializing File Target[logfile]
+2020-12-22 17:15:57.7694 Trace FindReachableObject<NLog.Layouts.Layout>:
+2020-12-22 17:15:57.7694 Trace Scanning FileTarget 'File Target[logfile]'
+2020-12-22 17:15:57.7694 Trace  Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-22 17:15:57.7694 Trace  Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-22 17:15:57.7694 Trace  Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-22 17:15:57.7694 Trace  Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-22 17:15:57.7694 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-22 17:15:57.7694 Trace File Target[logfile] has 2 layouts
+2020-12-22 17:15:57.7694 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.RetryingMultiProcessFileAppender+Factory
+2020-12-22 17:16:40.6581 Debug Targets for RestaurantManagement.BusinessLogic.Services.LoggerManager by level:
+2020-12-22 17:16:40.6587 Debug Trace =>
+2020-12-22 17:16:40.6587 Debug Debug => logfile
+2020-12-22 17:16:40.6587 Debug Info => logfile
+2020-12-22 17:16:40.6587 Debug Warn => logfile
+2020-12-22 17:16:40.6587 Debug Error => logfile
+2020-12-22 17:16:40.6587 Debug Fatal => logfile
+2020-12-22 17:16:40.6954 Debug FileTarget(Name=logfile): Preparing for new file 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-22_logfile.txt'
+2020-12-22 17:16:40.7103 Debug Creating file appender: c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-22_logfile.txt
+2020-12-22 17:16:40.7103 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-22_logfile.txt with allowFileSharedWriting=False
+2020-12-22 17:19:31.4236 Debug ScanAssembly('NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2020-12-22 17:19:31.7384 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c)
+2020-12-22 17:19:31.7384 Debug Search for auto loading files in location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-22 17:19:31.7384 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (RestaurantManagement.WebApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null)
+2020-12-22 17:19:31.7384 Debug Auto loading based on AppDomain-BaseDirectory found location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-22 17:19:31.7525 Debug Start auto loading, location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-22 17:19:31.7525 Trace Assembly 'Microsoft.Extensions.Logging, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-22 17:19:31.7525 Trace Assembly 'Microsoft.Extensions.Logging.Abstractions, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-22 17:19:31.7525 Debug Auto loading done
+2020-12-22 17:19:31.7525 Info Message Template Auto Format enabled
+2020-12-22 17:19:31.7825 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:19:31.7855 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-22 17:19:31.7855 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-22 17:19:31.7855 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-22 17:19:31.7998 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:19:31.7998 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:19:31.7998 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:19:31.7998 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-22 17:19:31.7998 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-22 17:19:31.7998 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:19:31.7998 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:19:31.7998 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:19:31.7998 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:19:31.7998 Trace Scanning LoggerNameLayoutRenderer 'Layout Renderer: ${logger}'
+2020-12-22 17:19:31.7998 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:19:31.7998 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-22 17:19:31.8219 Debug Setting 'NLog.Targets.FileTarget.name' to 'logfile'
+2020-12-22 17:19:31.8219 Debug Setting 'NLog.Targets.FileTarget.fileName' to 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-22 17:19:31.8219 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:19:31.8219 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-22 17:19:31.8219 Debug Setting 'NLog.Targets.FileTarget.layout' to '${longdate} ${level:uppercase=true} ${message}'
+2020-12-22 17:19:31.8219 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:19:31.8219 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-22 17:19:31.8219 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-22 17:19:31.8219 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-22 17:19:31.8219 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:19:31.8219 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:19:31.8219 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:19:31.8219 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-22 17:19:31.8219 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-22 17:19:31.8219 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:19:31.8311 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:19:31.8311 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:19:31.8311 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:19:31.8311 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-22 17:19:31.8311 Info Adding target FileTarget(Name=logfile)
+2020-12-22 17:19:31.8311 Debug Registered target logfile: NLog.Targets.FileTarget
+2020-12-22 17:19:31.8311 Trace ParseRulesElement
+2020-12-22 17:19:31.8549 Debug Watching path 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp' filter 'nlog.config' for changes.
+2020-12-22 17:19:31.8549 Debug --- NLog configuration dump ---
+2020-12-22 17:19:31.8549 Debug Targets:
+2020-12-22 17:19:31.8549 Debug File Target[logfile]
+2020-12-22 17:19:31.8549 Debug Rules:
+2020-12-22 17:19:31.8549 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]
+2020-12-22 17:19:31.8621 Debug --- End of NLog configuration dump ---
+2020-12-22 17:19:31.8621 Trace FindReachableObject<System.Object>:
+2020-12-22 17:19:31.8621 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]'
+2020-12-22 17:19:31.8621 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2020-12-22 17:19:31.8621 Trace  Scanning FileTarget 'File Target[logfile]'
+2020-12-22 17:19:31.8621 Trace   Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-22 17:19:31.8621 Trace   Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-22 17:19:31.8621 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:19:31.8621 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:19:31.8621 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-22 17:19:31.8621 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:19:31.8621 Trace   Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-22 17:19:31.8621 Trace   Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-22 17:19:31.8621 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:19:31.8621 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-22 17:19:31.8621 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:19:31.8621 Trace    Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-22 17:19:31.8621 Trace     Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-22 17:19:31.8621 Trace     Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:19:31.8621 Trace      Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:19:31.8621 Trace      Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:19:31.8621 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:19:31.8621 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-22 17:19:31.8782 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-22 17:19:31.8782 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2020-12-22 17:19:31.8782 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2020-12-22 17:19:31.8782 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp/nlog.config
+2020-12-22 17:19:31.8782 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2020-12-22 17:19:31.9002 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2020-12-22 17:19:31.9002 Trace Initializing Layout Renderer: ${message}
+2020-12-22 17:19:31.9002 Trace Initializing Layout Renderer: ${literal}
+2020-12-22 17:19:31.9002 Trace Initializing Layout Renderer: ${level}
+2020-12-22 17:19:31.9002 Trace Initializing SimpleLayout=Layout Renderer: ${level}
+2020-12-22 17:19:31.9002 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:19:31.9002 Trace Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:19:31.9002 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:19:31.9002 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:19:31.9116 Trace Initializing Layout Renderer: ${uppercase}
+2020-12-22 17:19:31.9116 Trace Initializing Layout Renderer: ${literal}
+2020-12-22 17:19:31.9116 Trace Initializing Layout Renderer: ${longdate}
+2020-12-22 17:19:31.9116 Trace Initializing '${longdate} ${level:uppercase=true} ${message}'
+2020-12-22 17:19:31.9116 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:19:31.9116 Trace Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-22 17:19:31.9116 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:19:31.9116 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-22 17:19:31.9116 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:19:31.9116 Trace  Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-22 17:19:31.9116 Trace   Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-22 17:19:31.9116 Trace   Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:19:31.9116 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:19:31.9116 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:19:31.9116 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:19:31.9116 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-22 17:19:31.9116 Trace Initializing Layout Renderer: ${literal}
+2020-12-22 17:19:31.9116 Trace Initializing Layout Renderer: ${shortdate}
+2020-12-22 17:19:31.9116 Trace Initializing Layout Renderer: ${literal}
+2020-12-22 17:19:31.9116 Trace Initializing 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-22 17:19:31.9116 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:19:31.9116 Trace Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-22 17:19:31.9116 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:19:31.9116 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:19:31.9116 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-22 17:19:31.9116 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:19:31.9116 Trace Initializing File Target[logfile]
+2020-12-22 17:19:31.9116 Trace FindReachableObject<NLog.Layouts.Layout>:
+2020-12-22 17:19:31.9252 Trace Scanning FileTarget 'File Target[logfile]'
+2020-12-22 17:19:31.9252 Trace  Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-22 17:19:31.9252 Trace  Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-22 17:19:31.9252 Trace  Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-22 17:19:31.9252 Trace  Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-22 17:19:31.9252 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-22 17:19:31.9252 Trace File Target[logfile] has 2 layouts
+2020-12-22 17:19:31.9252 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.RetryingMultiProcessFileAppender+Factory
+2020-12-22 17:20:00.8690 Debug Targets for RestaurantManagement.BusinessLogic.Services.LoggerManager by level:
+2020-12-22 17:20:00.8690 Debug Trace =>
+2020-12-22 17:20:00.8690 Debug Debug => logfile
+2020-12-22 17:20:00.8690 Debug Info => logfile
+2020-12-22 17:20:00.8690 Debug Warn => logfile
+2020-12-22 17:20:00.8690 Debug Error => logfile
+2020-12-22 17:20:00.8690 Debug Fatal => logfile
+2020-12-22 17:20:00.8995 Debug FileTarget(Name=logfile): Preparing for new file 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-22_logfile.txt'
+2020-12-22 17:20:00.9144 Debug Creating file appender: c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-22_logfile.txt
+2020-12-22 17:20:00.9144 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-22_logfile.txt with allowFileSharedWriting=False
+2020-12-22 17:21:34.4625 Debug ScanAssembly('NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2020-12-22 17:21:34.6562 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c)
+2020-12-22 17:21:34.6562 Debug Search for auto loading files in location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-22 17:21:34.6657 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (RestaurantManagement.WebApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null)
+2020-12-22 17:21:34.6657 Debug Auto loading based on AppDomain-BaseDirectory found location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-22 17:21:34.6657 Debug Start auto loading, location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-22 17:21:34.6657 Trace Assembly 'Microsoft.Extensions.Logging, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-22 17:21:34.6657 Trace Assembly 'Microsoft.Extensions.Logging.Abstractions, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-22 17:21:34.6657 Debug Auto loading done
+2020-12-22 17:21:34.6657 Info Message Template Auto Format enabled
+2020-12-22 17:21:34.6952 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:21:34.6952 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-22 17:21:34.7063 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-22 17:21:34.7063 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-22 17:21:34.7063 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:21:34.7063 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:21:34.7063 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:21:34.7063 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-22 17:21:34.7063 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-22 17:21:34.7063 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:21:34.7063 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:21:34.7063 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:21:34.7063 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:21:34.7063 Trace Scanning LoggerNameLayoutRenderer 'Layout Renderer: ${logger}'
+2020-12-22 17:21:34.7063 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:21:34.7063 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-22 17:21:34.7245 Debug Setting 'NLog.Targets.FileTarget.name' to 'logfile'
+2020-12-22 17:21:34.7245 Debug Setting 'NLog.Targets.FileTarget.fileName' to 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-22 17:21:34.7245 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:21:34.7245 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-22 17:21:34.7245 Debug Setting 'NLog.Targets.FileTarget.layout' to '${longdate} ${level:uppercase=true} ${message}'
+2020-12-22 17:21:34.7245 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:21:34.7245 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-22 17:21:34.7245 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-22 17:21:34.7245 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-22 17:21:34.7245 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:21:34.7245 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:21:34.7245 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:21:34.7245 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-22 17:21:34.7245 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-22 17:21:34.7245 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:21:34.7245 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:21:34.7245 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:21:34.7245 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:21:34.7245 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-22 17:21:34.7245 Info Adding target FileTarget(Name=logfile)
+2020-12-22 17:21:34.7245 Debug Registered target logfile: NLog.Targets.FileTarget
+2020-12-22 17:21:34.7245 Trace ParseRulesElement
+2020-12-22 17:21:34.7546 Debug Watching path 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp' filter 'nlog.config' for changes.
+2020-12-22 17:21:34.7546 Debug --- NLog configuration dump ---
+2020-12-22 17:21:34.7546 Debug Targets:
+2020-12-22 17:21:34.7546 Debug File Target[logfile]
+2020-12-22 17:21:34.7546 Debug Rules:
+2020-12-22 17:21:34.7546 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]
+2020-12-22 17:21:34.7546 Debug --- End of NLog configuration dump ---
+2020-12-22 17:21:34.7546 Trace FindReachableObject<System.Object>:
+2020-12-22 17:21:34.7546 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]'
+2020-12-22 17:21:34.7546 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2020-12-22 17:21:34.7546 Trace  Scanning FileTarget 'File Target[logfile]'
+2020-12-22 17:21:34.7546 Trace   Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-22 17:21:34.7546 Trace   Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-22 17:21:34.7546 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:21:34.7546 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:21:34.7546 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-22 17:21:34.7546 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:21:34.7546 Trace   Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-22 17:21:34.7546 Trace   Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-22 17:21:34.7546 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:21:34.7546 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-22 17:21:34.7546 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:21:34.7546 Trace    Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-22 17:21:34.7681 Trace     Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-22 17:21:34.7681 Trace     Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:21:34.7681 Trace      Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:21:34.7681 Trace      Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:21:34.7681 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:21:34.7681 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-22 17:21:34.7681 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-22 17:21:34.7681 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2020-12-22 17:21:34.7681 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2020-12-22 17:21:34.7681 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp/nlog.config
+2020-12-22 17:21:34.7681 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2020-12-22 17:21:34.7681 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2020-12-22 17:21:34.7681 Trace Initializing Layout Renderer: ${message}
+2020-12-22 17:21:34.7681 Trace Initializing Layout Renderer: ${literal}
+2020-12-22 17:21:34.7681 Trace Initializing Layout Renderer: ${level}
+2020-12-22 17:21:34.7681 Trace Initializing SimpleLayout=Layout Renderer: ${level}
+2020-12-22 17:21:34.7872 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:21:34.7872 Trace Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:21:34.7872 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:21:34.7872 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:21:34.7872 Trace Initializing Layout Renderer: ${uppercase}
+2020-12-22 17:21:34.7872 Trace Initializing Layout Renderer: ${literal}
+2020-12-22 17:21:34.7872 Trace Initializing Layout Renderer: ${longdate}
+2020-12-22 17:21:34.7872 Trace Initializing '${longdate} ${level:uppercase=true} ${message}'
+2020-12-22 17:21:34.7872 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:21:34.7872 Trace Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-22 17:21:34.7872 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:21:34.7872 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-22 17:21:34.7872 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:21:34.7872 Trace  Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-22 17:21:34.7872 Trace   Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-22 17:21:34.7872 Trace   Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-22 17:21:34.7872 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:21:34.7872 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-22 17:21:34.7872 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:21:34.7990 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-22 17:21:34.7990 Trace Initializing Layout Renderer: ${literal}
+2020-12-22 17:21:34.7990 Trace Initializing Layout Renderer: ${shortdate}
+2020-12-22 17:21:34.7990 Trace Initializing Layout Renderer: ${literal}
+2020-12-22 17:21:34.7990 Trace Initializing 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-22 17:21:34.7990 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-22 17:21:34.7990 Trace Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-22 17:21:34.7990 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-22 17:21:34.7990 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:21:34.7990 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-22 17:21:34.7990 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-22 17:21:34.7990 Trace Initializing File Target[logfile]
+2020-12-22 17:21:34.7990 Trace FindReachableObject<NLog.Layouts.Layout>:
+2020-12-22 17:21:34.7990 Trace Scanning FileTarget 'File Target[logfile]'
+2020-12-22 17:21:34.7990 Trace  Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-22 17:21:34.7990 Trace  Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-22 17:21:34.7990 Trace  Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-22 17:21:34.7990 Trace  Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-22 17:21:34.7990 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-22 17:21:34.7990 Trace File Target[logfile] has 2 layouts
+2020-12-22 17:21:34.7990 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.RetryingMultiProcessFileAppender+Factory
+2020-12-22 17:21:59.3653 Debug Targets for RestaurantManagement.BusinessLogic.Services.LoggerManager by level:
+2020-12-22 17:21:59.3653 Debug Trace =>
+2020-12-22 17:21:59.3653 Debug Debug => logfile
+2020-12-22 17:21:59.3653 Debug Info => logfile
+2020-12-22 17:21:59.3653 Debug Warn => logfile
+2020-12-22 17:21:59.3653 Debug Error => logfile
+2020-12-22 17:21:59.3653 Debug Fatal => logfile
+2020-12-22 17:21:59.4214 Debug FileTarget(Name=logfile): Preparing for new file 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-22_logfile.txt'
+2020-12-22 17:21:59.4342 Debug Creating file appender: c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-22_logfile.txt
+2020-12-22 17:21:59.4342 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-22_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:17:31.6169 Debug ScanAssembly('NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2020-12-26 15:17:31.7856 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c)
+2020-12-26 15:17:31.7856 Debug Search for auto loading files in location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-26 15:17:31.7856 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (RestaurantManagement.WebApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null)
+2020-12-26 15:17:31.7856 Debug Auto loading based on AppDomain-BaseDirectory found location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-26 15:17:31.7856 Debug Start auto loading, location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-26 15:17:31.7856 Trace Assembly 'Microsoft.Extensions.Logging, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-26 15:17:31.7856 Trace Assembly 'Microsoft.Extensions.Logging.Abstractions, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-26 15:17:31.7999 Debug Auto loading done
+2020-12-26 15:17:31.7999 Info Message Template Auto Format enabled
+2020-12-26 15:17:31.8207 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:17:31.8207 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 15:17:31.8207 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-26 15:17:31.8318 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-26 15:17:31.8318 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:17:31.8318 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:17:31.8318 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:17:31.8318 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 15:17:31.8318 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 15:17:31.8318 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:17:31.8318 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:17:31.8318 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:17:31.8318 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:17:31.8318 Trace Scanning LoggerNameLayoutRenderer 'Layout Renderer: ${logger}'
+2020-12-26 15:17:31.8318 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:17:31.8318 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 15:17:31.8484 Debug Setting 'NLog.Targets.FileTarget.name' to 'logfile'
+2020-12-26 15:17:31.8484 Debug Setting 'NLog.Targets.FileTarget.fileName' to 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-26 15:17:31.8484 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:17:31.8484 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-26 15:17:31.8484 Debug Setting 'NLog.Targets.FileTarget.layout' to '${longdate} ${level:uppercase=true} ${message}'
+2020-12-26 15:17:31.8484 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:17:31.8484 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 15:17:31.8484 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-26 15:17:31.8484 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-26 15:17:31.8484 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:17:31.8484 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:17:31.8484 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:17:31.8484 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 15:17:31.8484 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 15:17:31.8484 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:17:31.8484 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:17:31.8484 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:17:31.8484 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:17:31.8484 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 15:17:31.8484 Info Adding target FileTarget(Name=logfile)
+2020-12-26 15:17:31.8621 Debug Registered target logfile: NLog.Targets.FileTarget
+2020-12-26 15:17:31.8621 Trace ParseRulesElement
+2020-12-26 15:17:31.8855 Debug Watching path 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp' filter 'nlog.config' for changes.
+2020-12-26 15:17:31.8855 Debug --- NLog configuration dump ---
+2020-12-26 15:17:31.8855 Debug Targets:
+2020-12-26 15:17:31.8855 Debug File Target[logfile]
+2020-12-26 15:17:31.8855 Debug Rules:
+2020-12-26 15:17:31.8855 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]
+2020-12-26 15:17:31.8855 Debug --- End of NLog configuration dump ---
+2020-12-26 15:17:31.8939 Trace FindReachableObject<System.Object>:
+2020-12-26 15:17:31.8939 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]'
+2020-12-26 15:17:31.8939 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2020-12-26 15:17:31.8939 Trace  Scanning FileTarget 'File Target[logfile]'
+2020-12-26 15:17:31.8939 Trace   Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-26 15:17:31.8939 Trace   Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-26 15:17:31.8939 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:17:31.8939 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:17:31.8939 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-26 15:17:31.8939 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:17:31.8939 Trace   Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-26 15:17:31.8939 Trace   Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-26 15:17:31.8939 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:17:31.8939 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 15:17:31.8939 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:17:31.8939 Trace    Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 15:17:31.8939 Trace     Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 15:17:31.8939 Trace     Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:17:31.8939 Trace      Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:17:31.8939 Trace      Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:17:31.8939 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:17:31.8939 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 15:17:31.8939 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-26 15:17:31.8939 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2020-12-26 15:17:31.8939 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2020-12-26 15:17:31.8939 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp/nlog.config
+2020-12-26 15:17:31.8939 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2020-12-26 15:17:31.9133 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2020-12-26 15:17:31.9133 Trace Initializing Layout Renderer: ${message}
+2020-12-26 15:17:31.9133 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 15:17:31.9133 Trace Initializing Layout Renderer: ${level}
+2020-12-26 15:17:31.9133 Trace Initializing SimpleLayout=Layout Renderer: ${level}
+2020-12-26 15:17:31.9133 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:17:31.9133 Trace Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:17:31.9133 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:17:31.9133 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:17:31.9255 Trace Initializing Layout Renderer: ${uppercase}
+2020-12-26 15:17:31.9255 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 15:17:31.9255 Trace Initializing Layout Renderer: ${longdate}
+2020-12-26 15:17:31.9255 Trace Initializing '${longdate} ${level:uppercase=true} ${message}'
+2020-12-26 15:17:31.9255 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:17:31.9255 Trace Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-26 15:17:31.9255 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:17:31.9255 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 15:17:31.9255 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:17:31.9255 Trace  Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 15:17:31.9255 Trace   Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 15:17:31.9255 Trace   Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:17:31.9255 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:17:31.9255 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:17:31.9255 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:17:31.9255 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 15:17:31.9255 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 15:17:31.9255 Trace Initializing Layout Renderer: ${shortdate}
+2020-12-26 15:17:31.9255 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 15:17:31.9255 Trace Initializing 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-26 15:17:31.9255 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:17:31.9255 Trace Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-26 15:17:31.9255 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:17:31.9403 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:17:31.9403 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-26 15:17:31.9403 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:17:31.9403 Trace Initializing File Target[logfile]
+2020-12-26 15:17:31.9403 Trace FindReachableObject<NLog.Layouts.Layout>:
+2020-12-26 15:17:31.9403 Trace Scanning FileTarget 'File Target[logfile]'
+2020-12-26 15:17:31.9403 Trace  Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-26 15:17:31.9403 Trace  Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-26 15:17:31.9403 Trace  Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-26 15:17:31.9403 Trace  Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-26 15:17:31.9403 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-26 15:17:31.9403 Trace File Target[logfile] has 2 layouts
+2020-12-26 15:17:31.9403 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.RetryingMultiProcessFileAppender+Factory
+2020-12-26 15:19:01.1748 Debug Targets for RestaurantManagement.BusinessLogic.Services.LoggerManager by level:
+2020-12-26 15:19:01.1748 Debug Trace =>
+2020-12-26 15:19:01.1748 Debug Debug => logfile
+2020-12-26 15:19:01.1748 Debug Info => logfile
+2020-12-26 15:19:01.1748 Debug Warn => logfile
+2020-12-26 15:19:01.1748 Debug Error => logfile
+2020-12-26 15:19:01.1748 Debug Fatal => logfile
+2020-12-26 15:19:01.2132 Debug FileTarget(Name=logfile): Preparing for new file 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt'
+2020-12-26 15:19:01.2265 Debug Creating file appender: c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt
+2020-12-26 15:19:01.2265 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:21:24.1805 Debug ScanAssembly('NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2020-12-26 15:21:24.3095 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c)
+2020-12-26 15:21:24.3095 Debug Search for auto loading files in location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-26 15:21:24.3217 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (RestaurantManagement.WebApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null)
+2020-12-26 15:21:24.3217 Debug Auto loading based on AppDomain-BaseDirectory found location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-26 15:21:24.3217 Debug Start auto loading, location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-26 15:21:24.3217 Trace Assembly 'Microsoft.Extensions.Logging, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-26 15:21:24.3217 Trace Assembly 'Microsoft.Extensions.Logging.Abstractions, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-26 15:21:24.3217 Debug Auto loading done
+2020-12-26 15:21:24.3217 Info Message Template Auto Format enabled
+2020-12-26 15:21:24.3534 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:21:24.3534 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 15:21:24.3620 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-26 15:21:24.3620 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-26 15:21:24.3620 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:21:24.3620 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:21:24.3620 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:21:24.3620 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 15:21:24.3620 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 15:21:24.3620 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:21:24.3620 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:21:24.3620 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:21:24.3620 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:21:24.3620 Trace Scanning LoggerNameLayoutRenderer 'Layout Renderer: ${logger}'
+2020-12-26 15:21:24.3620 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:21:24.3620 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 15:21:24.3620 Debug Setting 'NLog.Targets.FileTarget.name' to 'logfile'
+2020-12-26 15:21:24.3778 Debug Setting 'NLog.Targets.FileTarget.fileName' to 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-26 15:21:24.3778 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:21:24.3778 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-26 15:21:24.3778 Debug Setting 'NLog.Targets.FileTarget.layout' to '${longdate} ${level:uppercase=true} ${message}'
+2020-12-26 15:21:24.3778 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:21:24.3778 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 15:21:24.3778 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-26 15:21:24.3778 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-26 15:21:24.3778 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:21:24.3778 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:21:24.3778 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:21:24.3778 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 15:21:24.3778 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 15:21:24.3778 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:21:24.3778 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:21:24.3778 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:21:24.3778 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:21:24.3778 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 15:21:24.3778 Info Adding target FileTarget(Name=logfile)
+2020-12-26 15:21:24.3945 Debug Registered target logfile: NLog.Targets.FileTarget
+2020-12-26 15:21:24.3945 Trace ParseRulesElement
+2020-12-26 15:21:24.4256 Debug Watching path 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp' filter 'nlog.config' for changes.
+2020-12-26 15:21:24.4256 Debug --- NLog configuration dump ---
+2020-12-26 15:21:24.4256 Debug Targets:
+2020-12-26 15:21:24.4256 Debug File Target[logfile]
+2020-12-26 15:21:24.4256 Debug Rules:
+2020-12-26 15:21:24.4256 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]
+2020-12-26 15:21:24.4256 Debug --- End of NLog configuration dump ---
+2020-12-26 15:21:24.4256 Trace FindReachableObject<System.Object>:
+2020-12-26 15:21:24.4256 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]'
+2020-12-26 15:21:24.4256 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2020-12-26 15:21:24.4256 Trace  Scanning FileTarget 'File Target[logfile]'
+2020-12-26 15:21:24.4256 Trace   Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-26 15:21:24.4256 Trace   Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-26 15:21:24.4256 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:21:24.4404 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:21:24.4404 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-26 15:21:24.4404 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:21:24.4404 Trace   Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-26 15:21:24.4404 Trace   Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-26 15:21:24.4404 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:21:24.4404 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 15:21:24.4404 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:21:24.4404 Trace    Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 15:21:24.4404 Trace     Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 15:21:24.4404 Trace     Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:21:24.4404 Trace      Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:21:24.4404 Trace      Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:21:24.4404 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:21:24.4404 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 15:21:24.4404 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-26 15:21:24.4404 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2020-12-26 15:21:24.4404 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2020-12-26 15:21:24.4404 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp/nlog.config
+2020-12-26 15:21:24.4404 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2020-12-26 15:21:24.4404 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2020-12-26 15:21:24.4559 Trace Initializing Layout Renderer: ${message}
+2020-12-26 15:21:24.4559 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 15:21:24.4559 Trace Initializing Layout Renderer: ${level}
+2020-12-26 15:21:24.4559 Trace Initializing SimpleLayout=Layout Renderer: ${level}
+2020-12-26 15:21:24.4559 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:21:24.4559 Trace Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:21:24.4559 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:21:24.4559 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:21:24.4559 Trace Initializing Layout Renderer: ${uppercase}
+2020-12-26 15:21:24.4559 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 15:21:24.4559 Trace Initializing Layout Renderer: ${longdate}
+2020-12-26 15:21:24.4559 Trace Initializing '${longdate} ${level:uppercase=true} ${message}'
+2020-12-26 15:21:24.4559 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:21:24.4559 Trace Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-26 15:21:24.4559 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:21:24.4559 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 15:21:24.4559 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:21:24.4559 Trace  Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 15:21:24.4559 Trace   Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 15:21:24.4559 Trace   Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:21:24.4559 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:21:24.4559 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:21:24.4559 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:21:24.4714 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 15:21:24.4714 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 15:21:24.4714 Trace Initializing Layout Renderer: ${shortdate}
+2020-12-26 15:21:24.4714 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 15:21:24.4714 Trace Initializing 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-26 15:21:24.4714 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:21:24.4714 Trace Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-26 15:21:24.4714 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:21:24.4714 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:21:24.4714 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-26 15:21:24.4714 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:21:24.4714 Trace Initializing File Target[logfile]
+2020-12-26 15:21:24.4714 Trace FindReachableObject<NLog.Layouts.Layout>:
+2020-12-26 15:21:24.4714 Trace Scanning FileTarget 'File Target[logfile]'
+2020-12-26 15:21:24.4714 Trace  Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-26 15:21:24.4714 Trace  Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-26 15:21:24.4714 Trace  Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-26 15:21:24.4714 Trace  Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-26 15:21:24.4714 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-26 15:21:24.4714 Trace File Target[logfile] has 2 layouts
+2020-12-26 15:21:24.4714 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.RetryingMultiProcessFileAppender+Factory
+2020-12-26 15:21:52.8852 Debug Targets for RestaurantManagement.BusinessLogic.Services.LoggerManager by level:
+2020-12-26 15:21:52.8852 Debug Trace =>
+2020-12-26 15:21:52.8852 Debug Debug => logfile
+2020-12-26 15:21:52.8852 Debug Info => logfile
+2020-12-26 15:21:52.8852 Debug Warn => logfile
+2020-12-26 15:21:52.8852 Debug Error => logfile
+2020-12-26 15:21:52.8852 Debug Fatal => logfile
+2020-12-26 15:21:52.9182 Debug FileTarget(Name=logfile): Preparing for new file 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt'
+2020-12-26 15:21:52.9278 Debug Creating file appender: c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt
+2020-12-26 15:21:52.9278 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:22:54.3684 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:23:04.4904 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:23:04.4904 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:23:22.5215 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:23:29.1169 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:23:29.1169 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:23:29.1286 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:24:02.1413 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:24:02.1849 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:24:02.1926 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:24:02.2209 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:24:02.2858 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:24:02.3051 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:25:46.7162 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:25:46.7328 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:25:46.7445 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:25:46.7535 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:28:04.0965 Debug ScanAssembly('NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2020-12-26 15:28:04.2080 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c)
+2020-12-26 15:28:04.2080 Debug Search for auto loading files in location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-26 15:28:04.2080 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (RestaurantManagement.WebApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null)
+2020-12-26 15:28:04.2080 Debug Auto loading based on AppDomain-BaseDirectory found location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-26 15:28:04.2080 Debug Start auto loading, location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-26 15:28:04.2232 Trace Assembly 'Microsoft.Extensions.Logging, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-26 15:28:04.2232 Trace Assembly 'Microsoft.Extensions.Logging.Abstractions, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-26 15:28:04.2232 Debug Auto loading done
+2020-12-26 15:28:04.2232 Info Message Template Auto Format enabled
+2020-12-26 15:28:04.2422 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:28:04.2422 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 15:28:04.2422 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-26 15:28:04.2422 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-26 15:28:04.2422 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:28:04.2532 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:28:04.2532 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:28:04.2532 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 15:28:04.2532 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 15:28:04.2532 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:28:04.2532 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:28:04.2532 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:28:04.2532 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:28:04.2532 Trace Scanning LoggerNameLayoutRenderer 'Layout Renderer: ${logger}'
+2020-12-26 15:28:04.2532 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:28:04.2532 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 15:28:04.2680 Debug Setting 'NLog.Targets.FileTarget.name' to 'logfile'
+2020-12-26 15:28:04.2680 Debug Setting 'NLog.Targets.FileTarget.fileName' to 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-26 15:28:04.2680 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:28:04.2680 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-26 15:28:04.2680 Debug Setting 'NLog.Targets.FileTarget.layout' to '${longdate} ${level:uppercase=true} ${message}'
+2020-12-26 15:28:04.2680 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:28:04.2680 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 15:28:04.2680 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-26 15:28:04.2680 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-26 15:28:04.2680 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:28:04.2680 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:28:04.2680 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:28:04.2680 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 15:28:04.2680 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 15:28:04.2680 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:28:04.2680 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:28:04.2680 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:28:04.2680 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:28:04.2680 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 15:28:04.2680 Info Adding target FileTarget(Name=logfile)
+2020-12-26 15:28:04.2680 Debug Registered target logfile: NLog.Targets.FileTarget
+2020-12-26 15:28:04.2680 Trace ParseRulesElement
+2020-12-26 15:28:04.2958 Debug Watching path 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp' filter 'nlog.config' for changes.
+2020-12-26 15:28:04.2958 Debug --- NLog configuration dump ---
+2020-12-26 15:28:04.2958 Debug Targets:
+2020-12-26 15:28:04.2958 Debug File Target[logfile]
+2020-12-26 15:28:04.2958 Debug Rules:
+2020-12-26 15:28:04.3011 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]
+2020-12-26 15:28:04.3011 Debug --- End of NLog configuration dump ---
+2020-12-26 15:28:04.3011 Trace FindReachableObject<System.Object>:
+2020-12-26 15:28:04.3011 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]'
+2020-12-26 15:28:04.3011 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2020-12-26 15:28:04.3011 Trace  Scanning FileTarget 'File Target[logfile]'
+2020-12-26 15:28:04.3011 Trace   Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-26 15:28:04.3011 Trace   Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-26 15:28:04.3011 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:28:04.3011 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:28:04.3011 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-26 15:28:04.3011 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:28:04.3011 Trace   Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-26 15:28:04.3011 Trace   Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-26 15:28:04.3011 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:28:04.3011 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 15:28:04.3011 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:28:04.3011 Trace    Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 15:28:04.3011 Trace     Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 15:28:04.3011 Trace     Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:28:04.3011 Trace      Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:28:04.3011 Trace      Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:28:04.3011 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:28:04.3011 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 15:28:04.3011 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-26 15:28:04.3011 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2020-12-26 15:28:04.3011 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2020-12-26 15:28:04.3164 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp/nlog.config
+2020-12-26 15:28:04.3164 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2020-12-26 15:28:04.3164 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2020-12-26 15:28:04.3164 Trace Initializing Layout Renderer: ${message}
+2020-12-26 15:28:04.3164 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 15:28:04.3164 Trace Initializing Layout Renderer: ${level}
+2020-12-26 15:28:04.3164 Trace Initializing SimpleLayout=Layout Renderer: ${level}
+2020-12-26 15:28:04.3164 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:28:04.3164 Trace Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:28:04.3164 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:28:04.3164 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:28:04.3339 Trace Initializing Layout Renderer: ${uppercase}
+2020-12-26 15:28:04.3339 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 15:28:04.3339 Trace Initializing Layout Renderer: ${longdate}
+2020-12-26 15:28:04.3339 Trace Initializing '${longdate} ${level:uppercase=true} ${message}'
+2020-12-26 15:28:04.3339 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:28:04.3339 Trace Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-26 15:28:04.3339 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:28:04.3339 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 15:28:04.3339 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:28:04.3339 Trace  Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 15:28:04.3339 Trace   Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 15:28:04.3339 Trace   Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 15:28:04.3339 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:28:04.3339 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 15:28:04.3339 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:28:04.3339 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 15:28:04.3339 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 15:28:04.3339 Trace Initializing Layout Renderer: ${shortdate}
+2020-12-26 15:28:04.3339 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 15:28:04.3339 Trace Initializing 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-26 15:28:04.3339 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 15:28:04.3339 Trace Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-26 15:28:04.3339 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 15:28:04.3339 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:28:04.3339 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-26 15:28:04.3339 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 15:28:04.3339 Trace Initializing File Target[logfile]
+2020-12-26 15:28:04.3339 Trace FindReachableObject<NLog.Layouts.Layout>:
+2020-12-26 15:28:04.3339 Trace Scanning FileTarget 'File Target[logfile]'
+2020-12-26 15:28:04.3339 Trace  Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-26 15:28:04.3339 Trace  Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-26 15:28:04.3339 Trace  Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-26 15:28:04.3339 Trace  Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-26 15:28:04.3339 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-26 15:28:04.3339 Trace File Target[logfile] has 2 layouts
+2020-12-26 15:28:04.3476 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.RetryingMultiProcessFileAppender+Factory
+2020-12-26 15:28:29.0441 Debug Targets for RestaurantManagement.BusinessLogic.Services.LoggerManager by level:
+2020-12-26 15:28:29.0441 Debug Trace =>
+2020-12-26 15:28:29.0441 Debug Debug => logfile
+2020-12-26 15:28:29.0441 Debug Info => logfile
+2020-12-26 15:28:29.0493 Debug Warn => logfile
+2020-12-26 15:28:29.0493 Debug Error => logfile
+2020-12-26 15:28:29.0493 Debug Fatal => logfile
+2020-12-26 15:28:29.0851 Debug FileTarget(Name=logfile): Preparing for new file 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt'
+2020-12-26 15:28:29.0851 Debug Creating file appender: c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt
+2020-12-26 15:28:29.0969 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 15:28:44.7805 Trace Opening c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/2020-12-26_logfile.txt with allowFileSharedWriting=False
+2020-12-26 16:31:59.4810 Debug ScanAssembly('NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2020-12-26 16:31:59.6827 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c)
+2020-12-26 16:31:59.6827 Debug Search for auto loading files in location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-26 16:31:59.6917 Debug Found assembly location directory: 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1' (RestaurantManagement.WebApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null)
+2020-12-26 16:31:59.6917 Debug Auto loading based on AppDomain-BaseDirectory found location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-26 16:31:59.6917 Debug Start auto loading, location: C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp\bin\Debug\netcoreapp3.1
+2020-12-26 16:31:59.6917 Trace Assembly 'Microsoft.Extensions.Logging, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-26 16:31:59.6917 Trace Assembly 'Microsoft.Extensions.Logging.Abstractions, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60' will be hidden in callsite stacktrace
+2020-12-26 16:31:59.6917 Debug Auto loading done
+2020-12-26 16:31:59.6917 Info Message Template Auto Format enabled
+2020-12-26 16:31:59.7166 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 16:31:59.7166 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 16:31:59.7278 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-26 16:31:59.7278 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-26 16:31:59.7278 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 16:31:59.7278 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 16:31:59.7278 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 16:31:59.7278 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 16:31:59.7278 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 16:31:59.7278 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 16:31:59.7374 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 16:31:59.7374 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 16:31:59.7374 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 16:31:59.7374 Trace Scanning LoggerNameLayoutRenderer 'Layout Renderer: ${logger}'
+2020-12-26 16:31:59.7374 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 16:31:59.7374 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 16:31:59.7374 Debug Setting 'NLog.Targets.FileTarget.name' to 'logfile'
+2020-12-26 16:31:59.7374 Debug Setting 'NLog.Targets.FileTarget.fileName' to 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-26 16:31:59.7374 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 16:31:59.7374 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-26 16:31:59.7545 Debug Setting 'NLog.Targets.FileTarget.layout' to '${longdate} ${level:uppercase=true} ${message}'
+2020-12-26 16:31:59.7545 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 16:31:59.7545 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 16:31:59.7545 Debug Setting 'NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper.uppercase' to 'true'
+2020-12-26 16:31:59.7545 Trace Wrapping NLog.LayoutRenderers.LevelLayoutRenderer with NLog.LayoutRenderers.Wrappers.UppercaseLayoutRendererWrapper
+2020-12-26 16:31:59.7545 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 16:31:59.7545 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 16:31:59.7545 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 16:31:59.7545 Trace Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 16:31:59.7545 Trace  Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 16:31:59.7545 Trace  Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 16:31:59.7545 Trace   Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 16:31:59.7545 Trace   Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 16:31:59.7545 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 16:31:59.7545 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 16:31:59.7545 Info Adding target FileTarget(Name=logfile)
+2020-12-26 16:31:59.7545 Debug Registered target logfile: NLog.Targets.FileTarget
+2020-12-26 16:31:59.7545 Trace ParseRulesElement
+2020-12-26 16:31:59.7818 Debug Watching path 'C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp' filter 'nlog.config' for changes.
+2020-12-26 16:31:59.7818 Debug --- NLog configuration dump ---
+2020-12-26 16:31:59.7818 Debug Targets:
+2020-12-26 16:31:59.7845 Debug File Target[logfile]
+2020-12-26 16:31:59.7845 Debug Rules:
+2020-12-26 16:31:59.7845 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]
+2020-12-26 16:31:59.7845 Debug --- End of NLog configuration dump ---
+2020-12-26 16:31:59.7845 Trace FindReachableObject<System.Object>:
+2020-12-26 16:31:59.7845 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] appendTo: [ logfile ]'
+2020-12-26 16:31:59.7845 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2020-12-26 16:31:59.7845 Trace  Scanning FileTarget 'File Target[logfile]'
+2020-12-26 16:31:59.7845 Trace   Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-26 16:31:59.7845 Trace   Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-26 16:31:59.7845 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 16:31:59.7845 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 16:31:59.7845 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-26 16:31:59.7845 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 16:31:59.7845 Trace   Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-26 16:31:59.7845 Trace   Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-26 16:31:59.7845 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 16:31:59.7845 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 16:31:59.7845 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 16:31:59.7845 Trace    Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 16:31:59.7845 Trace     Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 16:31:59.7845 Trace     Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 16:31:59.7845 Trace      Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 16:31:59.7845 Trace      Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 16:31:59.7845 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 16:31:59.7845 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 16:31:59.7845 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-26 16:31:59.7845 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2020-12-26 16:31:59.7994 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2020-12-26 16:31:59.7994 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=C:\Users\edgaras.legus\source\restaurant\RestaurantManagement\RestaurantManagement.WebApp/nlog.config
+2020-12-26 16:31:59.7994 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2020-12-26 16:31:59.7994 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2020-12-26 16:31:59.7994 Trace Initializing Layout Renderer: ${message}
+2020-12-26 16:31:59.7994 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 16:31:59.7994 Trace Initializing Layout Renderer: ${level}
+2020-12-26 16:31:59.7994 Trace Initializing SimpleLayout=Layout Renderer: ${level}
+2020-12-26 16:31:59.8152 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 16:31:59.8152 Trace Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 16:31:59.8152 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 16:31:59.8152 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 16:31:59.8152 Trace Initializing Layout Renderer: ${uppercase}
+2020-12-26 16:31:59.8152 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 16:31:59.8152 Trace Initializing Layout Renderer: ${longdate}
+2020-12-26 16:31:59.8152 Trace Initializing '${longdate} ${level:uppercase=true} ${message}'
+2020-12-26 16:31:59.8152 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 16:31:59.8152 Trace Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-26 16:31:59.8152 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 16:31:59.8152 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2020-12-26 16:31:59.8152 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 16:31:59.8152 Trace  Scanning UppercaseLayoutRendererWrapper 'Layout Renderer: ${uppercase}'
+2020-12-26 16:31:59.8152 Trace   Scanning Property Inner 'SimpleLayout=Layout Renderer: ${level}' NLog.Layouts
+2020-12-26 16:31:59.8152 Trace   Scanning SimpleLayout 'SimpleLayout=Layout Renderer: ${level}'
+2020-12-26 16:31:59.8152 Trace    Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 16:31:59.8152 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2020-12-26 16:31:59.8152 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 16:31:59.8152 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2020-12-26 16:31:59.8152 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 16:31:59.8152 Trace Initializing Layout Renderer: ${shortdate}
+2020-12-26 16:31:59.8152 Trace Initializing Layout Renderer: ${literal}
+2020-12-26 16:31:59.8152 Trace Initializing 'c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'
+2020-12-26 16:31:59.8311 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2020-12-26 16:31:59.8311 Trace Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-26 16:31:59.8311 Trace  Scanning Property Renderers 'System.Collections.ObjectModel.ReadOnlyCollection`1[NLog.LayoutRenderers.LayoutRenderer]' System.Collections.ObjectModel
+2020-12-26 16:31:59.8311 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 16:31:59.8311 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2020-12-26 16:31:59.8311 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2020-12-26 16:31:59.8311 Trace Initializing File Target[logfile]
+2020-12-26 16:31:59.8311 Trace FindReachableObject<NLog.Layouts.Layout>:
+2020-12-26 16:31:59.8311 Trace Scanning FileTarget 'File Target[logfile]'
+2020-12-26 16:31:59.8311 Trace  Scanning Property FileName ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt'' NLog.Layouts
+2020-12-26 16:31:59.8311 Trace  Scanning SimpleLayout ''c:/Users/edgaras.legus/source/restaurant/RestaurantManagement/RestaurantManagement.WebApp/Logs/${shortdate}_logfile.txt''
+2020-12-26 16:31:59.8311 Trace  Scanning Property Layout ''${longdate} ${level:uppercase=true} ${message}'' NLog.Layouts
+2020-12-26 16:31:59.8311 Trace  Scanning SimpleLayout ''${longdate} ${level:uppercase=true} ${message}''
+2020-12-26 16:31:59.8311 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2020-12-26 16:31:59.8311 Trace File Target[logfile] has 2 layouts
+2020-12-26 16:31:59.8311 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.RetryingMultiProcessFileAppender+Factory

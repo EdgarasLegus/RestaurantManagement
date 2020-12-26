@@ -43,6 +43,17 @@ namespace RestaurantManagement.BusinessLogic.Services
             return await _orderTempRepo.Get();
         }
 
+        public async Task<Order> GetOrderById(int id)
+        {
+            return await _orderTempRepo.GetFirstOrDefault(x => x.Id == id);
+        }
+
+        public async Task<Order> GetOrderWithItems(int id)
+        {
+            var order = await _orderTempRepo.GetFirstOrDefault(o => o.Id == id/*, x => x.OrderItem*/);
+            return order;
+        }
+
         public async Task AddOrder(Order orderEntity)
         {
             await _orderTempRepo.Add(orderEntity);
@@ -78,7 +89,7 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         public async Task DeleteCustomerOrder(int id)
         {
-            var orderEntity = await _orderRepo.GetOrderById(id);
+            var orderEntity = await GetOrderById(id);
             await _orderRepo.DeleteOrder(orderEntity);
             _loggerManager.LogInfo($"DeleteCustomerOrder(): Order '{orderEntity.OrderName}' was deleted!");
         }
@@ -135,7 +146,7 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         private async Task ChangeCreatedOrderStatus(Order orderEntity)
         {
-            var createdOrder = await _orderRepo.GetOrderById(orderEntity.Id);
+            var createdOrder = await GetOrderById(orderEntity.Id);
             await _orderRepo.UpdateOrder(createdOrder.Id, orderEntity);
             await _orderItemService.UpdateCreatedOrderItemsStatuses(createdOrder.Id);
         }
@@ -143,7 +154,7 @@ namespace RestaurantManagement.BusinessLogic.Services
         private async Task<Order> Create(OrderCreateModel orderCreateEntity)
         {
             var orderEntity = _mapper.Map<Order>(orderCreateEntity);
-            await _orderRepo.AddOrder(orderEntity);
+            await AddOrder(orderEntity);
             _loggerManager.LogInfo($"CreateCustomerOrder(): New order '{orderEntity.OrderName}' is" +
                 $" successfully created! Status: 10");
             return orderEntity;
@@ -216,7 +227,7 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         private async Task<bool> PreparingAndReadyFlagsAreFalse(int orderId)
         {
-            var order = await _orderRepo.GetOrderById(orderId);
+            var order = await GetOrderById(orderId);
             return order.IsPreparing == false && order.IsReady == false;
         }
 

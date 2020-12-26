@@ -138,6 +138,8 @@ namespace RestaurantManagement.BusinessLogic.Services
         {
             var staffEntity = await _staffRepo.GetFirstOrDefault(x => x.Id == id);
             if (staffEntity == null)
+                //var operationResult = new OperationResult<Staff>();
+                //operationResult.Status = Status
                 _loggerManager.LogError($"DeleteStaffMember(): Staff member {id} was not found!");
             else
             {

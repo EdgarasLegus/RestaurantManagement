@@ -22,15 +22,15 @@ namespace RestaurantManagement.Data
             _context = context;
         }
 
-        public IEnumerable<T> GetAll()
-        {
-            return _entities.ToList();
-        }
+        //public IEnumerable<T> GetAll()
+        //{
+        //    return _entities.ToList();
+        //}
 
-        public async Task<T> GetById(int id)
-        {
-            return await _entities.FindAsync(id);
-        }
+        //public async Task<T> GetById(int id)
+        //{
+        //    return await _entities.FindAsync(id);
+        //}
 
         public async Task<List<T>> Get(Expression<Func<T, bool>> expression = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
