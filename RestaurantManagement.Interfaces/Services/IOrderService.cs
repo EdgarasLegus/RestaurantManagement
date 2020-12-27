@@ -11,10 +11,14 @@ namespace RestaurantManagement.Interfaces.Services
     {
         Task<List<Order>> GetOrders();
         Task<Order> GetOrderById(int id);
+        Task<Order> GetOrderWithItems(int id);
         Task AddOrder(Order orderEntity);
         Task<OrderViewModel> CreateCustomerOrder(OrderCreateModel orderCreateEntity);
         Task DeleteCustomerOrder(int id);
-        Task<Order> GetExistingOrder(int id);
+        Task UpdateCreatedOrder(int id, Order orderEntity);
+        Task UpdateOrderStatusAndDate(int id, int status);
+        Task UpdateExistingOrder(int id, Order orderEntity, int status);
+        Task UpdateOrderNameAndStatus(int id, Order orderEntity, int status);
         Task UpdateCustomerOrder(OrderUpdateModel orderUpdateEntity, int orderId);
 
     }

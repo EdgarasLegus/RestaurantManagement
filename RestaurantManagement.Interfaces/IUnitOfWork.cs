@@ -10,8 +10,6 @@ namespace RestaurantManagement.Interfaces
     {
         IDishProductRepo DishProductRepo { get; }
         IDishRepo DishRepo { get; }
-        IOrderItemRepo OrderItemRepo { get; }
-        IOrderRepo OrderRepo { get; }
         Task<int> Commit();
         IRepository<T> GetRepository<T>() where T : class;
     }

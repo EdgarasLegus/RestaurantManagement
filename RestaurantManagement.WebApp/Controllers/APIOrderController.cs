@@ -15,18 +15,14 @@ namespace RestaurantManagement.WebApp.Controllers
     [ApiController]
     public class APIOrderController : ControllerBase
     {
-        private readonly IOrderRepo _orderRepo;
-        private readonly IOrderItemRepo _orderItemRepo;
         private readonly IMapper _mapper;
         private readonly ILoggerManager _loggerManager;
         private readonly IOrderService _orderService;
         private readonly IOrderItemService _orderItemService;
 
-        public APIOrderController(IOrderRepo orderRepo, IOrderItemRepo orderItemRepo, IMapper mapper, ILoggerManager loggerManager,
+        public APIOrderController(IMapper mapper, ILoggerManager loggerManager,
             IOrderService orderService, IOrderItemService orderItemService)
         {
-            _orderRepo = orderRepo;
-            _orderItemRepo = orderItemRepo;
             _mapper = mapper;
             _loggerManager = loggerManager;
             _orderService = orderService;
@@ -82,7 +78,7 @@ namespace RestaurantManagement.WebApp.Controllers
             try
             {
                 var order = await _orderService.GetOrderById(id);
-                var orderItem = await _orderItemService.GetSelectedOrderItem(itemId);
+                var orderItem = await _orderItemService.GetOrderItemById(itemId);
                 if (order == null)
                 {
                     _loggerManager.LogError($"Order with id: {id} is not found in database.");
@@ -137,7 +133,7 @@ namespace RestaurantManagement.WebApp.Controllers
         {
             try
             {
-                var order = await _orderRepo.GetOrderWithItems(id);
+                var order = await _orderService.GetOrderWithItems(id);
                 if (order == null)
                 {
                     _loggerManager.LogError($"GetOrderWithItems(): Order with id: {id}, is not found in database.");
@@ -178,7 +174,7 @@ namespace RestaurantManagement.WebApp.Controllers
         {
             try
             {
-                var existingOrder = await _orderService.GetExistingOrder(id);
+                var existingOrder = await _orderService.GetOrderWithItems(id);
                 if (existingOrder == null)
                 {
                     _loggerManager.LogError($"AddOrderItem(): Post new order item is failed, order does not exist.");
@@ -222,7 +218,7 @@ namespace RestaurantManagement.WebApp.Controllers
         {
             try
             {
-                var existingOrder = await _orderService.GetExistingOrder(id);
+                var existingOrder = await _orderService.GetOrderWithItems(id);
                 if (existingOrder == null)
                 {
                     _loggerManager.LogError($"UpdateOrder(): Put request is " +
@@ -255,7 +251,7 @@ namespace RestaurantManagement.WebApp.Controllers
                     return BadRequest("Invalid order item update model object");
                 }
 
-                var existingOrder = await _orderService.GetExistingOrder(id);
+                var existingOrder = await _orderService.GetOrderWithItems(id);
                 if (existingOrder == null)
                 {
                     _loggerManager.LogError($"UpdateOrderItem(): Put request is " +
@@ -263,7 +259,7 @@ namespace RestaurantManagement.WebApp.Controllers
                     return BadRequest("Order does not exist");
                 }
 
-                var existingOrderItem = await _orderItemService.GetSelectedOrderItem(itemId);
+                var existingOrderItem = await _orderItemService.GetOrderItemById(itemId);
                 if (existingOrderItem == null)
                 {
                     _loggerManager.LogError($"UpdateOrderItem(): Put request is " +

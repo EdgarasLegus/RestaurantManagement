@@ -1,0 +1,101 @@
+2020-12-27 00:03:33.7700 INFO GetOrderItemById() returned order item with id: 1142
+2020-12-27 00:13:17.2903 INFO GetOrderItemById() returned order item with id: 1142
+2020-12-27 00:13:30.9548 INFO GetOrderItemById() returned order item with id: 1141
+2020-12-27 00:13:54.8766 INFO GetOrderItemById() returned order item with id: 1140
+2020-12-27 00:19:29.1474 INFO UpdateItem(): Item '1136' was updated. Quantity remaining the same, as it cannot be changed in prepared item.
+2020-12-27 00:19:30.4000 INFO ChangeOrderItemStatusToServed(): Order item 1136 is served!
+2020-12-27 00:19:30.4000 INFO UpdateItem(): Item '1136' status was updated. Status: 75.
+2020-12-27 00:19:31.9799 INFO UpdateParentOrderStatusAndDate(): Order '1038' status was updated! Status: 40
+2020-12-27 00:30:28.8005 INFO CreateCustomerOrder(): New order 'ReTest' is successfully created! Status: 10
+2020-12-27 00:30:29.0656 WARN CheckCreatedOrderItem(): Item '1143' will have status declined! This item currently has 0 stock. Status: '30'
+2020-12-27 00:30:44.4055 WARN CreateCustomerOrder(): Order 'ReTest' was partially declined! Status: 20
+2020-12-27 00:33:16.7996 INFO CreateItem(): New item '1145' for selected order is successfully created! Status: 10
+2020-12-27 00:33:16.8843 INFO UpdateParentOrderStatusAndDate(): Order '1041' status was updated! Status: 40
+2020-12-27 00:33:27.4257 INFO CreateItem(): New item '1146' for selected order is successfully created! Status: 10
+2020-12-27 00:33:27.4257 INFO UpdateParentOrderStatusAndDate(): Order '1041' status was updated! Status: 40
+2020-12-27 00:33:27.4689 WARN DeclineItem(): Item '1146' for selected order was declined! Status: 30
+2020-12-27 00:47:33.2228 INFO UpdateParentOrderStatusAndDate(): Order '1041' status was updated! Status: 40
+2020-12-27 00:47:33.2720 INFO DeleteCustomerOrderItem(): Order item 1146 was deleted!
+2020-12-27 00:54:40.3213 INFO CreateCustomerOrder(): New order 'ReTest' is successfully created! Status: 10
+2020-12-27 00:54:40.5576 WARN CheckCreatedOrderItem(): Item '1147' will have status declined! This item currently has 0 stock. Status: '30'
+2020-12-27 00:55:21.2921 WARN CreateCustomerOrder(): Order 'ReTest' was partially declined! Status: 20
+2020-12-27 00:57:23.3842 INFO Update(): Order '1042' was updated!
+2020-12-27 00:57:23.4796 WARN DeclineItemPreparation(): Dish '3' stock hasn't been adjusted. Order Item '1147' ordered dish '3' has 0 stock!Order Item won't be prepared.
+2020-12-27 00:57:23.4995 WARN DeclineItem(): Item '1147' for selected order was declined! Status: 30
+2020-12-27 00:57:23.5277 INFO PerformItemPreparation(): Dish (6) stock was adjusted.
+2020-12-27 00:57:23.5401 INFO ChangePreparingOrderItemStatus(): Order item 1148 is preparing!
+2020-12-27 00:57:25.8071 INFO ChangePreparingOrderStatus(): Order 1042 is in preparing status.
+2020-12-27 00:59:43.6793 INFO Update(): Order '1042' was updated!
+2020-12-27 00:59:43.7438 WARN ReadyToServerOrderItem(): Item '1147' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-12-27 00:59:43.7663 INFO ChangeReadyOrderItemStatus(): Order item 1148 is ready to serve!
+2020-12-27 00:59:46.3427 INFO ChangeReadyOrderStatus(): Order 1042 is in ready to serve status.
+2020-12-27 01:02:51.5343 INFO UpdateItem(): Item '1148' was updated. Quantity remaining the same, as it cannot be changed in prepared item.
+2020-12-27 01:02:55.4141 INFO ChangeOrderItemStatusToServed(): Order item 1148 is served!
+2020-12-27 01:02:55.4141 INFO UpdateItem(): Item '1148' status was updated. Status: 75.
+2020-12-27 01:03:07.9713 INFO UpdateParentOrderStatusAndDate(): Order '1042' status was updated! Status: 40
+2020-12-27 01:18:03.2883 INFO UpdateItem(): Item '1131' was updated. Quantity remaining the same, as it cannot be changed in prepared item.
+2020-12-27 01:18:11.5130 INFO ChangeOrderItemStatusToServed(): Order item 1131 is served!
+2020-12-27 01:18:11.5130 INFO UpdateItem(): Item '1131' status was updated. Status: 75.
+2020-12-27 01:25:06.7127 INFO CreateCustomerOrder(): New order 'ReTest' is successfully created! Status: 10
+2020-12-27 01:25:06.9264 WARN CheckCreatedOrderItem(): Item '1149' will have status declined! This item currently has 0 stock. Status: '30'
+2020-12-27 01:25:06.9416 WARN CreateCustomerOrder(): Order 'ReTest' was partially declined! Status: 20
+2020-12-27 01:26:07.2461 INFO Update(): Order '1043' was updated!
+2020-12-27 01:26:07.2572 WARN DeclineItemPreparation(): Dish '3' stock hasn't been adjusted. Order Item '1149' ordered dish '3' has 0 stock!Order Item won't be prepared.
+2020-12-27 01:26:07.2572 WARN DeclineItem(): Item '1149' for selected order was declined! Status: 30
+2020-12-27 01:26:07.2828 INFO PerformItemPreparation(): Dish (5) stock was adjusted.
+2020-12-27 01:26:07.2934 INFO ChangePreparingOrderItemStatus(): Order item 1150 is preparing!
+2020-12-27 01:26:07.3037 INFO ChangePreparingOrderStatus(): Order 1043 is in preparing status.
+2020-12-27 01:26:25.9655 INFO Update(): Order '1043' was updated!
+2020-12-27 01:26:25.9720 WARN ReadyToServerOrderItem(): Item '1149' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-12-27 01:26:25.9720 INFO ChangeReadyOrderItemStatus(): Order item 1150 is ready to serve!
+2020-12-27 01:26:25.9967 INFO ChangeReadyOrderStatus(): Order 1043 is in ready to serve status.
+2020-12-27 01:26:53.3220 INFO UpdateItem(): Item '1150' was updated. Quantity remaining the same, as it cannot be changed in prepared item.
+2020-12-27 01:26:56.6509 INFO ChangeOrderItemStatusToServed(): Order item 1150 is served!
+2020-12-27 01:26:56.6509 INFO UpdateItem(): Item '1150' status was updated. Status: 75.
+2020-12-27 01:27:05.4052 INFO UpdateParentOrderStatusAndDate(): Order '1043' status was updated! Status: 70
+2020-12-27 01:34:13.9295 WARN AllowPartialUpdate(): Order '1043' was partially updated. Flags update was rollbacked.
+2020-12-27 01:34:48.4741 INFO Update(): Order '1043' was updated!
+2020-12-27 01:34:48.5557 INFO PerformItemPreparation(): Dish (3) stock was adjusted.
+2020-12-27 01:34:54.5098 INFO ChangePreparingOrderItemStatus(): Order item 1149 is preparing!
+2020-12-27 01:34:54.5098 WARN PrepareOrderItem(): Item '1150' cannot be preparing! This item is already in 'Preparing' or in 'ReadyToServe' or in 'Served' status.
+2020-12-27 01:34:54.5321 INFO ChangePreparingOrderStatus(): Order 1043 is in preparing status.
+2020-12-27 01:38:56.5694 WARN ServeOrderItem(): Item '1149' cannot be served, nor quantity of it can be updated! This item is not in 'ReadyToServe' status or it is preparing/completed.
+2020-12-27 01:39:14.9034 INFO Update(): Order '1043' was updated!
+2020-12-27 01:39:21.5007 INFO ChangeReadyOrderItemStatus(): Order item 1149 is ready to serve!
+2020-12-27 01:39:21.5030 WARN ReadyToServerOrderItem(): Item '1150' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-12-27 01:39:21.5030 INFO ChangeReadyOrderStatus(): Order 1043 is in ready to serve status.
+2020-12-27 01:39:52.6394 INFO UpdateItem(): Item '1149' was updated. Quantity remaining the same, as it cannot be changed in prepared item.
+2020-12-27 01:40:02.2518 INFO ChangeOrderItemStatusToServed(): Order item 1149 is served!
+2020-12-27 01:40:02.2536 INFO UpdateItem(): Item '1149' status was updated. Status: 75.
+2020-12-27 01:40:07.6213 INFO UpdateParentOrderStatusAndDate(): Order '1043' status was updated! Status: 70
+2020-12-27 01:41:43.0388 INFO CreateItem(): New item '1151' for selected order is successfully created! Status: 10
+2020-12-27 01:41:59.0853 INFO UpdateParentOrderStatusAndDate(): Order '1043' status was updated! Status: 70
+2020-12-27 01:42:34.2860 INFO PartiallyUpdateItem(): Item '1151' was partially updated. IsServed flag change was rollbacked or initially was false.
+2020-12-27 01:42:38.3053 INFO ChangeOrderItemStatusToUpdated(): Order item 1151 is updated!
+2020-12-27 01:42:38.3053 INFO PartiallyUpdateItem(): Item '1151' status was updated. Status: 70.
+2020-12-27 01:42:39.5708 INFO UpdateParentOrderStatusAndDate(): Order '1043' status was updated! Status: 70
+2020-12-27 01:49:55.2247 INFO CreateItem(): New item '1152' for selected order is successfully created! Status: 10
+2020-12-27 01:49:55.3145 INFO UpdateParentOrderStatusAndDate(): Order '1043' status was updated! Status: 70
+2020-12-27 01:50:17.3567 INFO PartiallyUpdateItem(): Item '1152' was partially updated. IsServed flag change was rollbacked or initially was false.
+2020-12-27 01:50:18.2134 INFO ChangeOrderItemStatusToUpdated(): Order item 1152 is updated!
+2020-12-27 01:50:18.2134 INFO PartiallyUpdateItem(): Item '1152' status was updated. Status: 70.
+2020-12-27 01:50:19.0122 INFO UpdateParentOrderStatusAndDate(): Order '1043' status was updated! Status: 70
+2020-12-27 01:51:57.6940 INFO Update(): Order '1043' was updated!
+2020-12-27 01:51:57.7076 WARN PrepareOrderItem(): Item '1149' cannot be preparing! This item is already in 'Preparing' or in 'ReadyToServe' or in 'Served' status.
+2020-12-27 01:51:57.7076 WARN PrepareOrderItem(): Item '1150' cannot be preparing! This item is already in 'Preparing' or in 'ReadyToServe' or in 'Served' status.
+2020-12-27 01:51:57.7366 INFO PerformItemPreparation(): Dish (5) stock was adjusted.
+2020-12-27 01:52:03.7723 INFO ChangePreparingOrderItemStatus(): Order item 1151 is preparing!
+2020-12-27 01:52:03.7861 INFO PerformItemPreparation(): Dish (5) stock was adjusted.
+2020-12-27 01:52:03.7861 INFO ChangePreparingOrderItemStatus(): Order item 1152 is preparing!
+2020-12-27 01:52:03.8107 INFO ChangePreparingOrderStatus(): Order 1043 is in preparing status.
+2020-12-27 01:52:32.2837 INFO Update(): Order '1043' was updated!
+2020-12-27 01:52:32.2892 WARN ReadyToServerOrderItem(): Item '1149' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-12-27 01:52:32.2892 WARN ReadyToServerOrderItem(): Item '1150' cannot be ready! This item is not in 'Preparing' status or already in 'ReadyToServe' status.
+2020-12-27 01:52:32.3117 INFO ChangeReadyOrderItemStatus(): Order item 1151 is ready to serve!
+2020-12-27 01:52:32.3199 INFO ChangeReadyOrderItemStatus(): Order item 1152 is ready to serve!
+2020-12-27 01:52:32.3199 INFO ChangeReadyOrderStatus(): Order 1043 is in ready to serve status.
+2020-12-27 01:53:01.5422 INFO UpdateItem(): Item '1151' was updated. Quantity remaining the same, as it cannot be changed in prepared item.
+2020-12-27 01:53:02.1392 INFO ChangeOrderItemStatusToServed(): Order item 1151 is served!
+2020-12-27 01:53:02.1392 INFO UpdateItem(): Item '1151' status was updated. Status: 75.
+2020-12-27 01:53:02.6720 INFO UpdateParentOrderStatusAndDate(): Order '1043' status was updated! Status: 70
+2020-12-27 02:02:43.8929 INFO GetOrderItemById() returned order item with id: 1141

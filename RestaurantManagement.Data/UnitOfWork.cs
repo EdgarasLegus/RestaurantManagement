@@ -21,14 +21,10 @@ namespace RestaurantManagement.Data
 
             DishProductRepo = new DishProductRepository(_context);
             DishRepo = new DishRepository(_context);
-            OrderItemRepo = new OrderItemRepository(_context);
-            OrderRepo = new OrderRepository(_context);
         }
 
         public IDishProductRepo DishProductRepo { get; }
         public IDishRepo DishRepo { get; }
-        public IOrderItemRepo OrderItemRepo { get; }
-        public IOrderRepo OrderRepo { get; }
 
         public Task<int> Commit()
         {

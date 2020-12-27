@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RestaurantManagement.Contracts.Entities;
 using RestaurantManagement.Contracts.Enums;
 using RestaurantManagement.Contracts.Models;
@@ -17,53 +18,49 @@ namespace RestaurantManagement.BusinessLogic.Services
     {
         private readonly IDishService _dishService;
         private readonly IOrderItemService _orderItemService;
-        private readonly IOrderRepo _orderRepo;
-        private readonly IOrderItemRepo _orderItemRepo;
         private readonly IMapper _mapper;
         private readonly ILoggerManager _loggerManager;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IRepository<Order> _orderTempRepo;
+        private readonly IRepository<Order> _orderRepo;
 
-        public OrderService(IDishService dishService, IOrderItemService orderItemService, IOrderRepo orderRepo,
-            /*IOrderItemRepo orderItemRepo,*/ IMapper mapper, ILoggerManager loggerManager, IUnitOfWork unitOfWork)
+        public OrderService(IDishService dishService, IOrderItemService orderItemService,
+            IMapper mapper, ILoggerManager loggerManager, IUnitOfWork unitOfWork)
         {
             _dishService = dishService;
             _orderItemService = orderItemService;
-            _orderRepo = orderRepo;
             _unitOfWork = unitOfWork;
-            _orderItemRepo = unitOfWork.OrderItemRepo;
             _mapper = mapper;
             _loggerManager = loggerManager;
 
-            _orderTempRepo = _unitOfWork.GetRepository<Order>();
+            _orderRepo = _unitOfWork.GetRepository<Order>();
         }
 
         public async Task<List<Order>> GetOrders()
         {
-            return await _orderTempRepo.Get();
+            return await _orderRepo.Get();
         }
 
         public async Task<Order> GetOrderById(int id)
         {
-            return await _orderTempRepo.GetFirstOrDefault(x => x.Id == id);
+            return await _orderRepo.GetFirstOrDefault(x => x.Id == id);
         }
 
         public async Task<Order> GetOrderWithItems(int id)
         {
-            var order = await _orderTempRepo.GetFirstOrDefault(o => o.Id == id/*, x => x.OrderItem*/);
+            var order = await _orderRepo.GetFirstOrDefault(o => o.Id == id, x => x.Include(x => x.OrderItem));
             return order;
         }
 
         public async Task AddOrder(Order orderEntity)
         {
-            await _orderTempRepo.Add(orderEntity);
+            await _orderRepo.Add(orderEntity);
             await _unitOfWork.Commit();
         }
 
         public async Task<OrderViewModel> CreateCustomerOrder(OrderCreateModel orderCreateEntity)
         {
             var orderEntity = await Create(orderCreateEntity);
-            var dishIdsList = await _orderItemRepo.GetDishesIdsByOrderId(orderEntity.Id);
+            var dishIdsList = await _orderItemService.GetDishesIdsByOrderId(orderEntity.Id);
             var orderedDishList = await _dishService.GetOrderedDishes(dishIdsList);
 
             if (OrderHasSomeItemsWithZeroStock(orderedDishList))
@@ -82,16 +79,55 @@ namespace RestaurantManagement.BusinessLogic.Services
             }
         }
 
-        public async Task<Order> GetExistingOrder(int id)
-        {
-            return await _orderRepo.GetOrderWithItems(id);
-        }
-
         public async Task DeleteCustomerOrder(int id)
         {
             var orderEntity = await GetOrderById(id);
-            await _orderRepo.DeleteOrder(orderEntity);
+            _orderRepo.Delete(orderEntity);
+            await _unitOfWork.Commit();
             _loggerManager.LogInfo($"DeleteCustomerOrder(): Order '{orderEntity.OrderName}' was deleted!");
+        }
+
+        public async Task UpdateCreatedOrder(int id, Order orderEntity)
+        {
+            var existingOrder = await _orderRepo.GetFirstOrDefault(x => x.Id == id);
+
+            existingOrder.OrderName = orderEntity.OrderName;
+            existingOrder.CreatedDate = orderEntity.CreatedDate;
+            existingOrder.ModifiedDate = orderEntity.ModifiedDate;
+            existingOrder.OrderStatus = orderEntity.OrderStatus;
+            existingOrder.OrderItem = orderEntity.OrderItem;
+            existingOrder.IsPreparing = orderEntity.IsPreparing;
+            existingOrder.IsReady = orderEntity.IsReady;
+
+            await _unitOfWork.Commit();
+        }
+
+        public async Task UpdateOrderStatusAndDate(int id, int status)
+        {
+            var existingOrder = await _orderRepo.GetFirstOrDefault(x => x.Id == id);
+            existingOrder.OrderStatus = status;
+            existingOrder.ModifiedDate = DateTime.Now;
+            await _unitOfWork.Commit();
+        }
+
+        public async Task UpdateExistingOrder(int id, Order orderEntity, int status)
+        {
+            var existingOrder = await _orderRepo.GetFirstOrDefault(x => x.Id == id);
+            existingOrder.OrderName = orderEntity.OrderName;
+            existingOrder.ModifiedDate = orderEntity.ModifiedDate;
+            existingOrder.OrderStatus = status;
+            existingOrder.IsPreparing = orderEntity.IsPreparing;
+            existingOrder.IsReady = orderEntity.IsReady;
+            await _unitOfWork.Commit();
+        }
+
+        public async Task UpdateOrderNameAndStatus(int id, Order orderEntity, int status)
+        {
+            var existingOrder = await _orderRepo.GetFirstOrDefault(x => x.Id == id);
+            existingOrder.OrderName = orderEntity.OrderName;
+            existingOrder.ModifiedDate = orderEntity.ModifiedDate;
+            existingOrder.OrderStatus = status;
+            await _unitOfWork.Commit();
         }
 
         public async Task UpdateCustomerOrder(OrderUpdateModel orderUpdateEntity, int orderId)
@@ -147,7 +183,7 @@ namespace RestaurantManagement.BusinessLogic.Services
         private async Task ChangeCreatedOrderStatus(Order orderEntity)
         {
             var createdOrder = await GetOrderById(orderEntity.Id);
-            await _orderRepo.UpdateOrder(createdOrder.Id, orderEntity);
+            await UpdateCreatedOrder(createdOrder.Id, orderEntity);
             await _orderItemService.UpdateCreatedOrderItemsStatuses(createdOrder.Id);
         }
 
@@ -199,14 +235,14 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         private async Task ChangePreparingOrderStatus(int orderId)
         {
-            await _orderRepo.UpdateOrderStatusAndDate(orderId, (int)OrderStates.Preparing);
+            await UpdateOrderStatusAndDate(orderId, (int)OrderStates.Preparing);
             _loggerManager.LogInfo($"ChangePreparingOrderStatus(): Order {orderId} is" +
                 $" in preparing status.");
         }
 
         private async Task ChangeReadyOrderStatus(int orderId)
         {
-            await _orderRepo.UpdateOrderStatusAndDate(orderId, (int)OrderStates.ReadyToServe);
+            await UpdateOrderStatusAndDate(orderId, (int)OrderStates.ReadyToServe);
             _loggerManager.LogInfo($"ChangeReadyOrderStatus(): Order {orderId} is" +
                 $" in ready to serve status.");
         }
@@ -247,14 +283,14 @@ namespace RestaurantManagement.BusinessLogic.Services
         private async Task AllowUpdate(OrderUpdateModel orderUpdateEntity, int id)
         {
             var orderEntity = _mapper.Map<Order>(orderUpdateEntity);
-            await _orderRepo.UpdateExistingOrder(id, orderEntity, (int)OrderStates.Edited);
+            await UpdateExistingOrder(id, orderEntity, (int)OrderStates.Edited);
             _loggerManager.LogInfo($"Update(): Order '{id}' was updated!");
         }
 
         private async Task AllowPartialUpdate(OrderUpdateModel orderUpdateEntity, int id)
         {
             var orderEntity = _mapper.Map<Order>(orderUpdateEntity);
-            await _orderRepo.UpdateOrderNameAndStatus(id, orderEntity, (int)OrderStates.Edited);
+            await UpdateOrderNameAndStatus(id, orderEntity, (int)OrderStates.Edited);
             _loggerManager.LogWarn($"AllowPartialUpdate(): Order '{id}' was partially updated. Flags update was rollbacked.");
         }
 
