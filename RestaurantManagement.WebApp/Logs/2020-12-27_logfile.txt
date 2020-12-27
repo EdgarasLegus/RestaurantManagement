@@ -99,3 +99,17 @@
 2020-12-27 01:53:02.1392 INFO UpdateItem(): Item '1151' status was updated. Status: 75.
 2020-12-27 01:53:02.6720 INFO UpdateParentOrderStatusAndDate(): Order '1043' status was updated! Status: 70
 2020-12-27 02:02:43.8929 INFO GetOrderItemById() returned order item with id: 1141
+2020-12-27 11:22:43.5102 INFO GetDishes() method returned existing dishes list.
+2020-12-27 11:29:03.7563 INFO GetDishById() returned dish with id: 6
+2020-12-27 11:36:19.2990 INFO CreateItem(): New item '1153' for selected order is successfully created! Status: 10
+2020-12-27 11:36:19.4215 INFO UpdateParentOrderStatusAndDate(): Order '1043' status was updated! Status: 70
+2020-12-27 11:44:00.6789 INFO GetDishWithProducts() method returned dish with products for id: 4
+2020-12-27 11:49:19.6050 INFO CreateCustomerOrder(): New order 'ReTest' is successfully created! Status: 10
+2020-12-27 11:54:40.5635 INFO Update(): Order '1044' was updated!
+2020-12-27 11:55:06.9145 INFO PerformItemPreparation(): Dish (3) stock was adjusted.
+2020-12-27 11:55:06.9504 INFO ChangePreparingOrderItemStatus(): Order item 1154 is preparing!
+2020-12-27 11:55:10.0870 INFO PerformItemPreparation(): Dish (5) stock was adjusted.
+2020-12-27 11:55:10.0944 INFO ChangePreparingOrderItemStatus(): Order item 1155 is preparing!
+2020-12-27 11:55:10.0944 INFO ChangePreparingOrderStatus(): Order 1044 is in preparing status.
+2020-12-27 12:18:32.8489 INFO GetDishes() method returned existing dishes list.
+2020-12-27 12:33:50.0167 INFO GetOrderById() returned order with id: 1043

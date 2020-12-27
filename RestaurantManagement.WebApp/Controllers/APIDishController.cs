@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantManagement.Contracts.Models;
-using RestaurantManagement.Interfaces.Repositories;
 using RestaurantManagement.Interfaces.Services;
 
 namespace RestaurantManagement.WebApp.Controllers
@@ -14,15 +12,14 @@ namespace RestaurantManagement.WebApp.Controllers
     [ApiController]
     public class APIDishController : ControllerBase
     {
-        private readonly IDishRepo _dishRepo;
-        private readonly IDishProductRepo _dishProductRepo;
+        private readonly IDishService _dishService;
         private readonly IMapper _mapper;
         private readonly ILoggerManager _loggerManager;
 
-        public APIDishController(IDishRepo dishRepo, IDishProductRepo dishProductRepo, IMapper mapper, ILoggerManager loggerManager)
+        public APIDishController(IDishService dishService,
+            IMapper mapper, ILoggerManager loggerManager)
         {
-            _dishRepo = dishRepo;
-            _dishProductRepo = dishProductRepo;
+            _dishService = dishService;
             _mapper = mapper;
             _loggerManager = loggerManager;
         }
@@ -32,7 +29,7 @@ namespace RestaurantManagement.WebApp.Controllers
         {
             try
             {
-                var dishes = await _dishRepo.GetDishes();
+                var dishes = await _dishService.GetDishes();
                 _loggerManager.LogInfo($"GetDishes() method returned existing dishes list.");
                 var dishResult = _mapper.Map<IEnumerable<DishViewModel>>(dishes);
                 return Ok(dishResult);
@@ -49,7 +46,7 @@ namespace RestaurantManagement.WebApp.Controllers
         {
             try
             {
-                var dish = await _dishRepo.GetDishById(id);
+                var dish = await _dishService.GetDishById(id);
 
                 if (dish == null)
                 {
@@ -74,7 +71,7 @@ namespace RestaurantManagement.WebApp.Controllers
         {
             try
             {
-                var dish = await _dishRepo.GetDishWithProducts(id);
+                var dish = await _dishService.GetDishWithProducts(id);
                 if (dish == null)
                 {
                     _loggerManager.LogError($"GetDishWithProducts(): Dish with id: {id}, is not found in database.");

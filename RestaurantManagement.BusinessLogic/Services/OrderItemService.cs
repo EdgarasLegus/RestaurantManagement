@@ -3,12 +3,10 @@ using RestaurantManagement.Contracts.Entities;
 using RestaurantManagement.Contracts.Enums;
 using RestaurantManagement.Contracts.Models;
 using RestaurantManagement.Interfaces;
-using RestaurantManagement.Interfaces.Repositories;
 using RestaurantManagement.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RestaurantManagement.BusinessLogic.Services
@@ -76,7 +74,7 @@ namespace RestaurantManagement.BusinessLogic.Services
             orderItemCreateEntity = SetOrderIdForItem(orderId, orderItemCreateEntity);
             var orderItemEntity = await CreateItem(orderItemCreateEntity);
             await UpdateParentOrderStatusAndDate(orderItemEntity);
-            var orderedDish = await _dishService.GetSingleDish(orderItemEntity.DishId);
+            var orderedDish = await _dishService.GetDishById(orderItemEntity.DishId);
 
             if (orderedDish.QuantityInStock != 0)
                 return _mapper.Map<OrderItemViewModel>(orderItemEntity);
@@ -179,7 +177,7 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         private async Task<bool> OrderItemDishHasZeroStock(OrderItem orderItemEntity)
         {
-            var itemDish = await _dishService.GetSingleDish(orderItemEntity.DishId);
+            var itemDish = await _dishService.GetDishById(orderItemEntity.DishId);
             return itemDish.QuantityInStock == 0;
         }
 
@@ -245,7 +243,7 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         private async Task<bool> OrderItemStatusIsNotPreparedAndAvalaibleInStock(OrderItem orderItemEntity)
         {
-            var orderedDish = await _dishService.GetSingleDish(orderItemEntity.DishId);
+            var orderedDish = await _dishService.GetDishById(orderItemEntity.DishId);
             return (orderItemEntity.OrderItemStatus == (int)OrderItemStates.Created 
                 || orderItemEntity.OrderItemStatus == (int)OrderItemStates.Declined
                 || orderItemEntity.OrderItemStatus == (int)OrderItemStates.Updated)

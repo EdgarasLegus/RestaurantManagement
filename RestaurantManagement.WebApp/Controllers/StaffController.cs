@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantManagement.Contracts.Entities;
 using RestaurantManagement.Contracts.Enums;
 using RestaurantManagement.Contracts.Models;
-using RestaurantManagement.Interfaces.Repositories;
 using RestaurantManagement.Interfaces.Services;
 using RestaurantManagement.WebApp.Models;
 

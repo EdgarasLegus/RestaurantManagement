@@ -1,17 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RestaurantManagement.Interfaces.Repositories;
 using RestaurantManagement.Interfaces.Services;
 using RestaurantManagement.Data;
 using AutoMapper;
@@ -19,7 +15,6 @@ using NLog;
 using System.IO;
 using RestaurantManagement.BusinessLogic.Services;
 using RestaurantManagement.WebApp.Extensions;
-using RestaurantManagement.Data.Repository;
 using RestaurantManagement.Contracts.Settings;
 using RestaurantManagement.Interfaces;
 
@@ -67,8 +62,6 @@ namespace RestaurantManagement.WebApp
                 .AddScoped<IStaffService, StaffService>()
                 .AddScoped<IOrderService, OrderService>()
                 .AddScoped<IOrderItemService, OrderItemService>()
-                .AddScoped<IDishRepo, DishRepository>()
-                //.AddScoped<IDishProductRepo, DishProductRepository>()
                 .AddScoped<ILogicHandler, LogicHandler>()
                 .AddScoped<IUserLogService, UserLogService>()
                 .AddScoped<IPersonRoleService, PersonRoleService>()

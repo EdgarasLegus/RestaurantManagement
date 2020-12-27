@@ -1,13 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using RestaurantManagement.Contracts.Entities;
 using RestaurantManagement.Contracts.Settings;
 using RestaurantManagement.Interfaces.Services;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace RestaurantManagement.BusinessLogic.Services
 {

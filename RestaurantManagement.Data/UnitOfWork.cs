@@ -1,9 +1,6 @@
-﻿using RestaurantManagement.Data.Repository;
-using RestaurantManagement.Interfaces;
-using RestaurantManagement.Interfaces.Repositories;
+﻿using RestaurantManagement.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RestaurantManagement.Data
@@ -18,13 +15,7 @@ namespace RestaurantManagement.Data
         {
             _context = context;
             _repositories = new Dictionary<Type, object>();
-
-            DishProductRepo = new DishProductRepository(_context);
-            DishRepo = new DishRepository(_context);
         }
-
-        public IDishProductRepo DishProductRepo { get; }
-        public IDishRepo DishRepo { get; }
 
         public Task<int> Commit()
         {

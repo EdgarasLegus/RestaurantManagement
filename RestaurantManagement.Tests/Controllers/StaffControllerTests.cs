@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using NUnit.Framework;
 using RestaurantManagement.Contracts.Entities;
-using RestaurantManagement.Interfaces.Repositories;
 using RestaurantManagement.Interfaces.Services;
 using RestaurantManagement.WebApp.Controllers;
 using RestaurantManagement.WebApp.Models;
