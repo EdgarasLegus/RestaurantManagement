@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query;
 using NSubstitute;
 using NUnit.Framework;
 using RestaurantManagement.BusinessLogic.Services;
@@ -9,6 +10,8 @@ using RestaurantManagement.Interfaces;
 using RestaurantManagement.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace RestaurantManagement.Tests.Services
@@ -26,34 +29,44 @@ namespace RestaurantManagement.Tests.Services
         [SetUp]
         public void Setup()
         {
+            _unitOfWorkMock = Substitute.For<IUnitOfWork>();
+            _orderRepoMock = Substitute.For<IRepository<Order>>();
+            _unitOfWorkMock.GetRepository<Order>().Returns(_orderRepoMock);
+
             _orderService = new OrderService(_dishServiceMock, _orderItemServiceMock,
                 _mapper, _loggerManager, _unitOfWorkMock);
-            _unitOfWorkMock = Substitute.For<IUnitOfWork>();
-            _orderRepoMock = _unitOfWorkMock.GetRepository<Order>();
-
         }
 
         [Test]
-        public async Task Test_GetOrders_ReturnOkResult()
+        public async Task GetOrders_InvokesAppropriateRepositoryMethod()
         {
-            var order = new Order()
-            {
-                OrderName = "TestOrder",
-                CreatedDate = new DateTime(2020, 12, 27),
-                ModifiedDate = new DateTime(2020, 12, 28),
-                OrderStatus = 10,
-                IsPreparing = false,
-                IsReady = false
+            //Arrange /Act
+            await _orderService.GetOrders();
 
-            };
-            var ordersList = new List<Order>() { order };
-
-            _orderRepoMock.Get().Returns(Arg.Any<List<Order>>());
-
-            var result = await _orderService.GetOrders();
+            //Assert
             await _orderRepoMock.Received().Get();
-            Assert.AreEqual(ordersList, result);
+        }
 
+        [Test]
+        public async Task GetOrderById_MakesAppropriateCall()
+        {
+            //Arragne, Act
+            await _orderService.GetOrderById(5);
+
+            //Assert
+            await _orderRepoMock.Received(1).GetFirstOrDefault(Arg.Any<Expression<Func<Order, bool>>>(),
+                Arg.Any<Func<IQueryable<Order>, IIncludableQueryable<Order, Order>>>());
+        }
+
+        [Test]
+        public async Task GetOrderWithItems_MakesAppropriateCall()
+        {
+            //Arragne, Act
+            await _orderService.GetOrderWithItems(5);
+
+            //Assert
+            await _orderRepoMock.Received(1).GetFirstOrDefault(Arg.Any<Expression<Func<Order, bool>>>(),
+                Arg.Any<>());
         }
 
         [Test]

@@ -45,8 +45,7 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         public async Task<Order> GetOrderWithItems(int id)
         {
-            var order = await _orderRepo.GetFirstOrDefault(o => o.Id == id, x => x.Include(x => x.OrderItem));
-            return order;
+            return await _orderRepo.GetFirstOrDefault(o => o.Id == id, x => x.Include(x => x.OrderItem));
         }
 
         public async Task AddOrder(Order orderEntity)
