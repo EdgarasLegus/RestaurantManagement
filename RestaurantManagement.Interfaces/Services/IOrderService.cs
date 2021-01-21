@@ -13,6 +13,7 @@ namespace RestaurantManagement.Interfaces.Services
         Task<Order> GetOrderById(int id);
         Task<Order> GetOrderWithItems(int id);
         Task AddOrder(Order orderEntity);
+        Task<Order> Create(OrderCreateModel orderCreateEntity);
         Task<OrderViewModel> CreateCustomerOrder(OrderCreateModel orderCreateEntity);
         Task DeleteCustomerOrder(int id);
         Task UpdateCreatedOrder(int id, Order orderEntity);

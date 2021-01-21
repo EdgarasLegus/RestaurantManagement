@@ -54,6 +54,15 @@ namespace RestaurantManagement.BusinessLogic.Services
             await _unitOfWork.Commit();
         }
 
+        public async Task<Order> Create(OrderCreateModel orderCreateEntity)
+        {
+            var orderEntity = _mapper.Map<Order>(orderCreateEntity);
+            await AddOrder(orderEntity);
+            _loggerManager.LogInfo($"CreateCustomerOrder(): New order '{orderEntity.OrderName}' is" +
+                $" successfully created! Status: 10");
+            return orderEntity;
+        }
+
         public async Task<OrderViewModel> CreateCustomerOrder(OrderCreateModel orderCreateEntity)
         {
             var orderEntity = await Create(orderCreateEntity);
@@ -63,17 +72,12 @@ namespace RestaurantManagement.BusinessLogic.Services
             if (OrderHasSomeItemsWithZeroStock(orderedDishList))
             {
                 orderEntity = await PartiallyDecline(orderEntity, orderedDishList);
-                return _mapper.Map<OrderViewModel>(orderEntity);
             }
             else if (OrderHasAllItemsWithZeroStock(orderedDishList))
             {
                 orderEntity = await Decline(orderEntity, orderedDishList);
-                return _mapper.Map<OrderViewModel>(orderEntity);
             }
-            else
-            {
-                return _mapper.Map<OrderViewModel>(orderEntity);
-            }
+            return _mapper.Map<OrderViewModel>(orderEntity);
         }
 
         public async Task DeleteCustomerOrder(int id)
@@ -184,14 +188,7 @@ namespace RestaurantManagement.BusinessLogic.Services
             await _orderItemService.UpdateCreatedOrderItemsStatuses(createdOrder.Id);
         }
 
-        private async Task<Order> Create(OrderCreateModel orderCreateEntity)
-        {
-            var orderEntity = _mapper.Map<Order>(orderCreateEntity);
-            await AddOrder(orderEntity);
-            _loggerManager.LogInfo($"CreateCustomerOrder(): New order '{orderEntity.OrderName}' is" +
-                $" successfully created! Status: 10");
-            return orderEntity;
-        }
+        
 
         private async Task<Order> PartiallyDecline(Order orderEntity, List<Dish> orderedDishList)
         {

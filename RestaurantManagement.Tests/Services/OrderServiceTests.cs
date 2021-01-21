@@ -5,6 +5,7 @@ using NSubstitute;
 using NUnit.Framework;
 using RestaurantManagement.BusinessLogic.Services;
 using RestaurantManagement.Contracts.Entities;
+using RestaurantManagement.Contracts.Enums;
 using RestaurantManagement.Contracts.Models;
 using RestaurantManagement.Interfaces;
 using RestaurantManagement.Interfaces.Services;
@@ -32,6 +33,8 @@ namespace RestaurantManagement.Tests.Services
             _unitOfWorkMock = Substitute.For<IUnitOfWork>();
             _orderRepoMock = Substitute.For<IRepository<Order>>();
             _unitOfWorkMock.GetRepository<Order>().Returns(_orderRepoMock);
+            _orderItemServiceMock = Substitute.For<IOrderItemService>();
+            _dishServiceMock = Substitute.For<IDishService>();
 
             _orderService = new OrderService(_dishServiceMock, _orderItemServiceMock,
                 _mapper, _loggerManager, _unitOfWorkMock);
@@ -66,28 +69,98 @@ namespace RestaurantManagement.Tests.Services
 
             //Assert
             await _orderRepoMock.Received(1).GetFirstOrDefault(Arg.Any<Expression<Func<Order, bool>>>(),
-                Arg.Any<>());
+                Arg.Any<Func<IQueryable<Order>, IIncludableQueryable<Order, OrderItem>>>());
         }
 
         [Test]
-        public async Task Test_CreateCustomerOrder_IfOrderIsPartiallyDeclined()
+        public async Task AddOrder_MakesAppropriateCallOfRepositoryMethods()
         {
             //Arrange
-            var orderCreateModel = new OrderCreateModel
+            var orderTestEntity = new Order
             {
+                Id = 1,
                 OrderName = "testOrder",
-                OrderItems = new List<OrderItemCreateModel>
-                {
-                    new OrderItemCreateModel{DishId = 1, Quantity = 1},
-                    new OrderItemCreateModel{DishId = 2, Quantity = 1},
-                    new OrderItemCreateModel{DishId = 2, Quantity = 2}
-                }
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now,
+                OrderStatus = (int)OrderStates.Created,
+                IsPreparing = false,
+                IsReady = false
             };
 
             //Act
-
+            await _orderService.AddOrder(orderTestEntity);
             //Assert
+            await _orderRepoMock.Received(1).Add(orderTestEntity);
+
         }
+
+        [Test]
+        public async Task AddOrder_MakesCommitCall()
+        {
+            //Arrange
+            var orderTestEntity = new Order
+            {
+                Id = 1,
+                OrderName = "testOrder",
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now,
+                OrderStatus = (int)OrderStates.Created,
+                IsPreparing = false,
+                IsReady = false
+            };
+
+            //Act
+            await _orderService.AddOrder(orderTestEntity);
+            //Assert
+            await _unitOfWorkMock.Commit();
+        }
+
+        [Test]
+        public async Task CreateCustomerOrder_IsPartiallyDeclined()
+        {
+            var testOrderEntity = new Order
+            {
+                Id = 1,
+                OrderName = "testOrder",
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now,
+                OrderStatus = (int)OrderStates.Created,
+                IsPreparing = false,
+                IsReady = false,
+                OrderItem = new List<OrderItem>
+                {
+                    new OrderItem{Id = 1001, OrderId = 1, DishId = 1, Quantity = 3},
+                    new OrderItem{Id = 1002, OrderId = 1, DishId = 2, Quantity = 5},
+                    new OrderItem{Id = 1003, OrderId = 1, DishId = 3, Quantity = 1}
+                }
+            };
+
+
+
+            var dishTestIds = await _orderItemServiceMock.GetDishesIdsByOrderId(testOrderEntity.Id);
+            await _dishServiceMock.GetOrderedDishes(dishTestIds).Returns();
+
+        }
+
+        //[Test]
+        //public async Task CreateCustomerOrder_IsPartiallyDeclined()
+        //{
+        //    //Arrange
+        //    var orderCreateModel = new OrderCreateModel
+        //    {
+        //        OrderName = "testOrder",
+        //        OrderItems = new List<OrderItemCreateModel>
+        //        {
+        //            new OrderItemCreateModel{DishId = 1, Quantity = 1},
+        //            new OrderItemCreateModel{DishId = 2, Quantity = 1},
+        //            new OrderItemCreateModel{DishId = 2, Quantity = 2}
+        //        }
+        //    };
+
+        //    //Act
+
+        //    //Assert
+        //}
 
     }
 }
