@@ -1,0 +1,8 @@
+2021-01-23 23:04:58.8135 INFO CreateCustomerOrder(): New order '2021_01_23_1_CreateTest' is successfully created! Status: 10
+2021-01-23 23:05:51.3046 INFO CreateCustomerOrder(): New order '2021_01_23_1_PartiallyDecline_Test' is successfully created! Status: 10
+2021-01-23 23:06:42.0189 WARN CheckCreatedOrderItem(): Item '1171' will have status declined! This item currently has 0 stock. Status: '30'
+2021-01-23 23:06:42.0477 WARN CreateCustomerOrder(): Order '2021_01_23_1_PartiallyDecline_Test' was partially declined! Status: 20
+2021-01-23 23:07:39.3673 INFO CreateCustomerOrder(): New order '2021_01_23_3_Decline_Test' is successfully created! Status: 10
+2021-01-23 23:07:44.0674 WARN CheckCreatedOrderItem(): Item '1172' will have status declined! This item currently has 0 stock. Status: '30'
+2021-01-23 23:07:44.7467 WARN CheckCreatedOrderItem(): Item '1173' will have status declined! This item currently has 0 stock. Status: '30'
+2021-01-23 23:07:44.7687 WARN CreateCustomerOrder(): Order '2021_01_23_3_Decline_Test' was declined! Status: 30

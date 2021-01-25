@@ -22,8 +22,8 @@ namespace RestaurantManagement.Tests.Services
         private IOrderService _orderService;
         private IDishService _dishServiceMock;
         private IOrderItemService _orderItemServiceMock;
-        private IMapper _mapper;
-        private ILoggerManager _loggerManager;
+        private IMapper _mapperMock;
+        private ILoggerManager _loggerManagerMock;
         private IUnitOfWork _unitOfWorkMock;
         private IRepository<Order> _orderRepoMock;
 
@@ -35,9 +35,11 @@ namespace RestaurantManagement.Tests.Services
             _unitOfWorkMock.GetRepository<Order>().Returns(_orderRepoMock);
             _orderItemServiceMock = Substitute.For<IOrderItemService>();
             _dishServiceMock = Substitute.For<IDishService>();
+            _mapperMock = Substitute.For<IMapper>();
+            _loggerManagerMock = Substitute.For<ILoggerManager>();
 
             _orderService = new OrderService(_dishServiceMock, _orderItemServiceMock,
-                _mapper, _loggerManager, _unitOfWorkMock);
+                _mapperMock, _loggerManagerMock, _unitOfWorkMock);
         }
 
         [Test]
@@ -58,18 +60,18 @@ namespace RestaurantManagement.Tests.Services
 
             //Assert
             await _orderRepoMock.Received(1).GetFirstOrDefault(Arg.Any<Expression<Func<Order, bool>>>(),
-                Arg.Any<Func<IQueryable<Order>, IIncludableQueryable<Order, Order>>>());
+                Arg.Any<Func<IQueryable<Order>, IIncludableQueryable<Order, object>>>());
         }
 
         [Test]
         public async Task GetOrderWithItems_MakesAppropriateCall()
         {
-            //Arragne, Act
+            //Arrange, Act
             await _orderService.GetOrderWithItems(5);
 
             //Assert
             await _orderRepoMock.Received(1).GetFirstOrDefault(Arg.Any<Expression<Func<Order, bool>>>(),
-                Arg.Any<Func<IQueryable<Order>, IIncludableQueryable<Order, OrderItem>>>());
+                Arg.Any<Func<IQueryable<Order>, IIncludableQueryable<Order, object>>>());
         }
 
         [Test]
@@ -112,12 +114,23 @@ namespace RestaurantManagement.Tests.Services
             //Act
             await _orderService.AddOrder(orderTestEntity);
             //Assert
-            await _unitOfWorkMock.Commit();
+            await _unitOfWorkMock.Received(1).Commit();
         }
 
         [Test]
         public async Task CreateCustomerOrder_IsPartiallyDeclined()
         {
+            var testCreateOrderEntity = new OrderCreateModel
+            {
+                OrderName = "testOrder",
+                OrderItems = new List<OrderItemCreateModel>
+                {
+                    new OrderItemCreateModel{ OrderId = 1, DishId = 1, Quantity = 3},
+                    new OrderItemCreateModel{OrderId = 1, DishId = 2, Quantity = 5},
+                    new OrderItemCreateModel{OrderId = 1, DishId = 3, Quantity = 1}
+                }
+            };
+
             var testOrderEntity = new Order
             {
                 Id = 1,
@@ -135,11 +148,75 @@ namespace RestaurantManagement.Tests.Services
                 }
             };
 
+            _orderService.Create(testCreateOrderEntity).Returns(testOrderEntity);
+            _orderService.OrderHasSomeItemsWithZeroStock(testOrderEntity).Returns(true);
+
+            await _orderService.CreateCustomerOrder(testCreateOrderEntity);
+
+            await _orderService.Received(1).PartiallyDecline(testOrderEntity);
+
+        }
+
+        [Test]
+        public async Task DeleteCustomerOrder_MakesCallToRepositoryMethod()
+        {
+            //Arrange
+            var orderTestEntity = new Order
+            {
+                Id = 1,
+                OrderName = "testOrder",
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now,
+                OrderStatus = (int)OrderStates.Created,
+                IsPreparing = false,
+                IsReady = false
+            };
+
+            //Act
+            //_orderService.GetOrderById(Arg.Any<int>()).Returns(orderTestEntity);
+            _orderRepoMock.Delete(orderTestEntity);
+            await _unitOfWorkMock.Commit();
+            _loggerManagerMock.LogInfo($"DeleteCustomerOrder(): Order '{orderTestEntity.OrderName}' was deleted!");
 
 
-            var dishTestIds = await _orderItemServiceMock.GetDishesIdsByOrderId(testOrderEntity.Id);
-            await _dishServiceMock.GetOrderedDishes(dishTestIds).Returns();
+            await _orderService.DeleteCustomerOrder(1);
 
+            //Assert
+            //await _orderService.Received(1).GetOrderById(Arg.Any<int>());
+            _orderRepoMock.Received(1).Delete(orderTestEntity);
+            await _unitOfWorkMock.Received(1).Commit();
+            _loggerManagerMock.Received(1).LogInfo($"DeleteCustomerOrder(): Order '{orderTestEntity.OrderName}' was deleted!");
+        }
+
+        [Test]
+        public async Task UpdateCreatedOrder_RepositoryMethodReceivedCall()
+        {
+            //Arrange
+            var orderTestUpdatableEntity = new Order
+            {
+                OrderName = "testOrder"
+            };
+
+            var existingTestOrder = new Order
+            {
+                Id = 1,
+                OrderName = "existingTestOrder",
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now,
+                OrderStatus = (int)OrderStates.Created,
+                IsPreparing = false,
+                IsReady = false
+            };
+
+            _orderRepoMock.GetFirstOrDefault(Arg.Any<Expression<Func<Order, bool>>>(),
+                Arg.Any<Func<IQueryable<Order>, IIncludableQueryable<Order, Order>>>()).Returns(existingTestOrder);
+
+            //Act
+            await _orderService.UpdateCreatedOrder(1, orderTestUpdatableEntity);
+
+            //Assert
+            await _orderRepoMock.Received(1).GetFirstOrDefault(Arg.Any<Expression<Func<Order, bool>>>(),
+                Arg.Any<Func<IQueryable<Order>, IIncludableQueryable<Order, Order>>>());
         }
 
         //[Test]

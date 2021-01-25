@@ -66,16 +66,14 @@ namespace RestaurantManagement.BusinessLogic.Services
         public async Task<OrderViewModel> CreateCustomerOrder(OrderCreateModel orderCreateEntity)
         {
             var orderEntity = await Create(orderCreateEntity);
-            var dishIdsList = await _orderItemService.GetDishesIdsByOrderId(orderEntity.Id);
-            var orderedDishList = await _dishService.GetOrderedDishes(dishIdsList);
 
-            if (OrderHasSomeItemsWithZeroStock(orderedDishList))
+            if (await OrderHasSomeItemsWithZeroStock(orderEntity))
             {
-                orderEntity = await PartiallyDecline(orderEntity, orderedDishList);
+                orderEntity = await PartiallyDecline(orderEntity);
             }
-            else if (OrderHasAllItemsWithZeroStock(orderedDishList))
+            else if (await OrderHasAllItemsWithZeroStock(orderEntity))
             {
-                orderEntity = await Decline(orderEntity, orderedDishList);
+                orderEntity = await Decline(orderEntity);
             }
             return _mapper.Map<OrderViewModel>(orderEntity);
         }
@@ -92,7 +90,7 @@ namespace RestaurantManagement.BusinessLogic.Services
         {
             var existingOrder = await _orderRepo.GetFirstOrDefault(x => x.Id == id);
 
-            existingOrder.OrderName = orderEntity.OrderName;
+             existingOrder.OrderName = orderEntity.OrderName;
             existingOrder.CreatedDate = orderEntity.CreatedDate;
             existingOrder.ModifiedDate = orderEntity.ModifiedDate;
             existingOrder.OrderStatus = orderEntity.OrderStatus;
@@ -153,6 +151,22 @@ namespace RestaurantManagement.BusinessLogic.Services
             }
         }
 
+        public async Task<bool> OrderHasSomeItemsWithZeroStock(Order orderEntity)
+        {
+            var dishIdsList = await _orderItemService.GetDishesIdsByOrderId(orderEntity.Id);
+            var orderedDishList = await _dishService.GetOrderedDishes(dishIdsList);
+            return orderedDishList.Any(x => x.QuantityInStock == 0)
+                && orderedDishList.Any(x => x.QuantityInStock != 0);
+        }
+
+        public async Task<Order> PartiallyDecline(Order orderEntity)
+        {
+            orderEntity.OrderStatus = (int)OrderStates.PartiallyDeclined;
+            await ChangeCreatedOrderStatus(orderEntity);
+            _loggerManager.LogWarn($"CreateCustomerOrder(): Order '{orderEntity.OrderName}' was" +
+                $" partially declined! Status: 20");
+            return orderEntity;
+        }
 
         // Review
         private bool OrderIsJustUpdated(OrderUpdateModel orderUpdateEntity)
@@ -170,14 +184,12 @@ namespace RestaurantManagement.BusinessLogic.Services
             return orderUpdateEntity.IsPreparing == false && orderUpdateEntity.IsReady == true;
         }
 
-        private bool OrderHasSomeItemsWithZeroStock(List<Dish> orderedDishList)
-        {
-            return orderedDishList.Any(x => x.QuantityInStock == 0) 
-                && orderedDishList.Any(x => x.QuantityInStock != 0);
-        }
+        
 
-        private bool OrderHasAllItemsWithZeroStock(List<Dish> orderedDishList)
+        private async Task<bool> OrderHasAllItemsWithZeroStock(Order orderEntity)
         {
+            var dishIdsList = await _orderItemService.GetDishesIdsByOrderId(orderEntity.Id);
+            var orderedDishList = await _dishService.GetOrderedDishes(dishIdsList);
             return orderedDishList.All(x => x.QuantityInStock == 0);
         }
 
@@ -190,16 +202,9 @@ namespace RestaurantManagement.BusinessLogic.Services
 
         
 
-        private async Task<Order> PartiallyDecline(Order orderEntity, List<Dish> orderedDishList)
-        {
-            orderEntity.OrderStatus = (int)OrderStates.PartiallyDeclined;
-            await ChangeCreatedOrderStatus(orderEntity);
-            _loggerManager.LogWarn($"CreateCustomerOrder(): Order '{orderEntity.OrderName}' was" +
-                $" partially declined! Status: 20");
-            return orderEntity;
-        }
+        
 
-        private async Task<Order> Decline(Order orderEntity, List<Dish> orderedDishList)
+        private async Task<Order> Decline(Order orderEntity)
         {
             orderEntity.OrderStatus = (int)OrderStates.Declined;
             await ChangeCreatedOrderStatus(orderEntity);
