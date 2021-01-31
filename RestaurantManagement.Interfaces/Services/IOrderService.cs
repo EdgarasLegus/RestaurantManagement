@@ -22,7 +22,9 @@ namespace RestaurantManagement.Interfaces.Services
         Task UpdateOrderNameAndStatus(int id, Order orderEntity, int status);
         Task UpdateCustomerOrder(OrderUpdateModel orderUpdateEntity, int orderId);
         Task<bool> OrderHasSomeItemsWithZeroStock(Order orderEntity);
+        Task<bool> OrderHasAllItemsWithZeroStock(Order orderEntity);
         Task<Order> PartiallyDecline(Order orderEntity);
+        Task<Order> Decline(Order orderEntity);
 
     }
 }
