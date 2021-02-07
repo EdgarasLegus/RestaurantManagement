@@ -1,0 +1,4 @@
+﻿1,l,Litras
+2,vnt,Vienetas
+3,kg,Kilogramas
+4,valg.šaukšt,Valgomasis šaukštas

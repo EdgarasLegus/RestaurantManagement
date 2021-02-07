@@ -65,6 +65,7 @@ namespace RestaurantManagement.WebApp
                 .AddScoped<ILogicHandler, LogicHandler>()
                 .AddScoped<IUserLogService, UserLogService>()
                 .AddScoped<IPersonRoleService, PersonRoleService>()
+                .AddScoped<IUnitOfMeasurementService, UnitOfMeasurementService>()
                 .AddScoped<IUnitOfWork, UnitOfWork>()
                 .AddHttpContextAccessor();
 

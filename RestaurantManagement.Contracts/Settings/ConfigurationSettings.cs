@@ -14,6 +14,7 @@ namespace RestaurantManagement.Contracts.Settings
         public string InitialPersonRoles { get; set; }
         public string InitialDishes { get; set; }
         public string InitialDishProducts { get; set; }
+        public string InitialUnits { get; set; }
 
         private static readonly IConfiguration configuration = new ConfigurationBuilder()
                 .AddJsonFile(@"./appsettings.json")

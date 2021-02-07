@@ -1,0 +1,10 @@
+2021-02-07 18:51:37.8941 INFO GetProducts() method returned all products list.
+2021-02-07 18:51:38.2000 ERROR GetProducts() method execution failed: Error mapping types.
+
+Mapping types:
+Object -> IEnumerable`1
+System.Object -> System.Collections.Generic.IEnumerable`1[[RestaurantManagement.Contracts.Models.ProductViewModel, RestaurantManagement.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-02-07 18:53:58.6787 INFO GetProducts() method returned all products list.
+2021-02-07 19:21:13.1767 ERROR CreateStaffMember() method execution failed: An error occurred while updating the entries. See the inner exception for details.
+2021-02-07 19:22:46.3880 ERROR CreateStaffMember() method execution failed: An error occurred while updating the entries. See the inner exception for details.
+2021-02-07 19:22:55.1948 INFO CreateStaffMember(): New staff member 'Benas Suokas' is successfully created!

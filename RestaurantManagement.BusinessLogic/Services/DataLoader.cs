@@ -13,13 +13,14 @@ namespace RestaurantManagement.BusinessLogic.Services
         private readonly IDishService _dishService;
         private readonly IDishProductService _dishProductService;
         private readonly IPersonRoleService _personRoleService;
+        private readonly IUnitOfMeasurementService _unitOfMeasurementService;
         private readonly IUnitOfWork _unitOfWork;
 
 
 
         public DataLoader(IStaffService staffService, IRestaurantTablesService restaurantTablesService, 
             IProductService productService, IDishService dishService, IDishProductService dishProductService,
-            IPersonRoleService personRoleService, IUnitOfWork unitOfWork)
+            IPersonRoleService personRoleService, IUnitOfMeasurementService unitOfMeasurementService, IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             _staffService = staffService;
@@ -28,10 +29,12 @@ namespace RestaurantManagement.BusinessLogic.Services
             _dishService = dishService;
             _dishProductService = dishProductService;
             _personRoleService = personRoleService;
+            _unitOfMeasurementService = unitOfMeasurementService;
         }
 
         public async Task LoadInitialData()
         {
+            await LoadUnits();
             await LoadRoles();
             await LoadStaff();
             await LoadTables();
@@ -39,6 +42,11 @@ namespace RestaurantManagement.BusinessLogic.Services
             await LoadDishes();
             await LoadDishProducts();
             //await _context.SaveChangesAsync();
+        }
+
+        private async Task LoadUnits()
+        {
+            await _unitOfWork.GetRepository<UnitOfMeasurement>().InsertInitialEntity(_unitOfMeasurementService.GetInitialUnitsOfMeasurement());
         }
 
         private async Task LoadRoles()

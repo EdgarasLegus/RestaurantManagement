@@ -157,10 +157,12 @@ namespace RestaurantManagement.Data.Migrations
                     b.Property<decimal>("StockAmount")
                         .HasColumnType("decimal(18,3)");
 
-                    b.Property<string>("UnitOfMeasure")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("UnitOfMeasurementId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UnitOfMeasurementId");
 
                     b.ToTable("Product");
                 });
@@ -242,6 +244,24 @@ namespace RestaurantManagement.Data.Migrations
                     b.ToTable("Staff");
                 });
 
+            modelBuilder.Entity("RestaurantManagement.Contracts.Entities.UnitOfMeasurement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("UnitDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UnitName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UnitOfMeasurement");
+                });
+
             modelBuilder.Entity("RestaurantManagement.Contracts.Entities.UserLog", b =>
                 {
                     b.Property<int>("Id")
@@ -291,6 +311,15 @@ namespace RestaurantManagement.Data.Migrations
                     b.HasOne("RestaurantManagement.Contracts.Entities.Order", "Order")
                         .WithMany("OrderItem")
                         .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RestaurantManagement.Contracts.Entities.Product", b =>
+                {
+                    b.HasOne("RestaurantManagement.Contracts.Entities.UnitOfMeasurement", null)
+                        .WithMany("Product")
+                        .HasForeignKey("UnitOfMeasurementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

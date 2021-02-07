@@ -1,10 +1,12 @@
 ﻿using Microsoft.Extensions.Options;
 using RestaurantManagement.Contracts.Entities;
 using RestaurantManagement.Contracts.Settings;
+using RestaurantManagement.Interfaces;
 using RestaurantManagement.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RestaurantManagement.BusinessLogic.Services
 {
@@ -12,11 +14,15 @@ namespace RestaurantManagement.BusinessLogic.Services
     {
         private readonly ILogicHandler _logicHandler;
         private readonly ConfigurationSettings _options;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IRepository<Product> _productRepo;
 
-        public ProductService(ILogicHandler logicHandler, IOptions<ConfigurationSettings> options)
+        public ProductService(ILogicHandler logicHandler, IOptions<ConfigurationSettings> options, IUnitOfWork unitOfWork)
         {
             _logicHandler = logicHandler;
             _options = options.Value;
+            _unitOfWork = unitOfWork;
+            _productRepo = _unitOfWork.GetRepository<Product>();
         }
 
         public List<Product> GetInitialProducts()
@@ -30,12 +36,28 @@ namespace RestaurantManagement.BusinessLogic.Services
                 Id = int.Parse(subList[0]),
                 ProductName = subList[1],
                 StockAmount = Convert.ToDecimal(subList[2]),
-                UnitOfMeasure = subList[3]
+                UnitOfMeasurementId = int.Parse(subList[3])
             }).Where(product => productList.All(x => x.ProductName != product.ProductName)))
             {
                 productList.Add(product);
             }
             return productList;
+        }
+
+        public async Task<List<Product>> GetProducts()
+        {
+            return await _productRepo.Get();
+        }
+
+        public async Task<Product> GetProductById(int id)
+        {
+            return await _productRepo.GetFirstOrDefault(x => x.Id == id);
+        }
+
+        public async Task AddProduct(Product productEntity)
+        {
+            await _productRepo.Add(productEntity);
+            await _unitOfWork.Commit();
         }
     }
 }

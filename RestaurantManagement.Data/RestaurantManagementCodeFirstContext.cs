@@ -28,6 +28,7 @@ namespace RestaurantManagement.Data
         public virtual DbSet<Staff> Staff { get; set; }
         public virtual DbSet<UserLog> UserLog { get; set; }
         public virtual DbSet<PersonRole> PersonRole { get; set; }
+        public virtual DbSet<UnitOfMeasurement> UnitOfMeasurement { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

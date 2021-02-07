@@ -40,6 +40,8 @@ namespace RestaurantManagement.WebApp
             CreateMap<Dish, DishViewModel>().ForMember(x => x.DishProduct, y => y.MapFrom(z => z.DishProduct));
             CreateMap<DishProduct, DishProductViewModel>();
 
+            CreateMap<Product, ProductViewModel>();
+
         }
     }
 }

@@ -17,7 +17,7 @@ namespace RestaurantManagement.Contracts.Entities
 
         [Column(TypeName = "decimal(18,3)")]
         public decimal StockAmount { get; set; }
-        public string UnitOfMeasure { get; set; }
+        public int UnitOfMeasurementId { get; set; }
 
         public virtual ICollection<DishProduct> DishProduct { get; set; }
     }
