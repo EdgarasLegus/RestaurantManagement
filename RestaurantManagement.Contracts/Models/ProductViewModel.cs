@@ -12,6 +12,6 @@ namespace RestaurantManagement.Contracts.Models
 
         [Column(TypeName = "decimal(18,3)")]
         public decimal StockAmount { get; set; }
-        public string UnitOfMeasure { get; set; }
+        public int UnitOfMeasurementId { get; set; }
     }
 }

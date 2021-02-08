@@ -66,5 +66,30 @@ namespace RestaurantManagement.WebApp.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateProduct([FromBody] ProductCreateModel productCreateModel)
+        {
+            try
+            {
+                if (productCreateModel == null)
+                {
+                    _loggerManager.LogError($"CreateProduct(): Post of new product is failed, it is empty.");
+                    return BadRequest("Product is null");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid product model object");
+                }
+                var createdProduct = await _productService.CreateProduct(productCreateModel);
+                return CreatedAtRoute("ProductById", new { id = createdProduct.Id }, createdProduct);
+            }
+            catch (Exception ex)
+            {
+                _loggerManager.LogError($"CreateProduct() method execution failed: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }

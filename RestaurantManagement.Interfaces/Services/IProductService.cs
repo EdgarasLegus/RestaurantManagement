@@ -1,4 +1,5 @@
 ﻿using RestaurantManagement.Contracts.Entities;
+using RestaurantManagement.Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,6 @@ namespace RestaurantManagement.Interfaces.Services
         List<Product> GetInitialProducts();
         Task<List<Product>> GetProducts();
         Task<Product> GetProductById(int id);
-        Task AddProduct(Product productEntity);
+        Task<ProductViewModel> CreateProduct(ProductCreateModel productCreateModel);
     }
 }

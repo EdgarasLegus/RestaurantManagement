@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Options;
+﻿using AutoMapper;
+using Microsoft.Extensions.Options;
 using RestaurantManagement.Contracts.Entities;
+using RestaurantManagement.Contracts.Models;
 using RestaurantManagement.Contracts.Settings;
 using RestaurantManagement.Interfaces;
 using RestaurantManagement.Interfaces.Services;
@@ -16,13 +18,18 @@ namespace RestaurantManagement.BusinessLogic.Services
         private readonly ConfigurationSettings _options;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<Product> _productRepo;
+        private readonly IMapper _mapper;
+        private readonly ILoggerManager _loggerManager;
 
-        public ProductService(ILogicHandler logicHandler, IOptions<ConfigurationSettings> options, IUnitOfWork unitOfWork)
+        public ProductService(ILogicHandler logicHandler, IOptions<ConfigurationSettings> options, 
+            IUnitOfWork unitOfWork, IMapper mapper, ILoggerManager loggerManager)
         {
             _logicHandler = logicHandler;
             _options = options.Value;
             _unitOfWork = unitOfWork;
             _productRepo = _unitOfWork.GetRepository<Product>();
+            _mapper = mapper;
+            _loggerManager = loggerManager;
         }
 
         public List<Product> GetInitialProducts()
@@ -54,10 +61,14 @@ namespace RestaurantManagement.BusinessLogic.Services
             return await _productRepo.GetFirstOrDefault(x => x.Id == id);
         }
 
-        public async Task AddProduct(Product productEntity)
+        public async Task<ProductViewModel> CreateProduct(ProductCreateModel productCreateModel)
         {
+            var productEntity = _mapper.Map<Product>(productCreateModel);
             await _productRepo.Add(productEntity);
             await _unitOfWork.Commit();
+            _loggerManager.LogInfo($"CreateProduct(): New product '{productEntity.ProductName}' is" +
+                $" successfully created!");
+            return _mapper.Map<ProductViewModel>(productEntity);
         }
     }
 }

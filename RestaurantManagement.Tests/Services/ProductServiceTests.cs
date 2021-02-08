@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Query;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Options;
 using NSubstitute;
 using NUnit.Framework;
 using RestaurantManagement.BusinessLogic.Services;
 using RestaurantManagement.Contracts.Entities;
+using RestaurantManagement.Contracts.Models;
 using RestaurantManagement.Contracts.Settings;
 using RestaurantManagement.Interfaces;
 using RestaurantManagement.Interfaces.Services;
@@ -23,6 +25,8 @@ namespace RestaurantManagement.Tests.Services
         private IUnitOfWork _unitOfWorkMock;
         private IRepository<Product> _productRepoMock;
         private IOptions<ConfigurationSettings> _optionsMock;
+        private IMapper _mapperMock;
+        private ILoggerManager _loggerManagerMock;
 
         [SetUp]
         public void Setup()
@@ -32,9 +36,12 @@ namespace RestaurantManagement.Tests.Services
             _optionsMock = Substitute.For<IOptions<ConfigurationSettings>>();
             _unitOfWorkMock.GetRepository<Product>().Returns(_productRepoMock);
             _logicHandlerMock = Substitute.For<ILogicHandler>();
+            _mapperMock = Substitute.For<IMapper>();
+            _loggerManagerMock = Substitute.For<ILoggerManager>();
 
 
-            _productService = new ProductService(_logicHandlerMock, _optionsMock, _unitOfWorkMock);
+            _productService = new ProductService(_logicHandlerMock, _optionsMock, _unitOfWorkMock,
+                _mapperMock, _loggerManagerMock);
         }
 
         [Test]
@@ -59,9 +66,16 @@ namespace RestaurantManagement.Tests.Services
         }
 
         [Test]
-        public async Task AddProduct_MakesAppropriateCallOfRepositoryMethods()
+        public async Task CreateProduct_ReturnsCorrectViewModel()
         {
             //Arrange
+            var testProductCreateModel = new ProductCreateModel
+            {
+                ProductName = "testProduct",
+                StockAmount = 4.500M,
+                UnitOfMeasurementId = 1
+            }; 
+
             var productTestEntity = new Product
             {
                 Id = 1,
@@ -70,11 +84,28 @@ namespace RestaurantManagement.Tests.Services
                 UnitOfMeasurementId = 1
             };
 
+            var testProductViewModel = new ProductViewModel
+            {
+                Id = 1,
+                ProductName = "testProduct",
+                StockAmount = 4.500M,
+                UnitOfMeasurementId = 1
+            };
+
+            var testMessage = $"CreateProduct(): New product '{productTestEntity.ProductName}' is" +
+                $" successfully created!";
+
+            _mapperMock.Map<Product>(testProductCreateModel).Returns(productTestEntity);
+            _mapperMock.Map<ProductViewModel>(productTestEntity).Returns(testProductViewModel);
+
             //Act
-            await _productService.AddProduct(productTestEntity);
+            var result = await _productService.CreateProduct(testProductCreateModel);
             //Assert
             await _productRepoMock.Received(1).Add(productTestEntity);
             await _unitOfWorkMock.Received(1).Commit();
+            _loggerManagerMock.Received(1).LogInfo(testMessage);
+
+            Assert.AreEqual(testProductViewModel, result);
 
         }
     }

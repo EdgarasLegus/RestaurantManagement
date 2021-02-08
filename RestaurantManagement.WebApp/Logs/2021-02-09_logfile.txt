@@ -1,0 +1,5 @@
+2021-02-09 00:50:44.7303 INFO GetDishes() method returned existing dishes list.
+2021-02-09 00:51:29.1032 INFO GetDishById() returned dish with id: 2
+2021-02-09 00:52:56.6003 INFO CreateProduct(): New product 'Braškės' is successfully created!
+2021-02-09 00:54:00.6140 INFO GetProducts() method returned all products list.
+2021-02-09 00:54:38.2926 INFO CreateProduct(): New product 'Vynuogės' is successfully created!

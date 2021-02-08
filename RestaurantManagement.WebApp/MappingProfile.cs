@@ -41,6 +41,7 @@ namespace RestaurantManagement.WebApp
             CreateMap<DishProduct, DishProductViewModel>();
 
             CreateMap<Product, ProductViewModel>();
+            CreateMap<ProductCreateModel, Product>();
 
         }
     }
