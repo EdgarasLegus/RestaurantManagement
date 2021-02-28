@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantManagement.Contracts.Models;
 using RestaurantManagement.Interfaces.Services;
@@ -10,6 +11,8 @@ namespace RestaurantManagement.WebApp.Controllers
 {
     [Route("api/v1/orders")]
     [ApiController]
+    // To secure WEB API endpoint
+    [Authorize]
     public class APIOrderController : ControllerBase
     {
         private readonly IMapper _mapper;

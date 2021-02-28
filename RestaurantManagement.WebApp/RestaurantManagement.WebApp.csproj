@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
-    <PackageReference Include="IdentityServer4" Version="4.1.0" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RestaurantManagement.BusinessLogic\RestaurantManagement.BusinessLogic.csproj" />
     <ProjectReference Include="..\RestaurantManagement.Data\RestaurantManagement.Data.csproj" />
+    <ProjectReference Include="..\RestaurantManagement.IdentityServer\RestaurantManagement.IdentityServer.csproj" />
   </ItemGroup>
 
   <ItemGroup>

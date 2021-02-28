@@ -17,6 +17,7 @@ using RestaurantManagement.BusinessLogic.Services;
 using RestaurantManagement.WebApp.Extensions;
 using RestaurantManagement.Contracts.Settings;
 using RestaurantManagement.Interfaces;
+using RestaurantManagement.IdentityServer;
 
 namespace RestaurantManagement.WebApp
 {
@@ -48,13 +49,24 @@ namespace RestaurantManagement.WebApp
 
             services.AddControllersWithViews();
 
+            // REGISTER IdentityServer 4 in ASP.NET Core
             services.AddIdentityServer()
-                .AddInMemoryClients(new List<Client>())
-                .AddInMemoryIdentityResources(new List<IdentityResource>())
-                .AddInMemoryApiResources(new List<ApiResource>())
-                .AddInMemoryApiScopes(new List<ApiScope>())
-                .AddTestUsers(new List<TestUser>())
+                .AddInMemoryClients(Config.Clients)
+                .AddInMemoryIdentityResources(Config.IdentityResources)
+                .AddInMemoryApiResources(Config.ApiResources)
+                .AddInMemoryApiScopes(Config.ApiScopes)
+                .AddTestUsers(Config.Users)
                 .AddDeveloperSigningCredential();
+
+            // ADDING Authentication MiddleWare to the Pipeline
+            services.AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication("Bearer", options =>
+                {
+                    // Name of Web Api resource
+                    options.ApiName = "RestaurantManagementAPI";
+                    // URL on which IdentityServer is running
+                    options.Authority = "https://localhost:44370";
+                });
 
             services
                 .AddScoped<IDataLoader, DataLoader>()
@@ -95,6 +107,8 @@ namespace RestaurantManagement.WebApp
             app.UseRouting();
             app.UseIdentityServer();
 
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.

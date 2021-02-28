@@ -3,3 +3,4 @@
 2021-02-09 00:52:56.6003 INFO CreateProduct(): New product 'Braškės' is successfully created!
 2021-02-09 00:54:00.6140 INFO GetProducts() method returned all products list.
 2021-02-09 00:54:38.2926 INFO CreateProduct(): New product 'Vynuogės' is successfully created!
+2021-02-09 17:05:54.0547 INFO CreateProduct(): New product 'Obuoliai' is successfully created!
