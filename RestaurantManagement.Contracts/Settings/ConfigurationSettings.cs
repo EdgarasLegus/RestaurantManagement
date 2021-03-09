@@ -31,5 +31,11 @@ namespace RestaurantManagement.Contracts.Settings
             var connectionString = configuration["ConnectionProperties:ConnectionStringCodeFirst"];
             return connectionString;
         }
+
+        public static string GetIdentityServerConnectionString()
+        {
+            var connectionString = configuration["ConnectionProperties:IdentityServerConnectionString"];
+            return connectionString;
+        }
     }
 }

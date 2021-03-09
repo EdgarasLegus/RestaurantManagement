@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20210207184556_unitOfMeasurementAddition.Designer.cs" />
     <Compile Remove="Migrations\20210207184850_unitOfMeasurementAddition.cs" />
     <Compile Remove="Migrations\20210207184850_unitOfMeasurementAddition.Designer.cs" />
+    <Compile Remove="Migrations\20210309130157_identityServerDatabaseCreation.cs" />
+    <Compile Remove="Migrations\20210309130157_identityServerDatabaseCreation.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

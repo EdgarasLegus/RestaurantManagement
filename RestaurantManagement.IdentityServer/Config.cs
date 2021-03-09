@@ -9,8 +9,9 @@ namespace RestaurantManagement.IdentityServer
 {
     public class Config
     {
-        public static List<TestUser> Users =>
-            new List<TestUser>
+        public static List<TestUser> GetUsers()
+        {
+            return new List<TestUser>
             {
                 new TestUser
                 {
@@ -24,23 +25,29 @@ namespace RestaurantManagement.IdentityServer
                     }
                 }
             };
+        }
 
-        public static IEnumerable<IdentityResource> IdentityResources =>
-            new IdentityResource[]
+        public static IEnumerable<IdentityResource> GetIdentityResources()
+        {
+            return new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile()
             };
+        }
 
-        public static IEnumerable<ApiScope> ApiScopes =>
-            new ApiScope[]
+        public static IEnumerable<ApiScope> GetApiScopes()
+        {
+            return new List<ApiScope>
             {
                 new ApiScope("RestaurantManagementAPI.read"),
                 new ApiScope("RestaurantManagementAPI.write")
             };
+        }
 
-        public static IEnumerable<ApiResource> ApiResources =>
-            new ApiResource[]
+        public static IEnumerable<ApiResource> GetApiResources()
+        {
+            return new List<ApiResource>
             {
                 new ApiResource("RestaurantManagementAPI")
                 {
@@ -48,9 +55,11 @@ namespace RestaurantManagement.IdentityServer
                     ApiSecrets = new List<Secret> { new Secret("QwXzc3VUz2".Sha256()) }
                 }
             };
+        }
 
-        public static IEnumerable<Client> Clients =>
-            new Client[]
+        public static IEnumerable<Client> GetClients()
+        {
+            return new List<Client>
             {
                 new Client
                 {
@@ -61,6 +70,7 @@ namespace RestaurantManagement.IdentityServer
                     AllowedScopes = { "RestaurantManagementAPI.read" }
                 }
             };
-            
+        }
+                 
     }
 }

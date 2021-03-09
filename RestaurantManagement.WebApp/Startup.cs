@@ -18,6 +18,11 @@ using RestaurantManagement.WebApp.Extensions;
 using RestaurantManagement.Contracts.Settings;
 using RestaurantManagement.Interfaces;
 using RestaurantManagement.IdentityServer;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using System.Reflection;
+using IdentityServer4.EntityFramework.DbContexts;
+using System.Linq;
+using IdentityServer4.EntityFramework.Mappers;
 
 namespace RestaurantManagement.WebApp
 {
@@ -34,6 +39,9 @@ namespace RestaurantManagement.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //IdentityServer DB setup
+            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+
             // FOR MAPPING ENTITIES WITH MODELS
             services.AddAutoMapper(typeof(Startup));
 
@@ -51,12 +59,23 @@ namespace RestaurantManagement.WebApp
 
             // REGISTER IdentityServer 4 in ASP.NET Core
             services.AddIdentityServer()
-                .AddInMemoryClients(Config.Clients)
-                .AddInMemoryIdentityResources(Config.IdentityResources)
-                .AddInMemoryApiResources(Config.ApiResources)
-                .AddInMemoryApiScopes(Config.ApiScopes)
-                .AddTestUsers(Config.Users)
-                .AddDeveloperSigningCredential();
+                .AddInMemoryClients(Config.GetClients())
+                .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                .AddInMemoryApiResources(Config.GetApiResources())
+                .AddInMemoryApiScopes(Config.GetApiScopes())
+                .AddTestUsers(Config.GetUsers())
+                .AddDeveloperSigningCredential()
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlServer(ConfigurationSettings.GetIdentityServerConnectionString(), sql => sql.MigrationsAssembly(migrationsAssembly));
+                })
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlServer(ConfigurationSettings.GetIdentityServerConnectionString(), sql => sql.MigrationsAssembly(migrationsAssembly));
+                });
+                
 
             // ADDING Authentication MiddleWare to the Pipeline
             services.AddAuthentication("Bearer")
@@ -67,6 +86,11 @@ namespace RestaurantManagement.WebApp
                     // URL on which IdentityServer is running
                     options.Authority = "https://localhost:44370";
                 });
+
+            // GLOBAL AUTHORIZATION
+            //services.AddMvc().AddMvcOptions(
+            //    options => options.Filters.Add(new AuthorizeFilter())
+            //    );
 
             services
                 .AddScoped<IDataLoader, DataLoader>()
@@ -91,6 +115,8 @@ namespace RestaurantManagement.WebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            InitializeDatabase(app);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -127,6 +153,52 @@ namespace RestaurantManagement.WebApp
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+
+                var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+                context.Database.Migrate();
+                if (!context.Clients.Any())
+                {
+                    foreach (var client in Config.GetClients())
+                    {
+                        context.Clients.Add(client.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.IdentityResources.Any())
+                {
+                    foreach (var resource in Config.GetIdentityResources())
+                    {
+                        context.IdentityResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.ApiResources.Any())
+                {
+                    foreach (var resource in Config.GetApiResources())
+                    {
+                        context.ApiResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.ApiScopes.Any())
+                {
+                    foreach (var resource in Config.GetApiScopes())
+                    {
+                        context.ApiScopes.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }
