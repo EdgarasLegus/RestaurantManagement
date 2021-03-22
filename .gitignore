@@ -340,5 +340,5 @@ ASALocalRun/
 healthchecksdb
 
 # Log directories
-RestaurantManagement.WebApp/InternalLogs/
-RestaurantManagement.WebApp/Logs/
+RestaurantManagement/RestaurantManagement.WebApp/InternalLogs/
+RestaurantManagement/RestaurantManagement.WebApp/Logs/
