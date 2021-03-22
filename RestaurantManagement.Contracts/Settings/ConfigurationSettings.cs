@@ -34,7 +34,7 @@ namespace RestaurantManagement.Contracts.Settings
 
         public static string GetIdentityServerConnectionString()
         {
-            var connectionString = configuration["ConnectionProperties:IdentityServerConnectionString"];
+            var connectionString = configuration["ConnectionStrings:IdentityServerConnectionString"];
             return connectionString;
         }
     }

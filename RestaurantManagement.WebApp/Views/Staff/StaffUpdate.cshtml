@@ -1,7 +1,10 @@
 ﻿@model RestaurantManagement.Contracts.Models.StaffUpdateModel
 @{ ViewData["Title"] = "Update selected staff member"; }
-@{ 
-    var context = new RestaurantManagement.Data.RestaurantManagementCodeFirstContext();
+@{
+    @*@using Microsoft.Extensions.Configuration
+    @inject IConfiguration Configuration
+    var configuration = (IConfiguration)System.Activator.CreateInstance<IConfiguration>();
+    var context = new RestaurantManagement.Data.RestaurantManagementCodeFirstContext(configuration);
     var unitOfWork = new RestaurantManagement.Data.UnitOfWork(context);
 
     var logicHandler = new RestaurantManagement.BusinessLogic.Services.LogicHandler();
@@ -10,7 +13,7 @@
     Microsoft.Extensions.Options.IOptions<RestaurantManagement.Contracts.Settings.ConfigurationSettings> options = Microsoft.Extensions.Options.Options.Create(configurationSettings);
 
     var personRoleService = new RestaurantManagement.BusinessLogic.Services.PersonRoleService(logicHandler, options, unitOfWork);
-    var roleList = await personRoleService.GetRoles();
+    var roleList = await personRoleService.GetRoles();*@
 }
 <h2>Update</h2>
 <h4>Staff</h4>
@@ -36,24 +39,24 @@
                 <span asp-validation-for="UserPassword" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="PersonRoleId" class="control-label">New Person role*</label>
                 @Html.DropDownListFor(x => x.PersonRoleId, new SelectList(roleList, "Id", "RoleName"), "--Select Role--", new { @class = "form-control" })
                 @Html.ValidationMessageFor(x => x.PersonRoleId, "", new { @class = "text-danger" })
-            </div>
-
-            @*<div class="form-group">
-                <label asp-for="StartDayOfEmployment" class="control-label">Contract from*</label>
-                <input asp-for="StartDayOfEmployment" class="form-control" />
-                <span asp-validation-for="StartDayOfEmployment" class="text-danger"></span>
             </div>*@
 
-        <div class="form-group">
-            <label asp-for="EndDayOfEmployment" class="control-label">Contract until*</label>
-            @*<div class="hide">Date format: <br />YYYY-MM-DD</div>*@
-            <input asp-for="EndDayOfEmployment" class="form-control" />
-            <span asp-validation-for="EndDayOfEmployment" class="text-danger"></span>
-        </div>
+            @*<div class="form-group">
+                    <label asp-for="StartDayOfEmployment" class="control-label">Contract from*</label>
+                    <input asp-for="StartDayOfEmployment" class="form-control" />
+                    <span asp-validation-for="StartDayOfEmployment" class="text-danger"></span>
+                </div>*@
+
+            <div class="form-group">
+                <label asp-for="EndDayOfEmployment" class="control-label">Contract until*</label>
+                @*<div class="hide">Date format: <br />YYYY-MM-DD</div>*@
+                <input asp-for="EndDayOfEmployment" class="form-control" />
+                <span asp-validation-for="EndDayOfEmployment" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
                 <button type="submit" class="button" id="button-3">Update</button>

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace RestaurantManagement.Data
 {
-    public partial class RestaurantManagementCodeFirstContext : DbContext
+    public partial class RestaurantManagementCodeFirstContext : DbContext //IdentityDbContext
     {
         public RestaurantManagementCodeFirstContext()
         {

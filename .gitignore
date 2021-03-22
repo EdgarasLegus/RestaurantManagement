@@ -338,3 +338,7 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# Log directories
+RestaurantManagement.WebApp/InternalLogs/
+RestaurantManagement.WebApp/Logs/

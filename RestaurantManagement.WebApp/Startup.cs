@@ -87,10 +87,10 @@ namespace RestaurantManagement.WebApp
                     options.Authority = "https://localhost:44370";
                 });
 
-            // GLOBAL AUTHORIZATION
+             //GLOBAL AUTHORIZATION
             //services.AddMvc().AddMvcOptions(
-            //    options => options.Filters.Add(new AuthorizeFilter())
-            //    );
+               // options => options.Filters.Add(new AuthorizeFilter())
+                //);
 
             services
                 .AddScoped<IDataLoader, DataLoader>()
@@ -108,8 +108,7 @@ namespace RestaurantManagement.WebApp
                 .AddScoped<IUnitOfWork, UnitOfWork>()
                 .AddHttpContextAccessor();
 
-            // Configuration.GetConnectionString("yourconnection sttring"); this way is more clean
-            services.AddDbContext<RestaurantManagementCodeFirstContext>(options => options.UseSqlServer(Contracts.Settings.ConfigurationSettings.GetConnectionStringCodeFirst()));
+            services.AddDbContext<RestaurantManagementCodeFirstContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionStringCodeFirst")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

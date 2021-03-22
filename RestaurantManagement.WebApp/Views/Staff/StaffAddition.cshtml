@@ -1,7 +1,10 @@
 ﻿@model RestaurantManagement.Contracts.Entities.Staff
 @{ ViewData["Title"] = "Add Staff member"; }
-@{ 
-    var context = new RestaurantManagement.Data.RestaurantManagementCodeFirstContext();
+@*@{
+    @using Microsoft.Extensions.Configuration
+    @inject IConfiguration Configuration
+    var configuration = (IConfiguration)System.Activator.CreateInstance<IConfiguration>();
+    var context = new RestaurantManagement.Data.RestaurantManagementCodeFirstContext(configuration);
     var unitOfWork = new RestaurantManagement.Data.UnitOfWork(context);
 
     var logicHandler = new RestaurantManagement.BusinessLogic.Services.LogicHandler();
@@ -11,7 +14,7 @@
 
     var personRoleService = new RestaurantManagement.BusinessLogic.Services.PersonRoleService(logicHandler, options, unitOfWork);
     var roleList = await personRoleService.GetRoles();
-}
+}*@
 <h2>Fill form to add new member to staff</h2>
 <div class="row">
     <div class="col-md-4">
@@ -30,12 +33,11 @@
                 <span asp-validation-for="UserPassword" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="PersonRoleId" class="control-label">Person role*</label>
                 @Html.DropDownListFor(x => x.PersonRoleId, new SelectList(roleList, "Id", "RoleName"), "--Select Role--", new {@class="form-control"})
                 @Html.ValidationMessageFor(x => x.PersonRoleId, "",  new { @class = "text-danger" })
-                @*<span asp-validation-for="PersonRoleId" class="text-danger"></span>*@
-            </div>
+            </div>*@
 
             <div class="form-group">
                 <label asp-for="StartDayOfEmployment" class="control-label">Start date*</label>
